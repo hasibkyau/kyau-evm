@@ -1,0 +1,39 @@
+// Fonts Family
+$font-en-poppins: 'Poppins', sans-serif;
+$font-en-nunito: 'Nunito Sans', sans-serif;
+$font-en-primary: $font-en-nunito;
+
+
+// MAT TOOLBAR, SIDENAV & LIST
+$toolbar-height: 60px;
+
+// BREAKPOINTS
+$max-tablet-width: 899px;
+
+// COLOR
+$color-secondary: #ff7542;
+$color-primary:#418D43;
+$color-accent: #1aa4e0;
+$color-dashboard: #002408;
+$color-font-color: #fff;
+$color-table: #002408;
+$color-table-font-color: #fff;
+$color-black: white;
+
+//BACKGROUND COLOR
+//$bg-primary: #090816;
+$bg-primary: #418D43;
+//$bg-primary: #0E1B45;
+
+//$bg-secondary: #5aafed;
+//$bg-secondary: #3D6799;
+$bg-secondary: rgb(50 58 112 / 25%);
+//hover sub menu bg color
+//$bg-three: #5aafed;
+//$bg-menu-hover: #5aafed;
+$bg-three: rgb(50 58 112 / 25%);
+//$bg-three: #3D6799;
+//$bg-menu-hover: #3D6799;
+$bg-menu-hover: rgb(50 58 112 / 25%);
+
+//$color-primary f6383e

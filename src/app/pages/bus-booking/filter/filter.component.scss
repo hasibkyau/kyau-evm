@@ -1,0 +1,411 @@
+@import'src/theme/variables';
+$color-white:#fff;
+$text-color: rgba(0, 0, 0, .7);
+$color-border: #e8e8e8;
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    padding: 0px 15px;
+}
+
+.filter-area {
+    background-color: $color-white;
+    padding: 15px 0px;
+    box-sizing: border-box;
+
+    .filter-main {
+        ul {
+            list-style: none;
+            padding: 0px;
+            margin: 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
+            li {
+                display: block;
+                width: 100%;
+
+                span {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    gap: 7px;
+                    text-transform: uppercase;
+                    font-family: $font-en-primary;
+                    font-style: normal;
+                    color: #757575;
+                    font-size: 16px;
+                    cursor: pointer;
+
+                    img {
+                        width: 13px;
+                    }
+                }
+
+                button {
+                    background-color: $color-white;
+                    font-family: $font-en-primary;
+                    text-transform: uppercase;
+                    font-size: 16px;
+                    padding: 8px 24px;
+                    box-sizing: border-box;
+                    border: 2px solid $color-primary;
+                    outline: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: all 0.3s linear;
+                    color: $color-primary;
+                    max-width: 130px;
+                    width: 100%;
+                    margin-left: auto;
+                    display: block;
+
+                    &:hover {
+                        background-color: $color-primary;
+                        color: $color-white;
+                    }
+                }
+
+                &:first-child {
+                    span {
+                        img {
+                            width: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.filter-buy-area {
+    margin-top: 20px;
+
+    .filter-buy-main {
+        background-color: $color-white;
+        padding: 15px;
+        box-shadow: 0 0 15px #ddd;
+        border-radius: 6px;
+
+        h3 {
+            color: #121212;
+            font-family: $font-en-primary;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 17px;
+            display: block;
+            margin-bottom: 15px !important;
+        }
+
+        .filter-buy-top {
+            padding-bottom: 15px;
+            border-bottom: 1px solid $color-border;
+            display: grid;
+            grid-template-columns: 3fr 9fr;
+            grid-gap: 15px;
+            grid-template-rows: auto;
+
+            mat-checkbox {
+                display: block;
+                font-family: $font-en-primary;
+                font-style: normal;
+                font-weight: 500;
+                color: $text-color;
+                font-size: 16px;
+            }
+        }
+
+        .depature-time-area {
+            ul {
+                list-style: none;
+                padding: 0px;
+                margin: 0px;
+                display: grid;
+                grid-template-columns: repeat(8, 1fr);
+                grid-gap: 10px;
+
+                li {
+                    display: block;
+                    text-align: center;
+
+                    button {
+                        border: 1px solid $color-border;
+                        outline: none;
+                        padding: 5px 6px;
+                        font-family: $font-en-primary;
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 14px;
+                        border-radius: 3px;
+                        width: 100%;
+                        display: block;
+                        background-color: $color-white;
+                        cursor: pointer;
+                        transition: all 0.3s linear;
+
+                        &:hover {
+                            background-color: #89BF44;
+                            color: $color-white;
+                        }
+                    }
+
+                    span {
+                        color: $color-black;
+                        font-family: $font-en-primary;
+                        font-size: 15px;
+                        font-style: normal;
+                        display: block;
+                        margin-top: 2px;
+                    }
+                }
+            }
+        }
+
+        .bus-area {
+            padding-top: 10px;
+
+            .bus-area-main {
+                ul {
+                    list-style: none;
+                    padding: 0px;
+                    margin: 0px;
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    grid-gap: 5px 15px;
+                    grid-template-rows: auto;
+
+                    li {
+                        mat-checkbox {
+                            display: block;
+                            font-family: $font-en-primary;
+                            font-style: normal;
+                            font-weight: 500;
+                            color: $text-color;
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+
+            .bus-area-bottom {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+
+                span {
+                    color: #89BF44;
+                    font-family: $font-en-primary;
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 15px;
+                    display: block;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+
+@media(max-width:990px) {
+    .filter-area {
+        display: none;
+    }
+}
+
+@media(max-width:1200px) {
+    .filter-buy-area {
+        margin-top: 20px;
+
+        .filter-buy-main {
+            .filter-buy-top {
+                grid-template-columns: 3fr 9fr;
+            }
+
+            .depature-time-area {
+                ul {
+                    grid-template-columns: repeat(7, 1fr);
+                    grid-gap: 10px;
+                }
+            }
+
+            .bus-area {
+                .bus-area-main {
+                    ul {
+                        grid-template-columns: repeat(4, 1fr);
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:1070px) {
+    .filter-buy-area {
+        margin-top: 20px;
+
+        .filter-buy-main {
+            .filter-buy-top {
+                grid-template-columns: 3fr 9fr;
+            }
+
+            .depature-time-area {
+                ul {
+                    grid-template-columns: repeat(6, 1fr);
+                    grid-gap: 10px;
+                }
+            }
+
+            .bus-area {
+                .bus-area-main {
+                    ul {
+                        grid-template-columns: repeat(4, 1fr);
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:990px) {
+    .filter-buy-area {
+        margin-top: 20px;
+
+        .filter-buy-main {
+            .filter-buy-top {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .depature-time-area {
+                ul {
+                    grid-template-columns: repeat(7, 1fr);
+                    grid-gap: 10px;
+                }
+            }
+
+            .bus-area {
+                .bus-area-main {
+                    ul {
+                        grid-template-columns: repeat(4, 1fr);
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media(max-width:810px) {
+    .filter-buy-area {
+        margin-top: 20px;
+
+        .filter-buy-main {
+            .depature-time-area {
+                ul {
+                    grid-template-columns: repeat(6, 1fr);
+                }
+            }
+
+            .bus-area {
+                .bus-area-main {
+                    ul {
+                        grid-template-columns: repeat(3, 1fr);
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media(max-width:750px) {
+    .filter-buy-area {
+        margin-top: 20px;
+
+        .filter-buy-main {
+            .depature-time-area {
+                ul {
+                    grid-template-columns: repeat(5, 1fr);
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:630px) {
+    .filter-buy-area {
+        margin-top: 20px;
+
+        .filter-buy-main {
+            .depature-time-area {
+                ul {
+                    grid-template-columns: repeat(5, 1fr);
+                }
+            }
+
+            .bus-area {
+                .bus-area-main {
+                    ul {
+                        grid-template-columns: repeat(2, 1fr);
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:530px) {
+    .filter-buy-area {
+        margin-top: 20px;
+
+        .filter-buy-main {
+            .depature-time-area {
+                ul {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+
+            .bus-area {
+                .bus-area-main {
+                    ul {
+                        grid-template-columns: repeat(2, 1fr);
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media(max-width:440px) {
+    .filter-buy-area {
+        margin-top: 20px;
+
+        .filter-buy-main {
+            .depature-time-area {
+                ul {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            .bus-area {
+                .bus-area-main {
+                    ul {
+                        grid-template-columns: repeat(1, 1fr);
+
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,189 @@
+<section class="admin-data-sec">
+  <div class="top-data-header">
+    <div class="title">
+      <h2>All Request Medicine</h2>
+      <div class="checkbox" *ngIf="admin?.showTotalOrderValue">
+        <mat-checkbox [(ngModel)]="showCalculation" (ngModelChange)="onChangeShowCalculation($event)" color="primary">
+          Show Total Amount
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <form class="table-search" #searchForm=ngForm>
+      <input type="text" #searchInput name="searchTerm" autocomplete="off" ngModel
+             placeholder="Search with Order No or Phone No">
+      <button><i class="fa fa-search"></i></button>
+    </form>
+
+    <div class="action" style="visibility: hidden;">
+    </div>
+
+  </div> <!-- END TOP DATA HEADER -->
+
+  <div class="date-multi">
+    <div class="date-filter">
+      <mat-form-field class="mat-date-input-field" appearance="outline" (click)="picker.open()">
+        <mat-label>Filter Created Date Range</mat-label>
+        <mat-date-range-input [formGroup]="dataFormDateRange" [rangePicker]="picker" [max]="today">
+          <input matStartDate formControlName="start" placeholder="Start date" readonly>
+          <input matEndDate formControlName="end" placeholder="End date" readonly
+                 (dateChange)="endChangeRegDateRange($event)">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <mat-error *ngIf="dataFormDateRange.controls.start.hasError('matStartDateInvalid')">Invalid start date
+        </mat-error>
+        <mat-error *ngIf="dataFormDateRange.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="date-filter">
+      <mat-form-field class="mat-date-input-field" appearance="outline" (click)="picker2.open()">
+        <mat-label>Filter Delivery Date Range</mat-label>
+        <mat-date-range-input [formGroup]="dataFormDeliveryRange" [rangePicker]="picker2" [max]="today">
+          <input matStartDate formControlName="start" placeholder="Start date" readonly>
+          <input matEndDate formControlName="end" placeholder="End date" readonly
+                 (dateChange)="endChangeDeliveryDateRange($event)">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker2></mat-date-range-picker>
+
+        <mat-error *ngIf="dataFormDeliveryRange.controls.start.hasError('matStartDateInvalid')">Invalid start date
+        </mat-error>
+        <mat-error *ngIf="dataFormDeliveryRange.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="action-multiple">
+
+
+
+
+    <div class="sort">
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menuCity">
+
+        {{cities[activeFilter4] ? cities[activeFilter4] : 'City'}}
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menuCity="matMenu">
+        <button *ngFor="let data of cities; let i = index" mat-menu-item (click)="filterData(data, i, 'city')"
+                [class.dropdown-active]="activeFilter4 === i">
+          {{data}}
+        </button>
+      </mat-menu>
+    </div>
+
+    <div class="sort">
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="menuSort">
+        Sort By
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menuSort="matMenu">
+        <button mat-menu-item (click)="sortData({updatedAt: -1}, 1)" [class.dropdown-active]="activeSort === 1">
+          Last Update
+        </button>
+        <button (click)="sortData({createdAt: 1}, 2)" mat-menu-item [class.dropdown-active]="activeSort === 2">
+          First to Last
+        </button>
+      </mat-menu>
+    </div>
+
+
+
+
+
+    <div class="sort">
+      <button mat-raised-button color="accent" (click)="exportToExcel()" *ngIf="admin?.downloadExcel">
+        Export as Excel
+        <mat-icon>file_download</mat-icon>
+      </button>
+    </div>
+    <button mat-raised-button color="warn">
+      <mat-icon>file_download</mat-icon>
+      Download Pdf
+    </button>
+
+
+  </div>
+
+  <hr class="center-square">
+
+  <div class="table-wrapper space">
+
+    <div class="table-action" [class.dual]="activeSort || filter">
+      <div class="left" *ngIf="activeSort || filter">
+        <button mat-stroked-button color="accent" (click)="onRemoveAllQuery()">
+          <mat-icon>close</mat-icon>
+          Clear FilterData
+        </button>
+      </div>
+
+      <div class="right" *ngIf="selectedIds && selectedIds.length">
+        <button *ngIf="checkEditPermission" mat-stroked-button color="primary" matTooltip="Change-Order-Status"
+                (click)="openUpdateOrderStatusDialogs('Change-Order-Status')">
+          Change Order Status
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+
+
+
+
+
+      </div>
+    </div> <!-- END Table Action -->
+
+
+    <div class="top-basic-info" *ngIf="showCalculation">
+      <div class="bottom">
+        <p>Total Amount: {{(calculation?.grandTotal ?? 0) | number: '':'bn'}} ৳</p>
+      </div>
+    </div> <!-- END Basic Count -->
+
+
+    <table>
+      <tr>
+        <th class="t-checkbox">
+          <mat-checkbox #matCheckbox (change)="onAllSelectChange($event)"></mat-checkbox>
+        </th>
+        <th>Phone No</th>
+        <th>Name</th>
+        <th>Created Date</th>
+        <th>Request Medicine Details</th>
+        <th>Division</th>
+        <th>Area</th>
+        <th>Zone</th>
+      </tr>
+      <tr
+        *ngFor="let data of requestMedicines | paginate: { itemsPerPage: requestMedicinesPerPage, currentPage: currentPage, totalItems: totalRequestMedicines } ; let i = index">
+        <td class="t-checkbox">
+          <mat-checkbox class="t-mat-checkbox" [(ngModel)]="data.select"
+                        (ngModelChange)="onCheckChange($event, i, data._id)"></mat-checkbox>
+        </td>
+        <td>{{data.phoneNo}}</td>
+        <td>{{data.name | titlecase}}</td>
+        <td>{{data.createdAt | date: 'd MMM, y, h:mm a'}}</td>
+        <td><span>{{'hsadsgdas bjhasdas dhajdas hhsd ghgshd hgdha sdgagsd' | slice:0:20}} </span>
+          <a class="add-date" style="color: blue;font-style:italic; cursor: pointer;display: block"
+             (click)="openUpdatedeliveryDateDialog(data)">Change</a>
+        </td>
+        <td>{{data?.division?.name | titlecase}}</td>
+        <td>{{data?.area?.name | titlecase}}</td>
+        <td>{{data?.zone?.name | titlecase}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="pagination-container">
+    <pagination-controls class="data-pagination" [autoHide]="true" [maxSize]="15" (pageChange)="onPageChanged($event)">
+    </pagination-controls>
+  </div> <!-- END PAGINATION -->
+
+
+  <!-- LOADING TEMPLATE -->
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" size="medium" color="#fff" type="ball-atom" [fullScreen]="false">
+    <p style="color: white"> Loading... </p>
+  </ngx-spinner>
+
+</section>

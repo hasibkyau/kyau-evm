@@ -1,0 +1,82 @@
+<div class="filter-area">
+    <div class="container">
+        <div class="filter-main">
+            <ul>
+                <li><span><img src="https://bdtickets.com/images/filter-icon.webp" alt="">SORT BY</span></li>
+                <li><span>Operator <img src="https://bdtickets.com/images/sort-icons/sort.svg" alt=""></span></li>
+                <li><span>Departure Time<img src="https://bdtickets.com/images/sort-icons/sort.svg" alt=""></span>
+                </li>
+                <li><span>Available Seats<img src="https://bdtickets.com/images/sort-icons/sort.svg" alt=""></span>
+                </li>
+                <li><span>Fare<img src="https://bdtickets.com/images/sort-icons/sort.svg" alt=""></span></li>
+                <li><button (click)="onShowFilterBuy()">Filter By</button></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--filter-buy-->
+<div class="filter-buy-area" *ngIf="isFilterBuy">
+    <div class="container">
+        <div class="filter-buy-main">
+            <div class="filter-buy-top">
+                <div class="bus-type">
+                    <h3>Bus Type</h3>
+                    <mat-checkbox>Ac</mat-checkbox>
+                    <mat-checkbox>Non Ac</mat-checkbox>
+                </div>
+                <div class="depature-time-area">
+                    <h3>Departure Time</h3>
+                    <ul>
+                        <li>
+                            <button>Before 4PM</button>
+                            <span>Late Night</span>
+                        </li>
+                        <li>
+                            <button>Before 4PM</button>
+                            <span>Late Night</span>
+                        </li>
+                        <li>
+                            <button>Before 4PM</button>
+                            <span>Late Night</span>
+                        </li>
+                        <li>
+                            <button>Before 4PM</button>
+                            <span>Late Night</span>
+                        </li>
+                        <li>
+                            <button>Before 4PM</button>
+                            <span>Late Night</span>
+                        </li>
+                        <li>
+                            <button>Before 4PM</button>
+                            <span>Late Night</span>
+                        </li>
+                        <li>
+                            <button>Before 4PM</button>
+                            <span>Late Night</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bus-area">
+                    <div class="bus-sec-title">
+                           <h3>Buses</h3>
+                    </div>
+                    <div class="bus-area-main">
+                        <ul>
+                            <li><mat-checkbox>Star Line</mat-checkbox></li>
+                            <li><mat-checkbox>Ena</mat-checkbox></li>
+                            <li><mat-checkbox>Shahzadpur Travels</mat-checkbox></li>
+                            <li><mat-checkbox>Shanti Pariban</mat-checkbox></li>
+                       </ul>
+                    </div>
+                    <div class="bus-area-bottom">
+                           <span>Clear Filter</span>
+                           <span (click)="onShowFilterBuy()">Close Filter</span>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

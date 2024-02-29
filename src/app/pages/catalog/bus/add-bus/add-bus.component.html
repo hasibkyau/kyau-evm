@@ -1,0 +1,326 @@
+<form
+  #formElement="ngForm"
+  [formGroup]="dataForm"
+  (ngSubmit)="onSubmit()"
+  autocomplete="off"
+>
+  <div class="top-input">
+    <div class="title">
+      <h2>{{ id ? "Edit" : "Add New" }} Launch</h2>
+    </div>
+    <div class="action-btn">
+      <button
+        mat-stroked-button
+        color="warn"
+        type="button"
+        routerLink="/catalog/all-bus"
+      >
+        Discard
+      </button>
+
+      <button
+        *ngIf="!isLoading"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        {{ id ? "Update" : "Save"
+        }}{{
+          dataForm.value.status
+            ? " (" + (dataForm.value.status | titlecase) + ")"
+            : ""
+        }}
+      </button>
+      <button *ngIf="isLoading" mat-raised-button color="primary" type="submit">
+        <span class="spinner"></span>
+      </button>
+    </div>
+  </div>
+  <!-- END Input Form Header -->
+
+  <div class="container-fluid">
+    <div class="main">
+      <mat-card class="content-main content-4">
+        <div class="title">
+          <h4>Launch Information</h4>
+        </div>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Launch Name</mat-label>
+          <input
+            formControlName="name"
+            matInput
+            placeholder="Enter full name"
+            required
+          />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Coach No</mat-label>
+          <input formControlName="coachNo" type="text" matInput placeholder="Enter Coach No" />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field> -->
+
+        <!-- <mat-form-field appearance="outline" class="w-100 px-1">
+          <mat-label>Coach Type</mat-label>
+          <mat-select formControlName="coachType">
+            <mat-option value="ac">Ac</mat-option>
+            <mat-option value="non_ac">Non Ac</mat-option>
+            <mat-option value="slipper">Slipper</mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field> -->
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Total Seat</mat-label>
+          <input
+            formControlName="totalSeat"
+            type="number"
+            digitOnly
+            matInput
+            placeholder="Enter  Total Seat No"
+          />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Company Name </mat-label>
+          <input
+            formControlName="company"
+            matInput
+            placeholder="Enter  Coach No"
+          />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </mat-card>
+      <!-- END CONTENT PART 1 -->
+
+      <div
+      class="action-btn"
+      style="display: flex; width: 100%; gap: 10px; margin-bottom: 10px;"
+    >
+      <button [class]="tempFloor===1?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(1)">
+        Floor 1
+      </button>
+      <button [class]="tempFloor===2?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(2)">
+        Floor 2
+      </button>
+      <button [class]="tempFloor===3?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(3)">
+        Floor 3
+      </button>
+    </div>
+
+      <mat-card class="specifications">
+        <div class="form-array-container">
+          <div formArrayName="seats" class="form-array-input">
+            <ng-container *ngFor="let data of seatsDataArray?.controls; let i = index"
+            [formGroupName]="i">
+            <div
+            class="single-field"
+            *ngIf="data?.value.floorNo===tempFloor"
+            >
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Floor No</mat-label>
+              <mat-select formControlName="floorNo" required>
+                <mat-option
+                  *ngFor="let data of [{value:1}, {value:2}, {value:3}]"
+                  [value]="data?.value"
+                  (click)="onBusFloorSelect(data?.value)"
+                  >{{ data?.value }}</mat-option
+                >
+              </mat-select>
+              <mat-error>This field is required.</mat-error>
+            </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Seat No</mat-label>
+                <input
+                  formControlName="seatNo"
+                  type="text"
+                  matInput
+                  [placeholder]="'Enter Name'"
+                />
+              </mat-form-field>
+              <!-- <mat-form-field appearance="outline">
+                <mat-label>Seat Type</mat-label>
+                <textarea formControlName="seatType" matInput placeholder="Enter value" [rows]="1"></textarea>
+              </mat-form-field> -->
+
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Seat Type</mat-label>
+                <mat-select formControlName="seatType" required>
+                  <mat-option
+                    *ngFor="let data of seatType"
+                    [value]="data?.value"
+                    >{{ data?.value }}</mat-option
+                  >
+                </mat-select>
+                <mat-error>This field is required.</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Select Seat Status</mat-label>
+                <mat-select formControlName="status" required>
+                  <mat-option value="Available">Available</mat-option>
+                  <mat-option value="Booked">Booked</mat-option>
+                  <mat-option value="Selected">Selected</mat-option>
+                  <mat-option value="Sold">Sold</mat-option>
+                  <mat-option value="Blocked">Blocked</mat-option>
+                </mat-select>
+                <mat-error>This field is required.</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>X Axis</mat-label>
+                <input
+                  formControlName="xaxis"
+                  type="number"
+                  digitOnly
+                  matInput
+                  placeholder="Enter X Axis"
+                />
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Y Axis</mat-label>
+                <input
+                  formControlName="yaxis"
+                  type="number"
+                  digitOnly
+                  matInput
+                  placeholder="Enter Y Axis"
+                />
+              </mat-form-field>
+
+              <button
+                class="btn-form-field-remove"
+                type="button"
+                mat-mini-fab
+                color="warn"
+                (click)="removeFormArrayField('seat', i)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            </ng-container>
+
+          </div>
+
+          <div class="add-form-array-action">
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onAddNewSeat()"
+            >
+              <mat-icon>add</mat-icon>
+              Create New Seat
+            </button>
+          </div>
+        </div>
+        <!-- END VARIATIONS FORM ARRAY -->
+      </mat-card>
+    </div>
+    <!-- END! MAIN AREA -->
+
+    <div class="sidebar">
+      <mat-card class="content-sidebar content-sidebar-0">
+        <div class="title">
+          <h4>Status</h4>
+        </div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Select Status</mat-label>
+          <mat-select formControlName="status" required>
+            <mat-option *ngFor="let data of busStatus" [value]="data.value">
+              {{ data.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+      </mat-card>
+      <!-- END CONTENT SIDEBAR 2 -->
+
+      <mat-card class="content-sidebar content-sidebar-2">
+        <div class="title">
+          <h4>Priority</h4>
+        </div>
+        <mat-form-field appearance="outline" class="w-100">
+          <input
+            formControlName="priority"
+            type="number"
+            digitOnly
+            matInput
+            placeholder="Enter priority"
+          />
+        </mat-form-field>
+      </mat-card>
+
+      <mat-card class="content-sidebar content-sidebar-2">
+        <div
+        class="action-btn"
+        style="display: flex; width: 100%; gap: 10px; margin-bottom: 10px;"
+      >
+        <button [class]="tempFloor===1?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(1)">
+          Floor 1
+        </button>
+        <button [class]="tempFloor===2?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(2)">
+          Floor 2
+        </button>
+        <button [class]="tempFloor===3?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(3)">
+          Floor 3
+        </button>
+      </div>
+        <div class="seat-area">
+          <div class="seat-area-main">
+            <div class="seat-area-top">
+              <img src="https://bdtickets.com/images/driver-icon.webp" alt="" />
+            </div>
+            <ul>
+              <ng-container *ngFor="let data of dataForm?.value.seats">
+              <li *ngIf="data?.floorNo === tempFloor"
+                [ngStyle]="{
+                  'grid-row-start': data?.xaxis,
+                  'grid-column-start': data?.yaxis
+                }"
+              >
+                <div style="justify-self: center; width: 26px; height: 30px">
+                  <span
+                    class="seat"
+                    [ngClass]="{
+                      blocked: (data?.status | lowercase) === 'locked',
+                      'sold-m': (data?.status | lowercase) === 'sold',
+                      selected: (data?.status | lowercase) === 'selected',
+                      'booked-m': (data?.status | lowercase) === 'booked'
+                    }"
+                  >
+                    <div
+                      class="hand"
+                      [ngClass]="{
+                        search_hand__Yoq3T:
+                          seatAnimation === true &&
+                          data?.seatId === selectedSeat?.seatId
+                      }"
+                    ></div>
+                  </span>
+                </div>
+              </li>
+            </ng-container>
+            </ul>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</form>
+
+<!-- LOADING TEMPLATE -->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.5)"
+  size="medium"
+  color="#fff"
+  type="ball-atom"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>

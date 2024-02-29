@@ -1,0 +1,117 @@
+<div class="header">
+  <button mat-raised-button color="primary" [routerLink]="['../../', 'add-request-medicine', order?._id]">
+    <mat-icon>edit</mat-icon>
+    Create Order
+  </button>
+</div>
+
+<section class="admin-data-sec">
+
+  <div class="top-data-header">
+    <div class="title">
+      <h2>Prescription Order Details</h2>
+    </div>
+  </div> <!-- END TOP DATA HEADER -->
+
+  <hr class="center-square">
+
+  <div class="profile">
+    <div class="info">
+      <h2>Checkout Date: {{order?.checkoutDate }}</h2>
+      <div class="row">
+        <h2>Payment Type: {{'Cash On Delivery'}}</h2>
+      </div>
+      <h2>Last Update: {{order?.updatedAt | date: 'mediumDate'}}</h2>
+    </div>
+  </div>
+
+  <div class="table-wrapper space">
+
+
+    <table>
+      <tr>
+        <th>SL</th>
+<!--        <th>Image</th>-->
+        <th>Name</th>
+        <th>Phone No</th>
+        <th>Order Date And Time</th>
+        <th>City</th>
+        <th>Payment Status</th>
+<!--        <th>Actions</th>-->
+      </tr>
+      <tr>
+        <td>1</td>
+<!--        <td>-->
+<!--          <img checkImageDefault [src]="order?.images[0]" class="table-image" style="margin: auto;">-->
+<!--        </td>-->
+        <td>{{order?.name}}</td>
+        <td>{{order?.phoneNo}}</td>
+        <td>{{order?.createdAt | date: 'd MMM, y, h:mm a'}}</td>
+        <td>{{order?.city}}</td>
+        <td>{{'Unpaid'}}</td>
+<!--        <td class="td-action">-->
+<!--          <a style="margin-left: 5px; color: #fff;" mat-mini-fab color="primary" mat-icon-button (click)="onShowPop(0)"-->
+<!--             matTooltip="View Prescriptions">-->
+<!--            <mat-icon>visibility</mat-icon>-->
+<!--          </a>-->
+<!--        </td>-->
+      </tr>
+    </table>
+  </div>
+
+  <div class="bottom-view">
+    <div class="action info">
+      <div class="item" style="border-bottom: none;">
+        <div class="left">
+          Name
+        </div>
+        <div class="right">
+          <p>{{order?.name}}</p>
+        </div>
+      </div>
+
+      <div class="item" style="border-bottom: none;">
+        <div class="left">
+          Phone No
+        </div>
+        <div class="right">
+          <p>{{order?.phoneNo}}</p>
+        </div>
+      </div>
+
+      <div class="item" style="border-bottom: none;">
+        <div class="left">
+          Email
+        </div>
+        <div class="right">
+          <p>{{order?.email | checkNull }}</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <div class="left">
+          City
+        </div>
+        <div class="right">
+          <p class="bold">{{order?.city}}</p>
+        </div>
+      </div>
+
+      <div class="item test">
+        <div class="left left-Shipping">
+          Shipping Address
+        </div>
+        <div class="right">
+          <p class="bold">{{order?.shippingAddress}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADING TEMPLATE -->
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" size="medium" color="#fff" type="ball-atom" [fullScreen]="false">
+    <p style="color: white"> Loading... </p>
+  </ngx-spinner>
+</section>
+
+<app-gallery-popup [galleryData]="order?.images" #galleryPop></app-gallery-popup>

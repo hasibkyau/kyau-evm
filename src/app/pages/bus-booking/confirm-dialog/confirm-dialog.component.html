@@ -1,0 +1,86 @@
+<div class="dialog-area" *ngIf="isConfirm">
+    <div class="dialog-main">
+        <div class="dialog-header">
+            <div class="dialog-header-left">
+                <h3>Please confirm!</h3>
+            </div>
+            <div class="dialog-header-right">
+                <span (click)="onHideConfirmDialog()"><i class="fa fa-xmark"></i></span>
+            </div>
+        </div>
+        <div class="dialog-confirm-info-top">
+            <h3>You are about to book this ticket(s)</h3>
+            <p>This ticket wil be temporarily <span>booked for 20 mins,</span></p>
+            <p>You need to complete the payment before the booking expires</p>
+        </div>
+        <div class="p">
+            <div class="book-details-onward">
+                <h3>Booking Details Onward:</h3>
+                <div class="book-details-onward-main">
+                    <ul>
+                        <li><span>Bus</span> <small>:</small> <strong>{{ticket?.bus?.name}}</strong></li>
+                        <li><span>Dropping Point</span> <small>:</small> <strong>{{ticket?.droppingPoint?.name}}</strong></li>
+                        <li><span>Journey Date</span> <small>:</small> <strong>{{ticket?.date}}</strong></li>
+                        <li><span>Departure Time</span> <small>:</small> <strong>{{ticket?.departureTime?.name}}</strong></li>
+                        <li><span>Journey</span> <small>:</small> <strong>{{ticket?.from?.name}} - {{ticket?.to?.name}}</strong></li>
+                        <li><span>Seats </span> <small>:</small> <strong *ngFor="let s of ticket?.seats">{{s?.seatNo}}</strong></li>
+                        <li><span>Boarding Point</span> <small>:</small> <strong>{{ticket?.boardingPoint?.name}}</strong></li>
+                        <li><span>Total Seats </span> <small>:</small> <strong>{{ticket?.seats?.length}}</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="book-details-main">
+            <div class="book-details-onward">
+                <h3>Passenger Details:</h3>
+                <div class="book-details-onward-main">
+                    <ul>
+                        <li><span>First Name</span> <small>:</small> <strong>{{ticket?.userName.split(' ')[0]}}</strong></li>
+                        <li> <span> Last Name</span> <small>:</small> <strong>{{ticket?.userName.split(' ')[1]}}</strong></li>
+                        <li><span>Phone Number</span> <small>:</small> <strong>{{ticket?.phone}}</strong></li>
+                        <li><span>Email</span> <small>:</small> <strong>{{ticket?.email}}</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="book-details-onward">
+                <h3>Payment Details Onward:</h3>
+                <div class="book-details-onward-main">
+                    <ul>
+                        <li><span>Seat Fare</span>      <small>:</small> <strong>{{ticket?.subTotal}} BDT</strong></li>
+                        <li><span>Service Charge</span> <small>:</small> <strong>{{ticket?.serviceCharge}} BDT</strong></li>
+                        <li><span>Payments Due</span>   <small>:</small> <strong>{{ticket?.grandTotal}} BDT</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="book-details-form">
+            <div class="book-details-form-main">
+                <div class="form-input">
+                    <label for="">PAYMENT METHOD*</label>
+                    <button (click)="onShowPaymentDropDown()">{{selectedMethod ? selectedMethod : 'Select Method' }}<i class="fa fa-angle-down"></i></button>
+                    <div class="payment-method" *ngIf="isShowPayment">
+                           <ul>
+                               <li (click)="onSelectPaymentMethod('Bkash')" [ngClass]="{'active': selectedMethod == 'Bkash'}">Bkash</li>
+                               <li (click)="onSelectPaymentMethod('Nagad')" [ngClass]="{'active': selectedMethod == 'Nagad'}">Nagad</li>
+                               <li (click)="onSelectPaymentMethod('Cash On Delivery')" [ngClass]="{'active': selectedMethod == 'Cash On Delivery'}">Cash On Delivery</li>
+                           </ul>
+                    </div>
+
+                </div>
+                <div class="form-input">
+                    <label for="">COUPON CODE</label>
+                    <div class="cupon">
+                        <input type="text" placeholder="Coupon Code">
+                        <button>Apply</button>
+                    </div>
+                </div>
+            </div>
+            <mat-checkbox class="mat-check">I AGREE TO ALL THE <a href="#"> TERMS AND CONDITIONS</a></mat-checkbox>
+        </div>
+
+        <div class="buy-btn">
+            <button (click)="onHideConfirmDialog()" routerLink="/payment">Purchase Now</button>
+        </div>
+    </div>
+</div>
