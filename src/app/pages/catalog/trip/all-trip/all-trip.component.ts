@@ -132,8 +132,6 @@ export class AllTripComponent implements OnInit {
       ...data,
       status: event.target.checked ? 'publish' : 'draft'
     }
-
-    console.log('mdata', mData);
     this.updateBusConfigById(mData, id);
   }
 
@@ -245,9 +243,7 @@ export class AllTripComponent implements OnInit {
       .getAllBusConfig(filter, null)
       .subscribe({
         next: (res) => {
-          if (res.success) {
-            console.log('trip',res.data);
-            
+          if (res.success) {            
             this.trips = res.data;
             this.totalTrips = res.count;
           }
