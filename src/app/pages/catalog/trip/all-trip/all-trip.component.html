@@ -1,25 +1,27 @@
 <section class="admin-data-sec">
   <div class="top-data-header">
     <div class="title">
-      <h2>All Tips</h2>
+      <h2>All Trips</h2>
     </div>
 
+    <!-- <form class="table-search" #searchForm=ngForm>
+      <input type="text"
+             #searchInput
+             name="searchTerm"
+             autocomplete="off"
+             ngModel placeholder="Search">
+      <button><i class="fa fa-search"></i></button>
+    </form> -->
 
+    <!-- <div class="action">
 
-    <div class="action">
-
-      <button
-        mat-raised-button
-        color="primary"
-        routerLink="/catalog/add-trip"
-      >
+      <button *ngIf="checkAddPermission" mat-raised-button color="accent" [routerLink]="['../', 'add-bus-config']">
         <mat-icon>add</mat-icon>
-        Add Trip
+        Add Launch Config
       </button>
-    </div>
-  </div>
-  <!-- END TOP DATA HEADER -->
+    </div> -->
 
+  </div> <!-- END TOP DATA HEADER -->
     <div class="top-data-header" style="display: block;">
       <app-search-trip></app-search-trip>
     </div> <!-- END TOP DATA HEADER -->
@@ -92,15 +94,16 @@
             <mat-checkbox #matCheckbox (change)="onAllSelectChange($event)"></mat-checkbox>
           </th>
           <th>Bus Name</th>
+          <th>Company</th>
           <th>Total Seat</th>
           <th>From</th>
           <th>To</th>
-          <th>Trip Date</th>
-          <th>Company</th>
-          <th>Price</th>
-          <th>Service Charge</th>
-          <th>Priority</th>
+          <!-- <th>Trip Date</th> -->
+          <!-- <th>Price</th> -->
+          <!-- <th>Service Charge</th> -->
+          <!-- <th>Priority</th> -->
           <th>Status</th>
+          <th>Action</th>
         </tr>
         <tr
           *ngFor="let data of trips | paginate: { itemsPerPage: TripsPerPage, currentPage: currentPage, totalItems: totalTrips } ; let i = index">
@@ -113,12 +116,19 @@
           <td>{{data?.bus?.totalSeat}}</td>
           <td>{{data.from?.name}}</td>
           <td>{{data.to?.name}}</td>
-          <td>{{data?.date}}</td>
-          <td>{{data?.bus?.name  | titlecase}}</td>
-          <td>{{data?.price}}</td>
-          <td>{{data?.serviceCharge}}</td>
-          <td>{{data?.priority}}</td>
-          <td [style.color]="data.status === 'publish' ? 'green' : 'red'">{{data.status | titlecase}}</td>
+          <!-- <td>{{data?.date}}</td> -->
+          <!-- <td>{{data?.bus?.name  | titlecase}}</td> -->
+          <!-- <td>{{data?.price}}</td> -->
+          <!-- <td>{{data?.serviceCharge}}</td> -->
+          <!-- <td>{{data?.priority}}</td> -->
+          <td [style.color]="data.status === 'publish' ? 'green' : 'red'">{{data.status === 'publish' ? ('Active' | titlecase) :  ('Inactive' | titlecase) }}</td>
+          <td class="button">
+              <label class="switch">
+                <input type="checkbox" [checked]="data.status === 'publish'"
+                (input)="onTripActivate($event, data, data?._id)">
+                <span class="slider round"></span>
+              </label>
+          </td>
         </tr>
       </table>
     </div>

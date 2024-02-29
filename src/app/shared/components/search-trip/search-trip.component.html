@@ -81,7 +81,7 @@
       </div>
       <div class="input-container">
         <mat-form-field appearance="outline" class="form-field" (click)="picker1.open()">
-          <input readonly matInput [matDatepicker]="picker1" (dateInput)="onSelectClick(select)"
+          <input readonly matInput [matDatepicker]="picker1"
                  placeholder="JOURNEY DATE"
                  formControlName="date">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -90,7 +90,7 @@
       </div>
 
 
-      <div class="input-container">
+      <!-- <div class="input-container">
         <mat-form-field appearance="outline" class="form-field">
           <mat-select formControlName="shift" #select placeholder="Time">
             <mat-option value="Morning">Morning</mat-option>
@@ -98,7 +98,16 @@
             <mat-option value="Night">Night</mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
+      </div> -->
+
+      <!-- <div class="input-container">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-select formControlName="seatType" #select placeholder="Seat Type">
+            <mat-option [value]="null">All</mat-option>
+            <mat-option *ngFor="let data of seatTypes" [value]="data.value">{{data?.viewValue}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> -->
 
 
       <button style="font-weight: 600;font-size: 17px;" type="submit" class="btn-search" mat-raised-button
