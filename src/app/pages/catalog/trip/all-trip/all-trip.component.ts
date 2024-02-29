@@ -15,6 +15,7 @@ import {UtilsService} from 'src/app/services/core/utils.service';
 import {ConfirmDialogComponent} from 'src/app/shared/components/ui/confirm-dialog/confirm-dialog.component';
 import {Bus} from '../../../../interfaces/common/bus.interface';
 import {BusService} from '../../../../services/common/bus.service';
+import { BusConfigService } from 'src/app/services/common/bus-config.service';
 
 @Component({
   selector: 'app-all-trip',
@@ -65,6 +66,7 @@ export class AllTripComponent implements OnInit {
     private reloadService: ReloadService,
     private activatedRoute: ActivatedRoute,
     private busService: BusService,
+    private busConfigService: BusConfigService
   ) {
   }
 
@@ -87,6 +89,7 @@ export class AllTripComponent implements OnInit {
           ...this.filter,
           ...{
             'from.name': qParam.get('from'),
+            status: 'publish'
           }
         }
       }
@@ -100,22 +103,22 @@ export class AllTripComponent implements OnInit {
         }
       }
 
-      if (qParam.get('date')) {
-        this.filter = {
-          ...this.filter,
-          ...{
-            date: qParam.get('date'),
-          }
-        }
-      }
-      if (qParam.get('shift')) {
-        this.filter = {
-          ...this.filter,
-          ...{
-            'departureTime.shift': qParam.get('shift')
-          }
-        }
-      }
+      // if (qParam.get('date')) {
+      //   this.filter = {
+      //     ...this.filter,
+      //     ...{
+      //       date: qParam.get('date'),
+      //     }
+      //   }
+      // }
+      // if (qParam.get('shift')) {
+      //   this.filter = {
+      //     ...this.filter,
+      //     ...{
+      //       'departureTime.shift': qParam.get('shift')
+      //     }
+      //   }
+      // }
 
       this.getAllTrip();
     });
@@ -124,7 +127,31 @@ export class AllTripComponent implements OnInit {
     this.getAllBus();
   }
 
+  onTripActivate(event: any, data?:any, id?:string){
+    let mData = {
+      ...data,
+      status: event.target.checked ? 'publish' : 'draft'
+    }
+    this.updateBusConfigById(mData, id);
+  }
 
+  private updateBusConfigById(data: any, id: any) {
+    this.subDataThree = this.busConfigService
+      .updateBusConfigById(id, data)
+      .subscribe({
+        next: (res) => {
+          if (res.success) {
+            this.uiService.success(res.message);
+            this.getAllTrip();
+          } else {
+            this.uiService.warn(res.message);
+          }
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+  }
   /**
    * CHECK ADMIN PERMISSION
    * onSelectShowPerPage()
@@ -212,11 +239,11 @@ export class AllTripComponent implements OnInit {
       sort: this.sortQuery,
     };
 
-    this.subDataOne = this.tripService
-      .getAllTrip(filter, null)
+    this.subDataOne = this.busConfigService
+      .getAllBusConfig(filter, null)
       .subscribe({
         next: (res) => {
-          if (res.success) {
+          if (res.success) {            
             this.trips = res.data;
             this.totalTrips = res.count;
           }

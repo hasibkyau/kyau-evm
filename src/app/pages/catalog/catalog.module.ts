@@ -83,7 +83,7 @@ import {SearchTripModule} from '../../shared/components/search-trip/search-trip.
     AddTripComponent,
     AllTripComponent,
     AddBusConfigComponent,
-    AllBusConfigComponent
+    AllBusConfigComponent,
   ],
   imports: [
     CommonModule,

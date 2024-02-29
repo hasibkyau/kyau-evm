@@ -36,7 +36,7 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Via Route</mat-label>
                     <mat-select formControlName="viaRoutes" multiple>
-                        <mat-option [value]="data?._id" *ngFor="let data of counters">{{data?.name}}</mat-option>
+                        <mat-option [value]="data" *ngFor="let data of counters">{{data?.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
             </div>

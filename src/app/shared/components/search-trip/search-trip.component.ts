@@ -10,6 +10,8 @@ import {UtilsService} from '../../../services/core/utils.service';
 import {FilterData} from '../../../interfaces/gallery/filter-data';
 import {Terminal} from '../../../interfaces/common/terminal.interface';
 import {MatSelect} from '@angular/material/select';
+import { Select } from 'src/app/interfaces/core/select';
+import { SEAT_TYPES } from 'src/app/core/db/seat-type.db';
 
 @Component({
   selector: 'app-search-trip',
@@ -44,6 +46,7 @@ export class SearchTripComponent implements OnInit {
   searchFormRoute: any[] = [];
   searchToRoute: any[] = [];
 
+  seatTypes: Select[] = SEAT_TYPES;
 
   //Subscriptions;
   private subFormTerminal!: Subscription;
@@ -74,7 +77,8 @@ export class SearchTripComponent implements OnInit {
           from: qParam.get('from'),
           to: qParam.get('to'),
           date: qParam.get('date'),
-          shift: qParam.get('shift'),
+          // shift: qParam.get('shift'),
+          seatType: qParam.get('seatType'),
         });
       }
     })
@@ -138,7 +142,8 @@ export class SearchTripComponent implements OnInit {
       from: [null, Validators.required],
       to: [null, Validators.required],
       date: [null, Validators.required],
-      shift: [null]
+      shift: [null],
+      seatType: [null]
     })
   }
 
@@ -150,7 +155,8 @@ export class SearchTripComponent implements OnInit {
           from: this.selectedForm,
           to: this.selectedTo,
           date: this.utilsService.getDateString(this.formData.value.date),
-          shift: this.formData.value.shift,
+          // shift: this.formData.value.shift,
+          seatType: this.formData.value.seatType
         },
         queryParamsHandling: 'merge'
       }).then();

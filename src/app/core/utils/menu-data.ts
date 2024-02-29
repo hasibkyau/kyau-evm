@@ -56,7 +56,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
 
   {
     id: 2,
-    name: 'Catalog',
+    name: 'Launch Setup',
     hasSubMenu: true,
     routerLink: null,
     icon: 'category',

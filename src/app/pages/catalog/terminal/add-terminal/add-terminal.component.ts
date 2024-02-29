@@ -88,7 +88,7 @@ export class AddTerminalComponent implements OnInit {
   private initDataForm() {
     this.dataForm = this.fb.group({
       name: [null,Validators.required],
-      counters:[null,Validators.required],
+      counters:[null],
       priority: [null],
       status: ['publish'],
     });

@@ -65,7 +65,7 @@ private initDataForm() {
     name: [null,Validators.required],
     priority: [null],
     status: ['publish'],
-    shift:['Morning',Validators.required]
+    shift:[null]
   });
 }
 
