@@ -14,6 +14,7 @@ export interface BusConfig {
   boardingPoints?: Counter[];
   droppingPoints?: Counter[];
   price?: number;
+  prices?: Price[];
   serviceCharge?: number;
   seats?: Seat[];
   priority?: number;
@@ -21,4 +22,11 @@ export interface BusConfig {
   createdAt: string;
   updatedAt: string;
   select?:boolean;
+}
+
+export interface Price {
+  _id?: string;
+  price?: string;
+  seatType?: string;
+  serviceCharge?: number;
 }

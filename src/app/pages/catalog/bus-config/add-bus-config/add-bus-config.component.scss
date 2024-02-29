@@ -1,5 +1,17 @@
 @import "src/theme/variables";
 
+.specifications {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 24px;
+  //min-height: 200px;
+
+  .select-single {
+    max-width: 350px;
+    width: 100%;
+  }
+}
+
 .price-input-area {
   width: 100%;
 

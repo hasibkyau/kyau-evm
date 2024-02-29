@@ -1,159 +1,270 @@
-<form #formElement="ngForm" [formGroup]="dataForm" (ngSubmit)="onSubmit()" autocomplete="off">
-    <div class="top-input">
-      <div class="title">
-        <h2>{{ id ? "Edit" : "Add New" }} Launch Config</h2>
-      </div>
-      <div class="action-btn">
-        <button mat-stroked-button color="warn" type="button" routerLink="/catalog/all-bus-config">Discard</button>
-        <button *ngIf="!isLoading" mat-raised-button color="primary" type="submit">
-          {{ id ? "Update" : "Save"
-          }}{{
-          dataForm.value.status
-          ? " (" + (dataForm.value.status | titlecase) + ")"
-          : ""
-          }}
-        </button>
-        <button *ngIf="isLoading" mat-raised-button color="primary" type="submit">
-          <span class="spinner"></span>
-        </button>
-      </div>
+<form
+  #formElement="ngForm"
+  [formGroup]="dataForm"
+  (ngSubmit)="onSubmit()"
+  autocomplete="off"
+>
+  <div class="top-input">
+    <div class="title">
+      <h2>{{ id ? "Edit" : "Add New" }} Launch Config</h2>
     </div>
-    <!-- END Input Form Header -->
-  
-    <div class="container-fluid">
-      <div class="main">
-        <mat-card class="content-main content-4">
-  
-          <div class="title">
-            <h4>Launch Information</h4>
-          </div>
-  
-          <mat-form-field appearance="outline" class="w-100 px-1">
-            <mat-label>Select Launch</mat-label>
-            <mat-select formControlName="bus">
-              <mat-option [value]="data?._id" *ngFor="let data of buss">{{data?.name}}</mat-option>
-            </mat-select>
-            <mat-error>This field is required.</mat-error>
-          </mat-form-field>
+    <div class="action-btn">
+      <button
+        mat-stroked-button
+        color="warn"
+        type="button"
+        routerLink="/catalog/all-bus-config"
+      >
+        Discard
+      </button>
+      <button
+        *ngIf="!isLoading"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        {{ id ? "Update" : "Save"
+        }}{{
+          dataForm.value.status
+            ? " (" + (dataForm.value.status | titlecase) + ")"
+            : ""
+        }}
+      </button>
+      <button *ngIf="isLoading" mat-raised-button color="primary" type="submit">
+        <span class="spinner"></span>
+      </button>
+    </div>
+  </div>
+  <!-- END Input Form Header -->
 
-          
-          <!-- <mat-form-field appearance="outline" class="w-100">
+  <div class="container-fluid">
+    <div class="main">
+      <mat-card class="content-main content-4">
+        <div class="title">
+          <h4>Launch Information</h4>
+        </div>
+
+        <mat-form-field appearance="outline" class="w-100 px-1">
+          <mat-label>Select Launch</mat-label>
+          <mat-select formControlName="bus">
+            <mat-option [value]="data?._id" *ngFor="let data of buss">{{
+              data?.name
+            }}</mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+
+        <!-- <mat-form-field appearance="outline" class="w-100">
             <mat-label>Choose a date</mat-label>
             <input matInput formControlName="date" [matDatepicker]="datepicker">
             <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
             <mat-datepicker #datepicker></mat-datepicker>
           </mat-form-field> -->
 
-          <div class="from">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Select From</mat-label>
-                <mat-select formControlName="from">
-                    <mat-option [value]="f?._id" *ngFor="let f of terminals">{{f?.name}}</mat-option>
-
-                </mat-select>
-            </mat-form-field>
+        <div class="from">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Select From</mat-label>
+            <mat-select formControlName="from">
+              <mat-option [value]="f?._id" *ngFor="let f of terminals">{{
+                f?.name
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
         <div class="from">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Select To</mat-label>
-                <mat-select formControlName="to">
-                    <mat-option [value]="t?._id" *ngFor="let t of terminals">{{t?.name}}</mat-option>
-
-                </mat-select>
-            </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Select To</mat-label>
+            <mat-select formControlName="to">
+              <mat-option [value]="t?._id" *ngFor="let t of terminals">{{
+                t?.name
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
-          <mat-form-field appearance="outline" class="w-100 px-1">
-            <mat-label>Select Departure Time</mat-label>
-            <mat-select formControlName="departureTime">
-              <mat-option [value]="data?._id" *ngFor="let data of schedules">{{data?.name}}</mat-option>
-            </mat-select>
-            <mat-error>This field is required.</mat-error>
-          </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 px-1">
+          <mat-label>Select Departure Time</mat-label>
+          <mat-select formControlName="departureTime">
+            <mat-option [value]="data?._id" *ngFor="let data of schedules">{{
+              data?.name
+            }}</mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
 
-  
-          <mat-form-field appearance="outline" class="w-100 px-1">
-            <mat-label>Select Arrival Time</mat-label>
-            <mat-select formControlName="arrivalTime">
-              <mat-option [value]="data?._id" *ngFor="let data of schedules">{{data?.name}}</mat-option>
-            </mat-select>
-            <mat-error>This field is required.</mat-error>
-          </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100 px-1">
+          <mat-label>Select Arrival Time</mat-label>
+          <mat-select formControlName="arrivalTime">
+            <mat-option [value]="data?._id" *ngFor="let data of schedules">{{
+              data?.name
+            }}</mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
 
-  
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Price</mat-label>
-            <input formControlName="price" type="number" digitOnly matInput placeholder="Enter price" />
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
+        <!-- <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Price</mat-label>
+          <input
+            formControlName="price"
+            type="number"
+            digitOnly
+            matInput
+            placeholder="Enter price"
+          />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field> -->
 
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Service Charge</mat-label>
-            <input formControlName="serviceCharge" type="number" digitOnly matInput placeholder="Enter service charge" />
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Priority</mat-label>
+          <input
+            formControlName="priority"
+            type="number"
+            digitOnly
+            matInput
+            placeholder="Enter priority"
+          />
+          <mat-error>This field is required</mat-error>
+        </mat-form-field>
+      </mat-card>
 
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Priority</mat-label>
-            <input formControlName="priority" type="number" digitOnly matInput placeholder="Enter priority" />
-            <mat-error>This field is required</mat-error>
-          </mat-form-field>
-        </mat-card>
-        <!-- END CONTENT PART 1 -->
-      </div>
-      <!-- END! MAIN AREA -->
-  
-      <div class="sidebar">
-        <mat-card class="content-sidebar content-sidebar-0">
-          <div class="title">
-            <h4>Status</h4>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Service Charge</mat-label>
+        <input
+          formControlName="serviceCharge"
+          type="number"
+          digitOnly
+          matInput
+          placeholder="Enter service charge"
+        />
+        <mat-error>This field is required</mat-error>
+      </mat-form-field>
+
+      <mat-card class="specifications">
+        <div class="form-array-container">
+          <div formArrayName="prices" class="form-array-input">
+            <ng-container
+              *ngFor="let data of priceDataArray?.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div
+                class="single-field"
+              >
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Seat Type</mat-label>
+                  <mat-select formControlName="seatType" required>
+                    <mat-option
+                      *ngFor="let data of seatTypes"
+                      [value]="data?.value"
+                      >{{ data?.value }}</mat-option
+                    >
+                  </mat-select>
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Price</mat-label>
+                  <input
+                    formControlName="price"
+                    type="text"
+                    matInput
+                    [placeholder]="'Enter Name'"
+                  />
+                </mat-form-field>
+
+                <button
+                  class="btn-form-field-remove"
+                  type="button"
+                  mat-mini-fab
+                  color="warn"
+                  (click)="removeFormArrayField('seat', i)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </ng-container>
           </div>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Select Status</mat-label>
-            <mat-select formControlName="status" required>
-              <mat-option *ngFor="let data of busConfigStatus" [value]="data.value">
-                {{ data.viewValue }}
-              </mat-option>
-            </mat-select>
-            <mat-error>This field is required.</mat-error>
-          </mat-form-field>
-        </mat-card>
-        <!-- END CONTENT SIDEBAR 2 -->
-  
-        <mat-card class="content-sidebar content-sidebar-2">
-          <div class="title">
-            <h4>Boarding Points</h4>
-          </div>
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Select Boarding Points</mat-label>
-            <mat-select formControlName="boardingPoints" multiple>
-                <mat-option [value]="data?._id" *ngFor="let data of counters">{{data?.name}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-card>
 
-        <mat-card class="content-sidebar content-sidebar-2">
-          <div class="title">
-            <h4>Dropping Points</h4>
+          <div class="add-form-array-action">
+            <button
+              type="button"
+              mat-raised-button
+              color="primary"
+              (click)="onAddNewSeat()"
+            >
+              <mat-icon>add</mat-icon>
+              Add Price
+            </button>
           </div>
-          <div class="from">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Select Dropping Points</mat-label>
-                <mat-select formControlName="droppingPoints" multiple>
-                    <mat-option [value]="data?._id" *ngFor="let data of counters">{{data?.name}}</mat-option>
-                </mat-select>
-              </mat-form-field>
         </div>
-        </mat-card>
+        <!-- END VARIATIONS FORM ARRAY -->
+      </mat-card>
 
-        
-   
-      </div>
+      <!-- END CONTENT PART 1 -->
     </div>
-  </form>
-  
-  <!-- LOADING TEMPLATE -->
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.5)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
-    <p style="color: white">Loading...</p>
-  </ngx-spinner>
+    <!-- END! MAIN AREA -->
+
+    <div class="sidebar">
+      <mat-card class="content-sidebar content-sidebar-0">
+        <div class="title">
+          <h4>Status</h4>
+        </div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Select Status</mat-label>
+          <mat-select formControlName="status" required>
+            <mat-option
+              *ngFor="let data of busConfigStatus"
+              [value]="data.value"
+            >
+              {{ data.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error>This field is required.</mat-error>
+        </mat-form-field>
+      </mat-card>
+      <!-- END CONTENT SIDEBAR 2 -->
+
+      <mat-card class="content-sidebar content-sidebar-2">
+        <div class="title">
+          <h4>Boarding Points</h4>
+        </div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Select Boarding Points</mat-label>
+          <mat-select formControlName="boardingPoints" multiple>
+            <mat-option [value]="data?._id" *ngFor="let data of counters">{{
+              data?.name
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card>
+
+      <mat-card class="content-sidebar content-sidebar-2">
+        <div class="title">
+          <h4>Dropping Points</h4>
+        </div>
+        <div class="from">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Select Dropping Points</mat-label>
+            <mat-select formControlName="droppingPoints" multiple>
+              <mat-option [value]="data?._id" *ngFor="let data of counters">{{
+                data?.name
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</form>
+
+<!-- LOADING TEMPLATE -->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.5)"
+  size="medium"
+  color="#fff"
+  type="ball-atom"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
