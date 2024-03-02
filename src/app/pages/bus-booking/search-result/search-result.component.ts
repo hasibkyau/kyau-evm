@@ -15,6 +15,7 @@ import {BOOKING_TIME} from '../../../core/utils/app-data';
 import {Select} from '../../../interfaces/core/select';
 import {Subscription} from 'rxjs';
 import {Ticket} from '../../../interfaces/common/ticket.interface';
+import { BusConfigService } from 'src/app/services/common/bus-config.service';
 
 @Component({
   selector: 'app-search-result',
@@ -28,12 +29,15 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   @Input() trip: Trip;
   @Input() ticket: Ticket;
   @Input() mode: 'edit' | 'add';
+  @Input() date: string;
+
   selectedTrip: Trip = null;
 
   windowWidth = window.innerWidth;
   dataForm: FormGroup;
   selectedGender = 'Male';
   isLoading: boolean = false;
+  floorSelected: number = 1;
 
   bookingTimes: Select[] = BOOKING_TIME;
 
@@ -72,6 +76,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private utilsService: UtilsService,
+    private busConfigService: BusConfigService
   ) {
 
   }
@@ -136,6 +141,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
       paidAmount: [0, Validators.required],
       bookingTime: [null],
     })
+  }
+
+  onToggleFloor(floor:number){
+    this.floorSelected=floor;
   }
 
   onSubmit() {
@@ -269,7 +278,8 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
           isAuth: true
         },
         applicationChannel: 'admin',
-        date: this.selectedTrip.date,
+        // date: this.selectedTrip.date,
+        date: this.date,
         seat: data._id,
         gender: 'Male',
         version: data.version
@@ -429,9 +439,11 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private getTripById() {
-    this.subDataFour = this.tripService.getTripById(this.id)
+    this.subDataFour = this.busConfigService.getBusConfigById(this.id)
       .subscribe({
         next: res => {
+          console.log('search result', res);
+          
           this.selectedTrip = res.data;
           if (this.selectedTrip) {
             this.selectedTrip.seats.forEach(f => {

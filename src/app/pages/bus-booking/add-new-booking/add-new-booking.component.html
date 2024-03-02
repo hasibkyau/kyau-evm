@@ -1,7 +1,7 @@
 <app-search-trip *ngIf="mode === 'add'"></app-search-trip>
 <app-filter *ngIf="mode === 'add'"></app-filter>
 <ng-container *ngIf="mode === 'add'">
-  <app-search-result *ngFor="let data of trips" [trip]="data"></app-search-result>
+  <app-search-result *ngFor="let data of trips" [date]="date" [trip]="data"></app-search-result>
 </ng-container>
 
 <ng-container *ngIf="mode === 'edit'">

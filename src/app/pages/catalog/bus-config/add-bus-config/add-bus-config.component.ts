@@ -180,6 +180,7 @@ export class AddBusConfigComponent implements OnInit {
       ...{
         // date:this.utilService.getDateString(this.dataForm.value.date),
         bus: this.buss.find((m) => m._id === this.dataForm.value.bus),
+        seats: this.buss.find((m) => m._id === this.dataForm.value.bus).seats,
         from: this.terminals.find((m) => m._id === this.dataForm.value.from),
         to: this.terminals.find((m) => m._id === this.dataForm.value.to),
         departureTime: this.schedules.find(

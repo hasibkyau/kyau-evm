@@ -6,14 +6,24 @@
         <div class="ticket-info" (click)="onShowMobile($event)">
           <div class="ticket-search-info">
             <h3>{{ trip?.bus?.name }}</h3>
-            <p>Coach Type: <span>{{ trip?.bus?.coachType }}</span></p>
+            <!-- <p>
+              Coach Type: <span>{{ trip?.bus?.coachType }}</span>
+            </p> -->
             <ul class="ticket-search-time">
-              <li><span>{{ trip?.departureTime?.name }}</span></li>
-              <li><span>{{ trip?.arrivalTime?.name }}</span></li>
+              <li>
+                <span>{{ trip?.departureTime?.name }}</span>
+              </li>
+              <li>
+                <span>{{ trip?.arrivalTime?.name }}</span>
+              </li>
             </ul>
             <ul class="ticket-search-point">
-              <li>Starting Point: <span>{{ trip?.from?.name }}</span></li>
-              <li>End Point: <span>{{ trip?.to?.name }}</span></li>
+              <li>
+                Starting Point: <span>{{ trip?.from?.name }}</span>
+              </li>
+              <li>
+                End Point: <span>{{ trip?.to?.name }}</span>
+              </li>
             </ul>
           </div>
 
@@ -34,12 +44,12 @@
           </div>
           <div class="ticket-price-info">
             <div class="price">
-              <span>{{ trip?.bus?.totalSeat }} Seats Available</span>
-              <h3>৳{{ trip?.price }}</h3>
+              <!-- <span>{{ trip?.bus?.totalSeat }} Seats Available</span> -->
+              <!-- <h3>৳{{ trip?.price }}</h3> -->
             </div>
             <div class="ticket-control-btn">
               <button (click)="onShow($event)">
-                {{ id ? 'Hide Seats' : 'Show Seats' }}
+                {{ id ? "Hide Seats" : "Show Seats" }}
               </button>
               <span>Cancellation Policy</span>
             </div>
@@ -49,7 +59,7 @@
           <div class="ticket-details-top">
             <ul>
               <li>
-                <div style="justify-self: center; width: 26px;height: 30px;">
+                <div style="justify-self: center; width: 26px; height: 30px">
                   <span class="seat booked-m">
                     <div class="hand"></div>
                   </span>
@@ -59,7 +69,7 @@
                 </div>
               </li>
               <li>
-                <div style="justify-self: center; width: 26px;height: 30px;">
+                <div style="justify-self: center; width: 26px; height: 30px">
                   <span class="seat booked-f">
                     <div class="hand"></div>
                   </span>
@@ -69,7 +79,7 @@
                 </div>
               </li>
               <li>
-                <div style="justify-self: center; width: 26px;height: 30px;">
+                <div style="justify-self: center; width: 26px; height: 30px">
                   <span class="seat blocked">
                     <div class="hand"></div>
                   </span>
@@ -79,8 +89,8 @@
                 </div>
               </li>
               <li>
-                <div style="justify-self: center; width: 26px;height: 30px;">
-                  <span class="seat ">
+                <div style="justify-self: center; width: 26px; height: 30px">
+                  <span class="seat">
                     <div class="hand"></div>
                   </span>
                 </div>
@@ -89,65 +99,110 @@
                 </div>
               </li>
               <li>
-                <div style="justify-self: center; width: 26px;height: 30px;">
+                <div style="justify-self: center; width: 26px; height: 30px">
                   <span class="seat selected">
                     <div class="hand"></div>
                   </span>
                 </div>
                 <div class="seat-type">
-                  <h3> SELECTED</h3>
+                  <h3>SELECTED</h3>
                 </div>
               </li>
               <li>
-                <div style="justify-self: center; width: 26px;height: 30px;">
+                <div style="justify-self: center; width: 26px; height: 30px">
                   <span class="seat sold-m">
                     <div class="hand"></div>
                   </span>
                 </div>
                 <div class="seat-type">
-                  <h3> SOLD (M)</h3>
+                  <h3>SOLD (M)</h3>
                 </div>
               </li>
               <li>
-                <div style="justify-self: center; width: 26px;height: 30px;">
+                <div style="justify-self: center; width: 26px; height: 30px">
                   <span class="seat sold-f">
                     <div class="hand"></div>
                   </span>
                 </div>
                 <div class="seat-type">
-                  <h3> SOLD (F)</h3>
+                  <h3>SOLD (F)</h3>
                 </div>
               </li>
             </ul>
+            <div class="floor-container">
+              <div
+                [class]="floorSelected === 1 ? 'floor floor-active' : 'floor'"
+                (click)="onToggleFloor(1)"
+              >
+                Floor 1
+              </div>
+              <div
+                [class]="floorSelected === 2 ? 'floor floor-active' : 'floor'"
+                (click)="onToggleFloor(2)"
+              >
+                Floor 2
+              </div>
+              <div
+                [class]="floorSelected === 3 ? 'floor floor-active' : 'floor'"
+                (click)="onToggleFloor(3)"
+              >
+                Floor 3
+              </div>
+            </div>
           </div>
           <div class="ticket-details-main">
             <div class="seat-area">
               <div class="seat-area-main">
                 <div class="seat-area-top">
-                  <img src="https://bdtickets.com/images/driver-icon.webp" alt="">
+                  <img
+                    src="https://bdtickets.com/images/driver-icon.webp"
+                    alt=""
+                  />
                 </div>
                 <ul>
-                  <li *ngFor="let data of selectedTrip?.seats"
-                      [ngStyle]="{'grid-row-start': data?.xaxis, 'grid-column-start':data?.yaxis}">
-
-                    <div style="justify-self: center; width: 26px;height: 30px;"
-                         (click)="onSelectSeat(data)">
-
-                      <span [matTooltip]="data.seatNo" class="seat search_loader__PZ_xW" [ngClass]="{
-                                                'blocked': (data?.status | lowercase) === 'blocked',
-                                                'booked-m': (data?.status | lowercase) === 'booked' && data?.gender === 'Female',
-                                                'booked-f': (data?.status | lowercase) === 'booked',
-                                                'sold-m': (data?.status | lowercase) === 'sold',
-                                                'sold-f': (data?.status | lowercase) === 'sold' && data?.gender === 'Female',
-                                                'search_loader__PZ_xW': data?.seatAnimation === true,
-                                                'selected': data?.seatAnimation === false && (data?.status | lowercase) ===  'selected'
-                                            }">
-                        <div class="hand" [ngClass]="{
-                                                    'search_hand__Yoq3T': seatAnimation === true && data?._id === selectedSeat?._id
-                                                }"></div>
+                  <ng-container *ngFor="let data of selectedTrip?.seats">
+                  <li
+                    *ngIf="data?.floorNo === floorSelected"
+                    [ngStyle]="{
+                      'grid-row-start': data?.xaxis,
+                      'grid-column-start': data?.yaxis
+                    }"
+                  >
+                    <div
+                      style="justify-self: center; width: 26px; height: 30px"
+                      (click)="onSelectSeat(data)"
+                    >
+                      <span
+                        [matTooltip]="data.seatNo"
+                        class="seat search_loader__PZ_xW"
+                        [ngClass]="{
+                          blocked: (data?.status | lowercase) === 'blocked',
+                          'booked-m':
+                            (data?.status | lowercase) === 'booked' &&
+                            data?.gender === 'Female',
+                          'booked-f': (data?.status | lowercase) === 'booked',
+                          'sold-m': (data?.status | lowercase) === 'sold',
+                          'sold-f':
+                            (data?.status | lowercase) === 'sold' &&
+                            data?.gender === 'Female',
+                          search_loader__PZ_xW: data?.seatAnimation === true,
+                          selected:
+                            data?.seatAnimation === false &&
+                            (data?.status | lowercase) === 'selected'
+                        }"
+                      >
+                        <div
+                          class="hand"
+                          [ngClass]="{
+                            search_hand__Yoq3T:
+                              seatAnimation === true &&
+                              data?._id === selectedSeat?._id
+                          }"
+                        ></div>
                       </span>
                     </div>
                   </li>
+                </ng-container>
                 </ul>
               </div>
             </div>
@@ -155,20 +210,28 @@
               <div>
                 <div class="boarding-info">
                   <div class="boarding-info-title">
-                    <h3>BOARDING/DROPPING <br>
-                      POINT:</h3>
+                    <h3>
+                      BOARDING/DROPPING <br />
+                      POINT:
+                    </h3>
                   </div>
                   <div class="boarding-info-selection-area">
                     <div class="boarding-info-select">
                       <h4>BOARDING POINT*</h4>
-                      <div class="boarding-info-selected-btn" [ngClass]="{'error': isBoardingError }"
-                           [matMenuTriggerFor]="menuBoarding">
+                      <div
+                        class="boarding-info-selected-btn"
+                        [ngClass]="{ error: isBoardingError }"
+                        [matMenuTriggerFor]="menuBoarding"
+                      >
                         <div class="boarding-selected-area-name">
                           <span>[{{ trip?.departureTime?.name }}]</span>
-                          <h5>{{
-                              selectBoardingPoints ? selectBoardingPoints?.name :
-                                'Select counter'
-                            }}</h5>
+                          <h5>
+                            {{
+                              selectBoardingPoints
+                                ? selectBoardingPoints?.name
+                                : "Select counter"
+                            }}
+                          </h5>
                         </div>
                         <div class="boarding-info-icon">
                           <span><i class="fa fa-angle-down"></i></span>
@@ -178,44 +241,57 @@
 
                     <div class="boarding-info-select">
                       <h4>DROPPING POINT*</h4>
-                      <div class="boarding-info-selected-btn" [matMenuTriggerFor]="menuDropping"
-                           [ngClass]="{'error': isDroppingError }">
+                      <div
+                        class="boarding-info-selected-btn"
+                        [matMenuTriggerFor]="menuDropping"
+                        [ngClass]="{ error: isDroppingError }"
+                      >
                         <div class="boarding-selected-area-name">
                           <span>[{{ trip?.arrivalTime?.name }}]</span>
-                          <h5>{{
-                              selectDroppingPoints ? selectDroppingPoints?.name :
-                                'Select counter'
-                            }}</h5>
+                          <h5>
+                            {{
+                              selectDroppingPoints
+                                ? selectDroppingPoints?.name
+                                : "Select counter"
+                            }}
+                          </h5>
                         </div>
                         <div class="boarding-info-icon">
                           <span><i class="fa fa-angle-down"></i></span>
                         </div>
                       </div>
                     </div>
-
                   </div>
 
                   <div class="boarding-info-title">
-                    <h3>SEAT
-                      INFORMATION:</h3>
+                    <h3>SEAT INFORMATION:</h3>
                   </div>
                   <div class="seat-table-area" *ngIf="selectedSeats.length">
                     <table>
                       <thead>
-                      <tr>
-                        <th>Seats</th>
-                        <th>Class</th>
-                        <th>Fare</th>
-                        <th *ngIf="mode === 'edit'">Act.</th>
-                      </tr>
+                        <tr>
+                          <th>Seats</th>
+                          <th>Class</th>
+                          <th>Fare</th>
+                          <th *ngIf="mode === 'edit'">Act.</th>
+                        </tr>
                       </thead>
                       <tbody>
-                      <tr *ngFor="let seat of selectedSeats">
-                        <td>{{ seat?.seatNo }} {{seat?.type ? '- ' + seat?.type : ''}}</td>
-                        <td>{{ seat?.seatType }}</td>
-                        <td>৳ {{ trip?.price }}</td>
-                        <td *ngIf="mode === 'edit' && seat?.type !== 'new'"><mat-icon (click)="onRemoveBookedSeat(seat)" style="font-size: 16px; cursor: pointer">close</mat-icon></td>
-                      </tr>
+                        <tr *ngFor="let seat of selectedSeats">
+                          <td>
+                            {{ seat?.seatNo }}
+                            {{ seat?.type ? "- " + seat?.type : "" }}
+                          </td>
+                          <td>{{ seat?.seatType }}</td>
+                          <td>৳ {{ trip?.price }}</td>
+                          <td *ngIf="mode === 'edit' && seat?.type !== 'new'">
+                            <mat-icon
+                              (click)="onRemoveBookedSeat(seat)"
+                              style="font-size: 16px; cursor: pointer"
+                              >close</mat-icon
+                            >
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -226,20 +302,26 @@
                   <div class="seat-table-area" *ngIf="canceledSeats.length">
                     <table>
                       <thead>
-                      <tr>
-                        <th>Seats</th>
-                        <th>Class</th>
-                        <th>Fare</th>
-                        <th *ngIf="mode === 'edit'">Act.</th>
-                      </tr>
+                        <tr>
+                          <th>Seats</th>
+                          <th>Class</th>
+                          <th>Fare</th>
+                          <th *ngIf="mode === 'edit'">Act.</th>
+                        </tr>
                       </thead>
                       <tbody>
-                      <tr *ngFor="let seat of canceledSeats">
-                        <td>{{ seat?.seatNo }}</td>
-                        <td>{{ seat?.seatType }}</td>
-                        <td>৳ {{ trip?.price }}</td>
-                        <td *ngIf="mode === 'edit'"><mat-icon (click)="onRemoveCanceledSeat(seat)" style="font-size: 16px; cursor: pointer">close</mat-icon></td>
-                      </tr>
+                        <tr *ngFor="let seat of canceledSeats">
+                          <td>{{ seat?.seatNo }}</td>
+                          <td>{{ seat?.seatType }}</td>
+                          <td>৳ {{ trip?.price }}</td>
+                          <td *ngIf="mode === 'edit'">
+                            <mat-icon
+                              (click)="onRemoveCanceledSeat(seat)"
+                              style="font-size: 16px; cursor: pointer"
+                              >close</mat-icon
+                            >
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -250,11 +332,9 @@
                       <li>Service Charge: ৳ {{ serviceCharge }}</li>
                     </ul>
                   </div>
-
                 </div>
               </div>
               <div class="user-log-in-info">
-
                 <div class="passenger-information">
                   <form [formGroup]="dataForm" (ngSubmit)="onSubmit()">
                     <div class="passenger-info-title">
@@ -263,30 +343,54 @@
                     <div class="input-field-area">
                       <div class="form-field">
                         <label>PHONE NUMBER*</label>
-                        <input type="tel" formControlName="phoneNo" digitOnly maxlength="11 ">
+                        <input
+                          type="tel"
+                          formControlName="phoneNo"
+                          digitOnly
+                          maxlength="11 "
+                        />
                         <span
-                          *ngIf="dataForm.get('phoneNo')?.touched && dataForm.get('phoneNo')?.invalid">This
-                          field is required</span>
+                          *ngIf="
+                            dataForm.get('phoneNo')?.touched &&
+                            dataForm.get('phoneNo')?.invalid
+                          "
+                          >This field is required</span
+                        >
                       </div>
                       <div class="form-field">
                         <label>EMAIL</label>
-                        <input type="email" formControlName="email">
+                        <input type="email" formControlName="email" />
                         <span
-                          *ngIf="dataForm.get('email')?.touched && dataForm.get('email')?.invalid">Invalid email address!</span>
+                          *ngIf="
+                            dataForm.get('email')?.touched &&
+                            dataForm.get('email')?.invalid
+                          "
+                          >Invalid email address!</span
+                        >
                       </div>
                     </div>
 
-                    <div class="input-field-area" style="grid-template-columns: repeat(1, 1fr); margin-top: 10px;">
+                    <div
+                      class="input-field-area"
+                      style="
+                        grid-template-columns: repeat(1, 1fr);
+                        margin-top: 10px;
+                      "
+                    >
                       <div class="form-field">
                         <label>NAME*</label>
-                        <input type="text" formControlName="name">
+                        <input type="text" formControlName="name" />
                         <span
-                          *ngIf="dataForm.get('name')?.touched && dataForm.get('name')?.invalid">This
-                          field is required</span>
+                          *ngIf="
+                            dataForm.get('name')?.touched &&
+                            dataForm.get('name')?.invalid
+                          "
+                          >This field is required</span
+                        >
                       </div>
                     </div>
 
-                    <div class="input-field-area" style="margin-top: 10px;">
+                    <div class="input-field-area" style="margin-top: 10px">
                       <div class="form-field">
                         <label>Ticket Type</label>
                         <select formControlName="ticketType">
@@ -294,51 +398,95 @@
                           <option value="Sold">Sold</option>
                         </select>
                         <span
-                          *ngIf="dataForm.get('ticketType')?.touched && dataForm.get('ticketType')?.invalid">This
-                          field is required</span>
+                          *ngIf="
+                            dataForm.get('ticketType')?.touched &&
+                            dataForm.get('ticketType')?.invalid
+                          "
+                          >This field is required</span
+                        >
                       </div>
                       <div class="form-field">
                         <label>Paid Amount</label>
-                        <input type="number" formControlName="paidAmount">
+                        <input type="number" formControlName="paidAmount" />
                         <span
-                          *ngIf="dataForm.get('paidAmount')?.touched && dataForm.get('paidAmount')?.invalid">This field is required</span>
+                          *ngIf="
+                            dataForm.get('paidAmount')?.touched &&
+                            dataForm.get('paidAmount')?.invalid
+                          "
+                          >This field is required</span
+                        >
                       </div>
                     </div>
 
-                    <div [style.display]="dataForm.value['ticketType'] === 'Booked' ? 'block' : 'none'"
-                         class="input-field-area" style="grid-template-columns: repeat(1, 1fr); margin-top: 10px;">
+                    <div
+                      [style.display]="
+                        dataForm.value['ticketType'] === 'Booked'
+                          ? 'block'
+                          : 'none'
+                      "
+                      class="input-field-area"
+                      style="
+                        grid-template-columns: repeat(1, 1fr);
+                        margin-top: 10px;
+                      "
+                    >
                       <div class="form-field">
                         <label>Booking Time</label>
-                        <select formControlName="bookingTime" [required]="dataForm.value['ticketType'] === 'Booked'">
-                          <option *ngFor="let data of bookingTimes" [value]="data.value">
+                        <select
+                          formControlName="bookingTime"
+                          [required]="dataForm.value['ticketType'] === 'Booked'"
+                        >
+                          <option
+                            *ngFor="let data of bookingTimes"
+                            [value]="data.value"
+                          >
                             {{ data.viewValue }}
                           </option>
                         </select>
                         <span
-                          *ngIf="dataForm.get('bookingTime')?.touched && dataForm.get('bookingTime')?.invalid">This
-                          field is required</span>
+                          *ngIf="
+                            dataForm.get('bookingTime')?.touched &&
+                            dataForm.get('bookingTime')?.invalid
+                          "
+                          >This field is required</span
+                        >
                       </div>
                     </div>
-
 
                     <div class="gender-btn">
                       <h4>Gender*</h4>
                       <ul>
                         <li>
-                          <button type="button" [class]="selectedGender === 'Male' ? 'active':''"
-                                  (click)="onSelectGender('Male')">Male
+                          <button
+                            type="button"
+                            [class]="selectedGender === 'Male' ? 'active' : ''"
+                            (click)="onSelectGender('Male')"
+                          >
+                            Male
                           </button>
                         </li>
                         <li>
-                          <button type="button" [class]="selectedGender === 'Female' ? 'active':''"
-                                  (click)="onSelectGender('Female')">Female
+                          <button
+                            type="button"
+                            [class]="
+                              selectedGender === 'Female' ? 'active' : ''
+                            "
+                            (click)="onSelectGender('Female')"
+                          >
+                            Female
                           </button>
                         </li>
                       </ul>
                     </div>
                     <div class="sub-btn">
                       <button *ngIf="!isLoading" type="submit">Proceed</button>
-                      <button style="opacity: 0.8" *ngIf="isLoading" type="button">Please wai...</button>
+                      <button
+                        style="opacity: 0.8"
+                        *ngIf="isLoading"
+                        type="button"
+                      >
+                        Please wai...
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -351,20 +499,24 @@
   </div>
 </div>
 
-
 <mat-menu #menuBoarding="matMenu">
-  <button mat-menu-item *ngFor="let b of trip?.boardingPoints" (click)="onSelectBoardingPoint(b)">{{
-      b?.name
-    }}
+  <button
+    mat-menu-item
+    *ngFor="let b of trip?.boardingPoints"
+    (click)="onSelectBoardingPoint(b)"
+  >
+    {{ b?.name }}
   </button>
 </mat-menu>
 
 <mat-menu #menuDropping="matMenu">
-  <button mat-menu-item *ngFor="let d of trip?.droppingPoints" (click)="onSelectDroppingPoint(d)">{{
-      d?.name
-    }}
+  <button
+    mat-menu-item
+    *ngFor="let d of trip?.droppingPoints"
+    (click)="onSelectDroppingPoint(d)"
+  >
+    {{ d?.name }}
   </button>
 </mat-menu>
-
 
 <app-confirm-dialog #confirm></app-confirm-dialog>
