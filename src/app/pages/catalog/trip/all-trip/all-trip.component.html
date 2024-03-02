@@ -15,9 +15,9 @@
 
     <!-- <div class="action">
 
-      <button *ngIf="checkAddPermission" mat-raised-button color="accent" [routerLink]="['../', 'add-bus-config']">
+      <button *ngIf="checkAddPermission" mat-raised-button color="accent" [routerLink]="['../', 'add-trip']">
         <mat-icon>add</mat-icon>
-        Add Launch Config
+        Add Trip
       </button>
     </div> -->
 
@@ -98,7 +98,7 @@
           <th>Total Seat</th>
           <th>From</th>
           <th>To</th>
-          <!-- <th>Trip Date</th> -->
+          <th>Trip Date</th>
           <!-- <th>Price</th> -->
           <!-- <th>Service Charge</th> -->
           <!-- <th>Priority</th> -->
@@ -116,7 +116,7 @@
           <td>{{data?.bus?.totalSeat}}</td>
           <td>{{data.from?.name}}</td>
           <td>{{data.to?.name}}</td>
-          <!-- <td>{{data?.date}}</td> -->
+          <td>{{data?.date}}</td>
           <!-- <td>{{data?.bus?.name  | titlecase}}</td> -->
           <!-- <td>{{data?.price}}</td> -->
           <!-- <td>{{data?.serviceCharge}}</td> -->

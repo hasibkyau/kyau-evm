@@ -6,6 +6,7 @@ import {TripService} from 'src/app/services/common/trip.service';
 import {Trip} from '../../../interfaces/common/trip.interface';
 import {TicketService} from '../../../services/common/ticket.service';
 import {Ticket} from '../../../interfaces/common/ticket.interface';
+import { BusConfigService } from 'src/app/services/common/bus-config.service';
 
 @Component({
   selector: 'app-add-new-booking',
@@ -21,6 +22,7 @@ export class AddNewBookingComponent implements OnInit {
   ticketId: string;
   ticket: Ticket = null;
   trip: Trip = null;
+  date: string;
 
 
   // Pagination
@@ -45,6 +47,7 @@ export class AddNewBookingComponent implements OnInit {
   private readonly ticketService = inject(TicketService);
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly busConfigService = inject(BusConfigService);
 
 
   ngOnInit(): void {
@@ -73,6 +76,7 @@ export class AddNewBookingComponent implements OnInit {
             ...this.filter,
             ...{
               'from.name': qParam.get('from'),
+              status: 'publish'
             }
           }
         }
@@ -87,24 +91,26 @@ export class AddNewBookingComponent implements OnInit {
         }
 
         if (qParam.get('date')) {
-          this.filter = {
-            ...this.filter,
-            ...{
-              date: qParam.get('date'),
-            }
-          }
+          // this.filter = {
+          //   ...this.filter,
+          //   ...{
+          //     date: qParam.get('date'),
+          //   }
+          // }
+          this.date = qParam.get('date');
         }
-        if (qParam.get('shift')) {
-          this.filter = {
-            ...this.filter,
-            ...{
-              'departureTime.shift': qParam.get('shift')
-            }
-          }
-        }
+        // if (qParam.get('shift')) {
+        //   this.filter = {
+        //     ...this.filter,
+        //     ...{
+        //       'departureTime.shift': qParam.get('shift')
+        //     }
+        //   }
+        // }
 
         console.log('After Mode', this.mode)
         if (this.filter) {
+          console.log('After Mode', this.mode)
           this.getAllTrips();
         }
 
@@ -121,18 +127,19 @@ export class AddNewBookingComponent implements OnInit {
   private getAllTrips() {
     // Select
     const mSelect = {
-      date: 1,
       bus: 1,
-      departureTime: 1,
-      arrivalTime: 1,
+      createdAt: 1,
+      date: 1,
       from: 1,
       to: 1,
-      boardingPoints: 1,
-      droppingPoints: 1,
       price: 1,
       serviceCharge: 1,
-      createdAt: 1,
+      status: 1,
+      seats: 1,
+      priority: 1,
+
     };
+
 
     const filter: FilterData = {
       filter: this.filter,
@@ -141,18 +148,22 @@ export class AddNewBookingComponent implements OnInit {
       sort: this.sortQuery,
     };
 
-    this.subGetData = this.tripService
+    this.subDataOne = this.tripService
       .getAllTrip(filter, null)
       .subscribe({
         next: (res) => {
-          this.trips = res.data;
+          if (res.success) { 
+            console.log(res);
+                       
+            this.trips = res.data;
+          }
         },
         error: (err) => {
           console.log(err);
         },
       });
-
   }
+
 
   private getTicketById() {
    this.subDataOne =  this.ticketService.getTicketById(this.ticketId).subscribe({

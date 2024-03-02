@@ -66,7 +66,8 @@ export class AllTripComponent implements OnInit {
     private reloadService: ReloadService,
     private activatedRoute: ActivatedRoute,
     private busService: BusService,
-    private busConfigService: BusConfigService
+    private busConfigService: BusConfigService,
+    private utilService: UtilsService
   ) {
   }
 
@@ -89,7 +90,6 @@ export class AllTripComponent implements OnInit {
           ...this.filter,
           ...{
             'from.name': qParam.get('from'),
-            status: 'publish'
           }
         }
       }
@@ -133,11 +133,38 @@ export class AllTripComponent implements OnInit {
       status: event.target.checked ? 'publish' : 'draft'
     }
     this.updateBusConfigById(mData, id);
+    // this.onSubmit(mData);
+    console.log('adding trip', mData);
   }
 
+  // onSubmit(data:any) {
+  //   const mData = {
+  //     ...data,
+  //     ...{
+  //         busConfig:data?._id,
+  //         date:this.utilService.getDateString(new Date),
+  //     }
+  //   };
+  //   this.addTrip(mData);
+  // }
+  // private addTrip(data: any) {
+  //   this.subDataOne = this.tripService.addTrip(data).subscribe({
+  //     next: res => {
+  //       if (res.success) {
+  //         this.uiService.success(res.message);
+  //       } else {
+  //         this.uiService.warn(res.message);
+  //       }
+  //     },
+  //     error: error => {
+  //       console.log(error);
+  //     }
+  //   });
+  // }
+
   private updateBusConfigById(data: any, id: any) {
-    this.subDataThree = this.busConfigService
-      .updateBusConfigById(id, data)
+    this.subDataThree = this.tripService
+      .updateTripById(id, data)
       .subscribe({
         next: (res) => {
           if (res.success) {
@@ -239,8 +266,8 @@ export class AllTripComponent implements OnInit {
       sort: this.sortQuery,
     };
 
-    this.subDataOne = this.busConfigService
-      .getAllBusConfig(filter, null)
+    this.subDataOne = this.tripService
+      .getAllTrip(filter, null)
       .subscribe({
         next: (res) => {
           if (res.success) {            

@@ -1,0 +1,61 @@
+<div class="popup-area" *ngIf="popup">
+    <div class="popup-area-main">
+      <div class="popup-area-main-parent">
+        <div class="close-button">
+          <button type="button" (click)="hidePopup()">
+            <img src="./assets/svg/close_FILL1_wght400_GRAD0_opsz48.svg" alt="" />
+          </button>
+        </div>
+  
+        <div class="workflow-popup-title">
+            <form
+            #formElement="ngForm"
+            [formGroup]="dataForm"
+            (ngSubmit)="onSubmit()"
+            autocomplete="off"
+          >
+            <div class="top-input">
+              <div class="title">
+                <h2>{{ id ? "Edit" : "Add New" }} Trip</h2>
+              </div>
+              <div class="action-btn">
+                <button mat-stroked-button color="warn" type="button" [class]="tripType === 1 ? 'active' : ''" (click)="onToggleTripType(1)">Date Wise</button>
+                <button mat-stroked-button color="warn" type="button" [class]="tripType === 3 ? 'active' : ''" (click)="onToggleTripType(3)">Days</button>
+              </div>
+            </div>
+          
+            <div class="container-fluid">
+              <div class="main">
+                <mat-card class="content-main content-4">
+                  <div class="title">
+                    <h4>Trip Date</h4>
+                  </div>
+          
+                  <div class="date-wise" *ngIf="tripType === 1">
+                    <input type="date" id="start" name="trip-start" [value]="date"/>
+                  </div>
+        
+                  <div class="days" *ngIf="tripType === 3">
+                    <input type="text">
+                  </div>
+
+                </mat-card>
+              </div>
+            </div>
+          </form>
+        </div>
+  
+  
+        <!-- popup-bottom -->
+        <div class="popup-bottom">
+            <button (click)="onSubmit()" type="button">
+                <span>Add</span>
+              </button>
+          <button (click)="hidePopup()" type="button">
+            <span>Close</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

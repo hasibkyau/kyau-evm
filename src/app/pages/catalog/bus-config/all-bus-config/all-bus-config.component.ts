@@ -14,6 +14,7 @@ import { ReloadService } from 'src/app/services/core/reload.service';
 import { UiService } from 'src/app/services/core/ui.service';
 import { UtilsService } from 'src/app/services/core/utils.service';
 import { ConfirmDialogComponent } from 'src/app/shared/components/ui/confirm-dialog/confirm-dialog.component';
+import { AssignTripComponent } from './assign-trip/assign-trip.component';
 
 @Component({
   selector: 'app-all-bus-config',
@@ -21,7 +22,9 @@ import { ConfirmDialogComponent } from 'src/app/shared/components/ui/confirm-dia
   styleUrls: ['./all-bus-config.component.scss']
 })
 export class AllBusConfigComponent implements OnInit {
-// Admin Base Data
+@ViewChild('assignTrip') assignTrip: AssignTripComponent;
+
+  // Admin Base Data
 adminId: string;
 role: string;
 permissions: AdminPermissions[];
@@ -147,6 +150,8 @@ ngAfterViewInit(): void {
     )
     .subscribe({
       next: (res) => {
+        console.log(res);
+        
         this.searchBusConfig = res.data;
         this.busConfigs = this.searchBusConfig;
         this.totalBusConfigs = res.count;
@@ -157,6 +162,10 @@ ngAfterViewInit(): void {
         console.log(error);
       },
     });
+}
+
+onAssignTrip(data:any){
+  this.assignTrip.showPopup(data);
 }
 
 /**

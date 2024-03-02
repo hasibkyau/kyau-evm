@@ -47,6 +47,7 @@ import {AllTripComponent} from './trip/all-trip/all-trip.component';
 import {AddBusConfigComponent} from './bus-config/add-bus-config/add-bus-config.component';
 import {AllBusConfigComponent} from './bus-config/all-bus-config/all-bus-config.component';
 import {SearchTripModule} from '../../shared/components/search-trip/search-trip.module';
+import { AssignTripComponent } from './bus-config/all-bus-config/assign-trip/assign-trip.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import {SearchTripModule} from '../../shared/components/search-trip/search-trip.
     AllTripComponent,
     AddBusConfigComponent,
     AllBusConfigComponent,
+    AssignTripComponent,
   ],
   imports: [
     CommonModule,
