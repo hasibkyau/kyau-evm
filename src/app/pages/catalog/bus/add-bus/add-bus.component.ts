@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { SEAT_TYPES } from 'src/app/core/db/seat-type.db';
+import { VEHICLE } from 'src/app/core/db/vehicle.db';
 import { PRODUCT_STATUS, DISCOUNT_TYPES } from 'src/app/core/utils/app-data';
 import { Bus } from 'src/app/interfaces/common/bus.interface';
 import { Tag } from 'src/app/interfaces/common/tag.interface';
@@ -35,8 +36,9 @@ export class AddBusComponent implements OnInit {
   // Static Data
   busStatus: Select[] = PRODUCT_STATUS;
   seatType: Select[] = SEAT_TYPES;
-  tempFloor: number = 1;
+  tempFloor: string = '1';
   seatsArray:any[]=[];
+  vehicles: any[] = VEHICLE;
 
   // Subscriptions
   private subDataOne: Subscription;
@@ -131,7 +133,7 @@ export class AddBusComponent implements OnInit {
   }
 
 
-  onBusFloorSelect(evt:number){
+  onBusFloorSelect(evt:string){
     this.tempFloor = evt;
   }
 
