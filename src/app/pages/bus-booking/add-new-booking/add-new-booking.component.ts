@@ -91,12 +91,12 @@ export class AddNewBookingComponent implements OnInit {
         }
 
         if (qParam.get('date')) {
-          // this.filter = {
-          //   ...this.filter,
-          //   ...{
-          //     date: qParam.get('date'),
-          //   }
-          // }
+          this.filter = {
+            ...this.filter,
+            ...{
+              date: qParam.get('date'),
+            }
+          }
           this.date = qParam.get('date');
         }
         // if (qParam.get('shift')) {
@@ -132,6 +132,8 @@ export class AddNewBookingComponent implements OnInit {
       date: 1,
       from: 1,
       to: 1,
+      departureTime: 1,
+      arrivalTime: 1,
       price: 1,
       serviceCharge: 1,
       status: 1,

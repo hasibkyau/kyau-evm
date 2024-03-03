@@ -1,5 +1,46 @@
 @import "src/theme/variables";
 
+.container-fluid{
+  .main{
+    border: 1px solid #FF7542;
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .title{
+
+  }
+  .sub-title{
+    h3{
+      border: 1px solid #B2DBC4;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    span{
+      font-weight: 600;
+    }
+
+    button{
+      background-color: #1c9f56;
+      width: 100%;
+      height: 50px;
+      text-align: center;
+      outline: 0px;
+      border: 0px;
+      border-radius: 10px;
+      padding: 8px;
+      transition: all 0.12s linear;
+      color: white;
+    }
+
+    button:hover {
+      background-color: #00883c;
+    }
+  }
+}
 .active{
   background-color: tomato;
   color: white;
@@ -12,7 +53,7 @@
   width: 100%;
   height: 100vh;
   background-color: rgba(34, 31, 31, 0.95);
-  z-index: 1111;
+  z-index: 222;
   padding: 30px 40px 50px 40px;
   display: flex;
   align-items: center;
@@ -111,7 +152,7 @@
 }
 
 .popup-bottom button {
-  background-color: #1c9f56;
+  // background-color: #1c9f56;
   width: 200px;
   height: 50px;
   text-align: center;
@@ -120,16 +161,22 @@
   border-radius: 10px;
   padding: 8px;
   transition: all 0.12s linear;
+  border: 1px solid#FF7542;
 }
 
 .popup-bottom button span {
-  color: white;
+  // color: white;
+  color: #FF7542;
   font-size: 15px;
   line-height: 21px;
 }
 
 .popup-bottom button:hover {
-  background-color: #00883c;
+  background-color: #FF7542;
+
+  span{
+    color: white;
+  }
 }
 
 .close-button {

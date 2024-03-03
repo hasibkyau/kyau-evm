@@ -97,117 +97,216 @@
       <!-- END CONTENT PART 1 -->
 
       <div
-      class="action-btn"
-      style="display: flex; width: 100%; gap: 10px; margin-bottom: 10px;"
-    >
-      <button [class]="tempFloor===1?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(1)">
-        Floor 1
-      </button>
-      <button [class]="tempFloor===2?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(2)">
-        Floor 2
-      </button>
-      <button [class]="tempFloor===3?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(3)">
-        Floor 3
-      </button>
-    </div>
+        class="action-btn"
+        style="display: flex; width: 100%; gap: 10px; margin-bottom: 10px"
+      >
+        <button
+          [class]="tempFloor === '1' ? 'floor-selected' : ''"
+          mat-stroked-button
+          color="warn"
+          type="button"
+          (click)="onBusFloorSelect('1')"
+        >
+          Floor 1
+        </button>
+        <button
+          [class]="tempFloor === '2' ? 'floor-selected' : ''"
+          mat-stroked-button
+          color="warn"
+          type="button"
+          (click)="onBusFloorSelect('2')"
+        >
+          Floor 2
+        </button>
+        <button
+          [class]="tempFloor === '3' ? 'floor-selected' : ''"
+          mat-stroked-button
+          color="warn"
+          type="button"
+          (click)="onBusFloorSelect('3')"
+        >
+          Floor 3
+        </button>
+        <button
+          [class]="tempFloor === '0' ? 'floor-selected' : ''"
+          mat-stroked-button
+          color="warn"  
+          type="button"
+          (click)="onBusFloorSelect('0')"
+        >
+          Vehicle Floor
+        </button>
+      </div>
 
       <mat-card class="specifications">
         <div class="form-array-container">
           <div formArrayName="seats" class="form-array-input">
-            <ng-container *ngFor="let data of seatsDataArray?.controls; let i = index"
-            [formGroupName]="i">
-            <div
-            class="single-field"
-            *ngIf="data?.value.floorNo===tempFloor"
-            >
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Floor No</mat-label>
-              <mat-select formControlName="floorNo" required>
-                <mat-option
-                  *ngFor="let data of [{value:1}, {value:2}, {value:3}]"
-                  [value]="data?.value"
-                  (click)="onBusFloorSelect(data?.value)"
-                  >{{ data?.value }}</mat-option
-                >
-              </mat-select>
-              <mat-error>This field is required.</mat-error>
-            </mat-form-field>
+            
+            <ng-container  *ngIf="tempFloor === '0'">
+              <div class="vehicle-container" *ngFor="let data of vehicles; let i = index">
+                <div class="vehicle-type">
+                  <div class="main-content">
+                    <div class="top">
+                      <img
+                        [src]="
+                          data?.img
+                            ? data?.img
+                            : 'https://bdtickets.com/images/driver-icon.webp'
+                        "
+                        alt=""
+                      />
+                    </div>
+                    <div class="bottom">
+                      <p>{{ data?.name }} : {{ data?.totalSeat }}</p>
+                      <p>{{ data?.name }} Price: {{ data?.price }}</p>
+                      <p>{{ data?.description }}</p>
+                    </div>
+                  </div>
+                </div>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Seat No</mat-label>
-                <input
-                  formControlName="seatNo"
-                  type="text"
-                  matInput
-                  [placeholder]="'Enter Name'"
-                />
-              </mat-form-field>
-              <!-- <mat-form-field appearance="outline">
+                <div  class="vehicle-form">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Vehicle Type</mat-label>
+                      <mat-select formControlName="seatType" required>
+                        <mat-option
+                          *ngFor="let data of vehicles"
+                          [value]="data?.name"
+                          >{{ data?.name }}</mat-option
+                        >
+                      </mat-select>
+                      <mat-error>This field is required.</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>Total Space</mat-label>
+                      <input
+                        formControlName="xaxis"
+                        type="number"
+                        digitOnly
+                        matInput
+                        placeholder="Enter X Axis"
+                      />
+                    </mat-form-field>
+
+                  <div class="button-container">
+                    <button
+                      class="save-btn"
+                      type="button"
+                      mat-raised-button
+                      (click)="onAddNewSeat()"
+                    >
+                      Save
+                    </button>
+                    <button
+                      type="button"
+                      mat-raised-button
+                      (click)="removeFormArrayField('seat', i)"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+
+            <ng-container
+              *ngFor="let data of seatsDataArray?.controls; let i = index"
+              [formGroupName]="i"
+            >
+              <div
+                class="single-field"
+                *ngIf="data?.value.floorNo === tempFloor"
+              >
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Floor No</mat-label>
+                  <mat-select formControlName="floorNo" required>
+                    <mat-option
+                      *ngFor="
+                        let data of [{ value: '1' }, { value: '2' }, { value: '3' }]
+                      "
+                      [value]="data?.value"
+                      (click)="onBusFloorSelect(data?.value)"
+                      >{{ data?.value }}</mat-option
+                    >
+                  </mat-select>
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Seat No</mat-label>
+                  <input
+                    formControlName="seatNo"
+                    type="text"
+                    matInput
+                    [placeholder]="'Enter Name'"
+                  />
+                </mat-form-field>
+                <!-- <mat-form-field appearance="outline">
                 <mat-label>Seat Type</mat-label>
                 <textarea formControlName="seatType" matInput placeholder="Enter value" [rows]="1"></textarea>
               </mat-form-field> -->
 
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Seat Type</mat-label>
-                <mat-select formControlName="seatType" required>
-                  <mat-option
-                    *ngFor="let data of seatType"
-                    [value]="data?.value"
-                    >{{ data?.value }}</mat-option
-                  >
-                </mat-select>
-                <mat-error>This field is required.</mat-error>
-              </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Seat Type</mat-label>
+                  <mat-select formControlName="seatType" required>
+                    <mat-option
+                      *ngFor="let data of seatType"
+                      [value]="data?.value"
+                      >{{ data?.value }}</mat-option
+                    >
+                  </mat-select>
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
 
-              <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Select Seat Status</mat-label>
-                <mat-select formControlName="status" required>
-                  <mat-option value="Available">Available</mat-option>
-                  <mat-option value="Booked">Booked</mat-option>
-                  <mat-option value="Selected">Selected</mat-option>
-                  <mat-option value="Sold">Sold</mat-option>
-                  <mat-option value="Blocked">Blocked</mat-option>
-                </mat-select>
-                <mat-error>This field is required.</mat-error>
-              </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Select Seat Status</mat-label>
+                  <mat-select formControlName="status" required>
+                    <mat-option value="Available">Available</mat-option>
+                    <mat-option value="Booked">Booked</mat-option>
+                    <mat-option value="Selected">Selected</mat-option>
+                    <mat-option value="Sold">Sold</mat-option>
+                    <mat-option value="Blocked">Blocked</mat-option>
+                  </mat-select>
+                  <mat-error>This field is required.</mat-error>
+                </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>X Axis</mat-label>
-                <input
-                  formControlName="xaxis"
-                  type="number"
-                  digitOnly
-                  matInput
-                  placeholder="Enter X Axis"
-                />
-              </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>X Axis</mat-label>
+                  <input
+                    formControlName="xaxis"
+                    type="number"
+                    digitOnly
+                    matInput
+                    placeholder="Enter X Axis"
+                  />
+                </mat-form-field>
 
-              <mat-form-field appearance="outline">
-                <mat-label>Y Axis</mat-label>
-                <input
-                  formControlName="yaxis"
-                  type="number"
-                  digitOnly
-                  matInput
-                  placeholder="Enter Y Axis"
-                />
-              </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Y Axis</mat-label>
+                  <input
+                    formControlName="yaxis"
+                    type="number"
+                    digitOnly
+                    matInput
+                    placeholder="Enter Y Axis"
+                  />
+                </mat-form-field>
 
-              <button
-                class="btn-form-field-remove"
-                type="button"
-                mat-mini-fab
-                color="warn"
-                (click)="removeFormArrayField('seat', i)"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
+                <button
+                  class="btn-form-field-remove"
+                  type="button"
+                  mat-mini-fab
+                  color="warn"
+                  (click)="removeFormArrayField('seat', i)"
+                >
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
             </ng-container>
-
           </div>
 
-          <div class="add-form-array-action">
+          <div class="add-form-array-action" *ngIf="tempFloor !== '0'">
             <button
               type="button"
               mat-raised-button
@@ -258,19 +357,37 @@
 
       <mat-card class="content-sidebar content-sidebar-2">
         <div
-        class="action-btn"
-        style="display: flex; width: 100%; gap: 10px; margin-bottom: 10px;"
-      >
-        <button [class]="tempFloor===1?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(1)">
-          Floor 1
-        </button>
-        <button [class]="tempFloor===2?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(2)">
-          Floor 2
-        </button>
-        <button [class]="tempFloor===3?'floor-selected':''" mat-stroked-button color="warn" type="button" (click)="onBusFloorSelect(3)">
-          Floor 3
-        </button>
-      </div>
+          class="action-btn"
+          style="display: flex; width: 100%; gap: 10px; margin-bottom: 10px"
+        >
+          <button
+            [class]="tempFloor === '1' ? 'floor-selected' : ''"
+            mat-stroked-button
+            color="warn"
+            type="button"
+            (click)="onBusFloorSelect('1')"
+          >
+            Floor 1
+          </button>
+          <button
+            [class]="tempFloor === '2 '? 'floor-selected' : ''"
+            mat-stroked-button
+            color="warn"
+            type="button"
+            (click)="onBusFloorSelect('2')"
+          >
+            Floor 2
+          </button>
+          <button
+            [class]="tempFloor === '3' ? 'floor-selected' : ''"
+            mat-stroked-button
+            color="warn"
+            type="button"
+            (click)="onBusFloorSelect('3')"
+          >
+            Floor 3
+          </button>
+        </div>
         <div class="seat-area">
           <div class="seat-area-main">
             <div class="seat-area-top">
@@ -278,34 +395,35 @@
             </div>
             <ul>
               <ng-container *ngFor="let data of dataForm?.value.seats">
-              <li *ngIf="data?.floorNo === tempFloor"
-                [ngStyle]="{
-                  'grid-row-start': data?.xaxis,
-                  'grid-column-start': data?.yaxis
-                }"
-              >
-                <div style="justify-self: center; width: 26px; height: 30px">
-                  <span
-                    class="seat"
-                    [ngClass]="{
-                      blocked: (data?.status | lowercase) === 'locked',
-                      'sold-m': (data?.status | lowercase) === 'sold',
-                      selected: (data?.status | lowercase) === 'selected',
-                      'booked-m': (data?.status | lowercase) === 'booked'
-                    }"
-                  >
-                    <div
-                      class="hand"
+                <li
+                  *ngIf="data?.floorNo === tempFloor"
+                  [ngStyle]="{
+                    'grid-row-start': data?.xaxis,
+                    'grid-column-start': data?.yaxis
+                  }"
+                >
+                  <div style="justify-self: center; width: 26px; height: 30px">
+                    <span
+                      class="seat"
                       [ngClass]="{
-                        search_hand__Yoq3T:
-                          seatAnimation === true &&
-                          data?.seatId === selectedSeat?.seatId
+                        blocked: (data?.status | lowercase) === 'locked',
+                        'sold-m': (data?.status | lowercase) === 'sold',
+                        selected: (data?.status | lowercase) === 'selected',
+                        'booked-m': (data?.status | lowercase) === 'booked'
                       }"
-                    ></div>
-                  </span>
-                </div>
-              </li>
-            </ng-container>
+                    >
+                      <div
+                        class="hand"
+                        [ngClass]="{
+                          search_hand__Yoq3T:
+                            seatAnimation === true &&
+                            data?.seatId === selectedSeat?.seatId
+                        }"
+                      ></div>
+                    </span>
+                  </div>
+                </li>
+              </ng-container>
             </ul>
           </div>
         </div>

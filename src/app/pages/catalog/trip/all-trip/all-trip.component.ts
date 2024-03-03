@@ -103,14 +103,14 @@ export class AllTripComponent implements OnInit {
         }
       }
 
-      // if (qParam.get('date')) {
-      //   this.filter = {
-      //     ...this.filter,
-      //     ...{
-      //       date: qParam.get('date'),
-      //     }
-      //   }
-      // }
+      if (qParam.get('date')) {
+        this.filter = {
+          ...this.filter,
+          ...{
+            date: qParam.get('date'),
+          }
+        }
+      }
       // if (qParam.get('shift')) {
       //   this.filter = {
       //     ...this.filter,

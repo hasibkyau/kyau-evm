@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { PRODUCT_STATUS } from 'src/app/core/utils/app-data';
@@ -8,6 +9,7 @@ import { Terminal } from 'src/app/interfaces/common/terminal.interface';
 import { Trip } from 'src/app/interfaces/common/trip.interface';
 import { Select } from 'src/app/interfaces/core/select';
 import { FilterData } from 'src/app/interfaces/gallery/filter-data';
+import { BusConfigService } from 'src/app/services/common/bus-config.service';
 import { ScheduleService } from 'src/app/services/common/schedule.service';
 import { TerminalService } from 'src/app/services/common/terminal.service';
 import { TripService } from 'src/app/services/common/trip.service';
@@ -50,7 +52,8 @@ export class AssignTripComponent implements OnInit{
     private spinnerService: NgxSpinnerService,
     private scheduleService: ScheduleService,
     private terminalService: TerminalService,
-    private utilService:UtilsService
+    private utilService:UtilsService,
+    private busConfigService: BusConfigService
   ) {}
 
   ngOnInit(): void {}
@@ -73,15 +76,12 @@ export class AssignTripComponent implements OnInit{
     this.tripType = type;
   }
 
+  onDateSelect(date:any){
+    this.date = date;
+  }
+
   onSubmit() {
-    const mData = {
-      ...this.trip,
-      ...{
-          busConfig: this.trip?._id,
-          date: this.date,
-      }
-    };    
-    this.addTrip(mData);
+    this.getAllTrip(this.date);
   }
 
   private initDataForm() {
@@ -100,7 +100,7 @@ export class AssignTripComponent implements OnInit{
     this.subDataOne = this.tripService.addTrip(data).subscribe({
       next: res => {
         if (res.success) {
-          this.hidePopup();
+          // this.hidePopup();
           this.uiService.success(res.message);
         } else {
           this.uiService.warn(res.message);
@@ -112,6 +112,53 @@ export class AssignTripComponent implements OnInit{
     });
   }
 
+  private getAllTrip(date:string) {
+    // Select
+    const mSelect = {
+      bus: 1,
+      date: 1,
+      from: 1,
+      to: 1,
+      status: 1,
+    };
+
+    let mFilter ={
+      busConfig: this.trip._id,
+      date: this.date 
+    }
+
+    const filter: FilterData = {
+      filter: mFilter,
+      select: mSelect,
+    };
+
+    this.subDataOne = this.tripService
+      .getAllTrip(filter, null)
+      .subscribe({
+        next: (res) => {
+          if (res.success) { 
+            console.log('all trip', res);
+            if(res?.data?.length > 0){
+              let dateString = moment(this.date).format('YYYY-MM-DD');
+              this.uiService.wrong("Trip already added for " + dateString)
+            }else{
+              const mData = {
+                ...this.trip,
+                ...{
+                    _id: null,
+                    busConfig: this.trip?._id,
+                    date: this.date,
+                }
+              };    
+              this.addTrip(mData);
+            }
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
     /**
    * ON DESTROY
    */

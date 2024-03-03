@@ -17,7 +17,7 @@ export interface Seat {
   _id?: string;
   seatNo?: string;
   seatType?: string;
-  floorNo?: number;
+  floorNo?: string;
   status?:
     | 'Available'
     | 'Booked'

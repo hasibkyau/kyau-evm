@@ -113,10 +113,11 @@
         <th>Bus</th>
         <th>Ticket Type</th>
         <th>Seats</th>
-        <th>Departure Time</th>
-        <th>Arrival Time</th>
+        <!-- <th>Departure Time</th>
+        <th>Arrival Time</th> -->
         <th>From</th>
         <th>To</th>
+        <th>Price</th>
         <th>Expired In</th>
         <!--        <th>Status</th>-->
         <th>Actions</th>
@@ -134,10 +135,11 @@
         <td>{{ data.bus?.name ?? '-' }}</td>
         <td style="font-weight: 600;" [ngStyle]="getTicketTypeStyle(data?.ticketType)">{{ data?.ticketType }}</td>
         <td>{{ data | ticketSeats : data.ticketType === 'Canceled' ? 'Canceled' : null }}</td>
-        <td>{{ data?.departureTime?.name }}</td>
-        <td>{{ data?.arrivalTime?.name }}</td>
+        <!-- <td>{{ data?.departureTime?.name }}</td>
+        <td>{{ data?.arrivalTime?.name }}</td> -->
         <td>{{ data?.from?.name }}</td>
         <td>{{ data?.to?.name }}</td>
+        <td>{{ data?.grandTotal }}</td>
         <td style="font-weight: 600; color: #d83333">{{ data?.expireTime > 0 ? data?.expireTime : 'Expired'}}</td>
         <td class="td-action">
           <button *ngIf="data.ticketType !== 'Canceled'" [disabled]="!checkEditPermission"

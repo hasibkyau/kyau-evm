@@ -1,3 +1,4 @@
+import { Price } from "./bus-config.interface";
 import { Bus, Seat } from "./bus.interface";
 import { Counter } from "./counter.interface";
 import { Schedule } from "./schedule.interface";
@@ -14,6 +15,7 @@ export interface Trip {
   boardingPoints?: Counter[];
   droppingPoints?: Counter[];
   price?: number;
+  prices?: Price[];
   serviceCharge?: number;
   seats?: Seat[];
   priority?: number;
