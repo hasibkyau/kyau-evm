@@ -5,6 +5,7 @@ export interface Cart {
   trip?: string;
   journeyDate?: string;
   seat?: string;
+  price?: Number;
   date?: string;
   user?: CartAuth;
   gender?: string;

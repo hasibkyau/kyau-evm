@@ -100,7 +100,7 @@ export class AssignTripComponent implements OnInit{
     this.subDataOne = this.tripService.addTrip(data).subscribe({
       next: res => {
         if (res.success) {
-          this.hidePopup();
+          // this.hidePopup();
           this.uiService.success(res.message);
         } else {
           this.uiService.warn(res.message);

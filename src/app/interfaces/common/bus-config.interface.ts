@@ -26,7 +26,7 @@ export interface BusConfig {
 
 export interface Price {
   _id?: string;
-  price?: string;
+  price?: number;
   seatType?: string;
   serviceCharge?: number;
 }

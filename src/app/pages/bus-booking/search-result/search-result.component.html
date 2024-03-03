@@ -170,7 +170,7 @@
                   >
                     <div
                       style="justify-self: center; width: 26px; height: 30px"
-                      (click)="onSelectSeat(data)"
+                      (click)="onSelectSeat(data, selectedTrip)"
                     >
                       <span
                         [matTooltip]="data.seatNo"
@@ -277,13 +277,15 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let seat of selectedSeats">
+                        <tr *ngFor="let seat of selectedSeats; let i=index">
                           <td>
                             {{ seat?.seatNo }}
                             {{ seat?.type ? "- " + seat?.type : "" }}
                           </td>
                           <td>{{ seat?.seatType }}</td>
-                          <td>৳ {{ trip?.price }}</td>
+                          <!-- <td>৳ {{ trip?.price }}</td> -->
+                          <td *ngIf="mode !== 'edit'">৳ {{ carts[i]?.price }}</td>
+                          <td *ngIf="mode === 'edit'">৳ {{ seat?.price }}</td>
                           <td *ngIf="mode === 'edit' && seat?.type !== 'new'">
                             <mat-icon
                               (click)="onRemoveBookedSeat(seat)"
