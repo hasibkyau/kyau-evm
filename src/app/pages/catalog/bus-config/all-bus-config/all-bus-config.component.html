@@ -112,13 +112,15 @@
             (change)="onAllSelectChange($event)"
           ></mat-checkbox>
         </th>
-        <th>Launch Name</th>
-        <th>Total Seat</th>
         <th>From</th>
         <th>To</th>
-        <th>Company</th>
+        <th>Deprature Time</th>
+        <th>Arrival Time</th>
+        <th>Launch Name</th>
+        <th>Total Seat</th>
+        <!-- <th>Company</th> -->
         <!-- <th>Price</th> -->
-        <th>Service Charge</th>
+        <!-- <th>Service Charge</th> -->
         <th>Priority</th>
         <th>Status</th>
         <th>Actions</th>
@@ -142,13 +144,15 @@
             (ngModelChange)="onCheckChange($event, i, data._id)"
           ></mat-checkbox>
         </td>
-        <td>{{ data?.bus?.name | titlecase }}</td>
-        <td>{{ data?.bus?.totalSeat }}</td>
         <td>{{ data.from?.name }}</td>
         <td>{{ data.to?.name }}</td>
+        <td>{{ data?.departureTime?.name }}</td>
+        <td>{{ data?.arrivalTime?.name }}</td>
         <td>{{ data?.bus?.name | titlecase }}</td>
+        <td>{{ data?.bus?.totalSeat }}</td>
+        <!-- <td>{{ data?.bus?.name | titlecase }}</td> -->
         <!-- <td>{{data?.price}}</td> -->
-        <td>{{ data?.serviceCharge }}</td>
+        <!-- <td>{{ data?.serviceCharge }}</td> -->
         <td>{{ data?.priority }}</td>
         <td [style.color]="data.status === 'publish' ? 'green' : 'red'">
           {{ data.status | titlecase }}

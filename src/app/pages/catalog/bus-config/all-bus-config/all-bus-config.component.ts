@@ -216,6 +216,8 @@ private getAllBusConfig() {
     date: 1,
     from: 1,
     to: 1,
+    departureTime: 1,
+    arrivalTime: 1,
     price: 1,
     serviceCharge: 1,
     status: 1,

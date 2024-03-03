@@ -48,6 +48,7 @@ import {AddBusConfigComponent} from './bus-config/add-bus-config/add-bus-config.
 import {AllBusConfigComponent} from './bus-config/all-bus-config/all-bus-config.component';
 import {SearchTripModule} from '../../shared/components/search-trip/search-trip.module';
 import { AssignTripComponent } from './bus-config/all-bus-config/assign-trip/assign-trip.component';
+import { DatePickerModule } from 'src/app/shared/components/date-picker/date-picker.module';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { AssignTripComponent } from './bus-config/all-bus-config/assign-trip/ass
     FlexLayoutModule,
     DigitOnlyModule,
     SearchTripModule,
+    DatePickerModule
   ]
 })
 export class CatalogModule {
