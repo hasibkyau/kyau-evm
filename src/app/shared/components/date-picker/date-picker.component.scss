@@ -1,0 +1,254 @@
+@import "src/theme/variables";
+
+.general-date-picker {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  .form-label {
+    padding-bottom: 12px;
+    span {
+      width: 100%;
+      font: $font-en-primary;
+      font-size: 15px;
+      font-weight: 400;
+      color: #221f1f;
+    }
+  }
+  button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    // width: 220px;
+    height: 52px;
+    /* UI Properties */
+    background: #ffffff;
+    border: 1px solid #1c9f5680;
+    border-radius: 10px;
+    opacity: 1;
+
+    .placeHolder {
+      display: flex;
+      font: $font-en-primary;
+      font-size: 15px;
+      color: #221f1f;
+      font-weight: 400;
+    }
+
+    .placeHolder2 {
+      display: none;
+      font: $font-en-primary;
+      font-size: 15px;
+      color: #221f1f;
+      font-weight: 400;
+    }
+
+    .icon-time {
+      svg {
+        // background: red;
+      }
+      svg path {
+        fill: #575757;
+      }
+    }
+  }
+
+  button:hover {
+    border: 1px solid #1c9f56;
+    background: #e2fff0;
+    .placeHolder {
+      display: none;
+    }
+
+    .placeHolder2 {
+      display: flex;
+      color: #221f1f;
+    }
+
+    .icon-item {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      /* UI Properties */
+      background: #94dcb7;
+      opacity: 1;
+    }
+  }
+
+  .invalid {
+    background-color: #fff2f2 !important;
+    border-color: #ff0000 !important;
+
+    .icon-time {
+      svg {
+        // background: red;
+      }
+      svg path {
+        fill: #ff0000 !important;
+      }
+    }
+  }
+}
+
+.mat-calender-date-td-child {
+  background-color: #fff;
+  border: 1px solid #00883c4d;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+::ng-deep.my-custom-td-date-select {
+  .mat-calender-date-td-child {
+    .mat-calendar-body-cell-content {
+      border-radius: 4px !important;
+      font-weight: 600;
+      font-size: 14px;
+      font-family: $font-en-primary;
+      letter-spacing: 0.5px;
+      padding-bottom: 2px;
+    }
+
+    .my-custom-td-date-select {
+      background-color: #1c9f56;
+    }
+
+    .mat-calendar-header {
+      padding: 0px 8px 0 8px;
+
+      .mat-calendar-controls {
+        justify-content: space-between;
+
+        .mat-calendar-spacer {
+          display: none;
+        }
+
+        .mat-calendar-period-button {
+          order: 2;
+        }
+
+        .mat-mdc-icon-button .mat-mdc-focus-indicator {
+          background: #f5f8fb;
+          border-radius: 50%;
+        }
+
+        .mat-calendar-previous-button::after {
+          opacity: 0.3;
+        }
+
+        .mat-calendar-previous-button::after,
+        .mat-calendar-next-button::after {
+          margin: 10.5px;
+        }
+
+        .mat-calendar-previous-button,
+        .mat-calendar-next-button {
+          width: 30px;
+          height: 30px;
+        }
+
+        .mat-calendar-next-button::after {
+          opacity: 0.3;
+        }
+
+        .mat-mdc-icon-button.mat-calendar-next-button {
+          order: 3;
+        }
+      }
+    }
+
+    .mat-calendar-content {
+      padding: 0 0 8px 0;
+    }
+
+    .mat-calendar-table-header th {
+      text-align: center;
+      padding: 0 0 8px 0;
+      font-size: 14px;
+      font-family: $font-en-primary;
+      font-weight: 600;
+      color: #221f1f;
+      opacity: 0.5;
+    }
+
+    .mat-calendar-body-label {
+      font-size: 14px;
+      font-family: $font-en-primary;
+      font-weight: 600;
+      color: #221f1f;
+      opacity: 0.5;
+    }
+
+    .mat-mdc-button .mdc-button__label,
+    .mat-mdc-unelevated-button .mdc-button__label,
+    .mat-mdc-raised-button .mdc-button__label,
+    .mat-mdc-outlined-button .mdc-button__label {
+      font-size: 14px;
+      font-family: $font-en-primary;
+      font-weight: 600;
+      color: #221f1f;
+    }
+
+    .mdc-button {
+      height: 30px;
+    }
+
+    .mdc-button:hover {
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.01);
+    }
+  }
+}
+
+/* --- my-input-custom-time-select --- */
+::ng-deep.my-custom-td-date-select.mat-mdc-menu-panel.mat-mdc-menu-panel {
+  min-width: 300px !important;
+  max-width: 300px !important;
+  border-radius: 10px !important;
+
+  .mat-mdc-menu-content {
+    padding: 0;
+  }
+}
+
+/* --- this is for top arrow --- */
+::ng-deep.my-custom-td-date-select {
+  &.mat-mdc-menu-panel.mat-mdc-menu-panel {
+    padding-top: 6px !important;
+    margin-left: -10px !important;
+    background: transparent !important;
+    box-shadow: none;
+
+    &::after {
+      content: "";
+      height: 8px;
+      width: 9px;
+      border: 1px solid #00883c4d;
+      position: absolute;
+      top: 2px;
+      left: 66px;
+      background-color: #fff;
+      z-index: 111;
+      transform: rotate(45deg);
+      border-right: 0;
+      border-bottom: 0;
+    }
+  }
+
+  &.assign-user-role-location-mat-menu {
+    &.mat-mdc-menu-panel.mat-mdc-menu-panel {
+      margin-left: inherit;
+      margin-right: -10px !important;
+
+      &::after {
+        top: 2px;
+        left: inherit;
+        right: 12px;
+      }
+    }
+  }
+}

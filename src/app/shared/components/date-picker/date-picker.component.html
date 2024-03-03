@@ -1,0 +1,10 @@
+<div class="mat-calender-date-td-child" style="max-width: 300px;" (click)="$event.stopPropagation()">
+    <mat-calendar 
+    #calendar
+    [(selected)]="dateSelected" 
+    (selectedChange)="onDateChange($event)"></mat-calendar>
+</div>
+
+  
+
+
