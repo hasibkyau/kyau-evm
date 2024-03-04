@@ -49,7 +49,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   dataForm: FormGroup;
   selectedGender = 'Male';
   isLoading: boolean = false;
-  floorSelected: number = 1;
+  floorSelected: string = '1';
 
   bookingTimes: Select[] = BOOKING_TIME;
 
@@ -90,7 +90,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     private busConfigService: BusConfigService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     // Reload Data
     this.subReload = this.reloadService.refreshData$.subscribe(() => {
       this.getCartByTrip();
@@ -149,7 +149,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  onToggleFloor(floor: number) {
+  onToggleFloor(floor: string) {
     this.floorSelected = floor;
   }
 
@@ -280,12 +280,8 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
    * SELECT SEAT FUNCTIONALITY
    */
   onSelectSeat(data: Seat) {
-    console.log('seat', data);
-    // console.log('selectedTrip', this.selectedTrip);
-    // console.log('prices', this.prices);
     let price = this.prices.find((p) => p.seatType === data?.seatType);
     let fare = price?.price;
-    console.log('seat price', fare);
 
     if (data.status === 'Available') {
       let findIndex = this.selectedTrip?.seats.findIndex(
@@ -434,7 +430,6 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private bookTrip(data: any) {
-    console.log('booking',data);
     let mSeats = data?.seats?.map(m=>{
       return{
         ...m,
@@ -444,7 +439,6 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
       }
     })
 
-    console.log('mDataSeats', mSeats);
     let mData = {
       ...data,
       seats: mSeats

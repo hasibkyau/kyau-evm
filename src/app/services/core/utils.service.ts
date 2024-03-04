@@ -109,11 +109,7 @@ export class UtilsService {
   getexpiredTime(date: any, type: 'HH:MM' | 'DD:HH:MM' | 'DD:HH:MM:SS' | 'HH:MM:SS' | 'MM:SS'): any {
     if (date) {
       const data = this.getExpiredIn(date);
-      const time = data.seconds
-      const minute = data.minutes;
-      if(time < 0 || minute < 0){
-        return 0;
-      }
+
       if (type === 'HH:MM') {
         return `${data.hours} Hours ${data.minutes} Minutes`
       } else if (type === 'DD:HH:MM') {

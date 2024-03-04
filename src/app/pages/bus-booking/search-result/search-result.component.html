@@ -131,20 +131,20 @@
             </ul>
             <div class="floor-container">
               <div
-                [class]="floorSelected === 1 ? 'floor floor-active' : 'floor'"
-                (click)="onToggleFloor(1)"
+                [class]="floorSelected === '1' ? 'floor floor-active' : 'floor'"
+                (click)="onToggleFloor('1')"
               >
                 Floor 1
               </div>
               <div
-                [class]="floorSelected === 2 ? 'floor floor-active' : 'floor'"
-                (click)="onToggleFloor(2)"
+                [class]="floorSelected === '2' ? 'floor floor-active' : 'floor'"
+                (click)="onToggleFloor('2')"
               >
                 Floor 2
               </div>
               <div
-                [class]="floorSelected === 3 ? 'floor floor-active' : 'floor'"
-                (click)="onToggleFloor(3)"
+                [class]="floorSelected === '3' ? 'floor floor-active' : 'floor'"
+                (click)="onToggleFloor('3')"
               >
                 Floor 3
               </div>
@@ -298,7 +298,7 @@
                     </table>
                   </div>
 
-                  <div class="boarding-info-title">
+                  <div class="boarding-info-title" *ngIf="canceledSeats.length">
                     <h3>Canceled Seats:</h3>
                   </div>
                   <div class="seat-table-area" *ngIf="canceledSeats.length">

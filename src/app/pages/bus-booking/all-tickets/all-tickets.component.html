@@ -140,7 +140,7 @@
         <td>{{ data?.from?.name }}</td>
         <td>{{ data?.to?.name }}</td>
         <td>{{ data?.grandTotal }}</td>
-        <td style="font-weight: 600; color: #d83333">{{ data?.expireTime > 0 ? data?.expireTime : 'Expired'}}</td>
+        <td style="font-weight: 600; color: #d83333">{{ data?.expireTime }}</td>
         <td class="td-action">
           <button *ngIf="data.ticketType !== 'Canceled'" [disabled]="!checkEditPermission"
                   (click)="openConfirmDialog('canceled', data)"
