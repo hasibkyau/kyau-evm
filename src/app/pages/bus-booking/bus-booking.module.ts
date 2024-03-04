@@ -25,6 +25,7 @@ import {SearchResultComponent} from './search-result/search-result.component';
 import {FilterComponent} from './filter/filter.component';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import {SearchTripModule} from '../../shared/components/search-trip/search-trip.module';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {SearchTripModule} from '../../shared/components/search-trip/search-trip.
     NgxDropzoneModule,
     FormsModule,
     NgxPaginationModule,
+    NgxPrintModule,
     MaterialModule,
     DirectivesModule,
     PipesModule,
