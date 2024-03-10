@@ -55,9 +55,17 @@
             </div>
           </div>
         </div>
-        <div class="ticket-details-area" *ngIf="isShow">
+        <div class="ticket-details-area" *ngIf="selectedTrip">
           <div class="ticket-details-top">
             <ul>
+              <li>
+                <div [class]="'seat-plan'">
+                  <img [src]="'/assets/images/seats/Available/singleChair.png'" alt="">
+                </div>
+                <div class="seat-type">
+                  <h3>Available</h3>
+                </div>
+              </li>
 
               <li>
                 <div [class]="'seat-plan booked'">
@@ -67,7 +75,7 @@
                   <h3>BOOKED</h3>
                 </div>
               </li>
-
+              
               <li>
                 <div [class]="'seat-plan blocked'">
                   <img [src]="'/assets/images/seats/Blocked/singleChair.png'" alt="">

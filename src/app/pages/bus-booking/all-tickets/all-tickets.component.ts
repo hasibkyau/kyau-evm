@@ -323,16 +323,21 @@ export class AllTicketsComponent implements OnInit {
   }
 
   onExpireTimeCount() {
-    this.myInterval = setInterval(() => {
-      this.tickets = this.tickets?.map(m=>{
-        let time = this.utilsService.getexpiredTime(m.expiredIn, "HH:MM:SS");
-        console.log('time',time);
-        return{
-          ...m,
-          ...{
-            expireTime: time
-          }
+    this.tickets = this.tickets?.map(m=>{
+      let time = this.utilsService.getexpiredTime(m.expiredIn, "HH:MM:SS");
+      console.log('time',time);
+      return{
+        ...m,
+        ...{
+          expireTime: time
         }
+      }
+    })
+
+    this.myInterval = setInterval(() => {
+      this.tickets?.forEach(m=>{
+        let time = this.utilsService.getexpiredTime(m.expiredIn, "HH:MM:SS");
+        m.expireTime = time;
       })
     }, 1000);
   }
