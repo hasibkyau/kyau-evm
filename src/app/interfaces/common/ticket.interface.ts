@@ -18,7 +18,7 @@ export interface Ticket {
   bookingTime?: number;
   paidAmount?: number;
   grandTotal?: number;
-  ticketType?:'Booked' | 'Issued' | 'Canceled';
+  ticketType?:'Booked' | 'Issued' | 'Canceled' | 'Sold';
   bus?: Bus;
   departureTime?: Schedule;
   arrivalTime?: Schedule;

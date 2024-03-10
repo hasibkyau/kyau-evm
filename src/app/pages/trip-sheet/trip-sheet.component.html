@@ -226,6 +226,73 @@
   
   <!-- Print Table Html Code -->
   <div id="all-tickets-print-table" style="display: none">
+    <h2>Trip Sheet</h2>
+    <table style="  
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 12px;">
+      <tr>
+        <th>Ticket Sold</th>
+        <th>Sold Seats</th>
+        <th>Sold Amount</th>
+        <th>Sold Paid</th>
+        <th>Sold Due</th>
+        <th>Ticket Booked</th>
+        <th>Booked Seats</th>
+        <th>Booked Amount</th>
+      </tr>
+      <tr>
+        <td style="  
+        border: 1px solid #656565;
+        text-align: left;
+        padding: 5px;
+        font-size: 12px;">{{ ticketStatistics?.soldStatistics?.totalTickets }}
+        </td>
+        <td style="  
+        border: 1px solid #656565;
+        text-align: left;
+        padding: 5px;
+        font-size: 12px;">{{ ticketStatistics?.soldStatistics?.totalSeatSold }}</td>
+        <td style="  
+        border: 1px solid #656565;
+        text-align: left;
+        padding: 5px;
+        font-size: 12px;">{{ ticketStatistics?.soldStatistics?.totalAmount }}</td>
+        <td style="  
+        border: 1px solid #656565;
+        text-align: left;
+        padding: 5px;
+        font-size: 12px;">{{ ticketStatistics?.soldStatistics?.totalPaidAmount }}</td>
+        <td style="  
+        border: 1px solid #656565;
+        text-align: left;
+        padding: 5px;
+        font-size: 12px;">
+          {{ ticketStatistics?.soldStatistics?.totalDue }}
+        </td>
+        <td style="  
+        border: 1px solid #656565;
+        text-align: left;
+        padding: 5px;
+        font-size: 12px;">
+          {{ ticketStatistics?.bookingStatistics?.totalTickets }}
+        </td>
+        <td style="  
+        border: 1px solid #656565;
+        text-align: left;
+        padding: 5px;
+        font-size: 12px;">{{ ticketStatistics?.bookingStatistics?.totalSeatBooked}}
+        </td>
+        <td style="  
+        border: 1px solid #656565;
+        text-align: left;
+        padding: 5px;
+        font-size: 12px;">{{ ticketStatistics?.bookingStatistics?.toatlAmount}}
+        </td>
+      </tr>
+    </table>
     <table>
       <tr>
         <th>Ticket No</th>

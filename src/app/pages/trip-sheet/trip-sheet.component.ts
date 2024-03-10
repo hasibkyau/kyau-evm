@@ -40,6 +40,7 @@ export class TripSheetComponent implements OnInit {
   holdPrevData: Ticket[] = [];
   id?: string;
   buss: Bus[] = [];
+  ticketStatistics?: any;
 
   // Pagination
   currentPage = 1;
@@ -276,6 +277,7 @@ export class TripSheetComponent implements OnInit {
       serviceCharge: 1,
       grandTotal: 1,
       ticketType: 1,
+      paidAmount: 1,
       departureTime: 1,
       arrivalTime: 1,
       from: 1,
@@ -324,16 +326,58 @@ export class TripSheetComponent implements OnInit {
   }
 
   onExpireTimeCount() {
-    this.tickets = this.tickets?.map(m=>{
-      let time = this.utilsService.getexpiredTime(m.expiredIn, "HH:MM:SS");
-      console.log('time',time);
-      return{
-        ...m,
-        ...{
-          expireTime: time
+
+      let totalTicketSold = 0;
+      let totalSeatSold = 0;
+      let totalSoldAmount = 0;
+      let totalSoldPaidAmount = 0;
+      let totalSoldDue = 0;
+
+      let totalTicketBooked = 0;
+      let totalSeatBooked = 0;
+      let totalBookedPaidAmount = 0;
+      let totalBookedDue = 0;
+      let toatlBookedAmount = 0;
+
+
+      this.tickets?.map(m=>{
+        if(m?.ticketType === 'Sold'){
+          totalSeatSold = totalSeatSold + m?.seats.length;
+          totalSoldAmount = totalSoldAmount + m?.grandTotal;
+          totalSoldPaidAmount = totalSoldPaidAmount + m?.paidAmount;
+          totalTicketSold = totalTicketSold + 1;
+        }else if (m?.ticketType === 'Booked'){
+          totalSeatBooked = totalSeatBooked + m?.seats.length;
+          toatlBookedAmount = toatlBookedAmount + m?.grandTotal;
+          totalBookedPaidAmount = totalBookedPaidAmount + m?.paidAmount;
+          totalTicketBooked = totalTicketBooked + 1;
+        }
+      })
+
+
+      totalSoldDue = totalSoldAmount - totalSoldPaidAmount;
+      totalBookedDue = toatlBookedAmount - totalBookedPaidAmount;
+
+      this.ticketStatistics = {
+        bookingStatistics:{
+          totalTickets: totalTicketBooked,
+          toatlAmount: toatlBookedAmount,
+          totalPaidAmount: totalBookedPaidAmount,
+          totalDue: totalBookedDue,
+          totalSeatBooked: totalSeatBooked
+
+        },
+        soldStatistics:{
+          totalTickets: totalTicketSold,
+          totalAmount: totalSoldAmount,
+          totalPaidAmount: totalSoldPaidAmount,
+          totalDue: totalSoldDue,
+          totalSeatSold: totalSeatSold,
         }
       }
-    })
+      
+      console.log('ticket statistics',this.ticketStatistics);
+      
   }
 
 
