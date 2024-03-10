@@ -94,6 +94,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     // Reload Data
     this.subReload = this.reloadService.refreshData$.subscribe(() => {
       this.getCartByTrip();
+      this.getTripById();
     });
 
     // Init Form
