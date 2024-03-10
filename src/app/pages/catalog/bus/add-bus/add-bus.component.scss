@@ -67,6 +67,38 @@
   }
 }
 
+.seat-plan{
+  margin: auto;
+  text-align: center;
+  border-radius: 3px;
+  img{
+    width: 30px;
+    border-radius: 3px;
+    // border: 1px solid red;
+  }
+
+  .selected{
+    background: #D4EDBC;
+  }
+  
+  .sold{
+    background: #FF99CC;
+  }
+  
+  .booked{
+    background: transparent;
+  }
+  
+  .blocked{
+    background: #4234af5d;
+  }
+  
+  span{
+    font-size: 10px;
+  }
+}
+
+
 .price-input-area {
   width: 100%;
 

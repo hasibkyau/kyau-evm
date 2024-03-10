@@ -448,6 +448,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
       next: (res) => {
         this.isLoading = false;
         if (res.success) {
+          this.reloadService.needRefreshData$();
           this.uiService.success(res.message);
         } else {
           this.uiService.warn(res.message);
@@ -467,6 +468,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
         next: (res) => {
           this.isLoading = false;
           if (res.success) {
+            this.reloadService.needRefreshData$();
             this.uiService.success(res.message);
           } else {
             this.uiService.warn(res.message);
