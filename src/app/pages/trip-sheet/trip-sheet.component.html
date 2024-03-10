@@ -182,7 +182,7 @@
             style="font-weight: 600"
             [ngStyle]="getTicketTypeStyle(data?.ticketType)"
           >
-            {{ data?.ticketType }}
+            {{ data?.ticketType === 'Sold' ? 'Issued' : data?.ticketType }}
           </td>
           <td>
             {{

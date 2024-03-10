@@ -81,7 +81,7 @@ export const TICKET_TYPES: Select[] = [
   },
   {
     value: 'Sold',
-    viewValue: 'Sold'
+    viewValue: 'Issued'
   },
   {
     value: 'Canceled',
