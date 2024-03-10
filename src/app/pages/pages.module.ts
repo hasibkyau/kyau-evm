@@ -9,12 +9,13 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {MaterialModule} from "../material/material.module";
+import { TripSheetComponent } from './trip-sheet/trip-sheet.component';
+import { TripSheetModule } from './trip-sheet/trip-sheet.module';
 
 
 @NgModule({
   declarations: [
-    PagesComponent
-
+    PagesComponent,
   ],
   imports: [
     CommonModule,
@@ -25,7 +26,8 @@ import {MaterialModule} from "../material/material.module";
     MatRadioModule,
     MatSelectModule,
     NgxSpinnerModule,
-    MaterialModule
+    MaterialModule,
+    TripSheetModule
   ]
 })
 export class PagesModule {

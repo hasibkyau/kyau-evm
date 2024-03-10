@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {CheckAuthAccessGuard} from '../auth-guard/check-auth-access.guard';
 import {PagesComponent} from './pages.component';
+import { TripSheetComponent } from './trip-sheet/trip-sheet.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,8 @@ const routes: Routes = [
         path: 'catalog',
         loadChildren: () => import('./catalog/catalog.module').then(m => m.CatalogModule),
       },
+      {path: 'trip-sheet', component: TripSheetComponent},
+
       {
         path: 'admin-control',
         loadChildren: () => import('./admin-control/admin-control.module').then(m => m.AdminControlModule),

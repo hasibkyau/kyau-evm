@@ -5,28 +5,29 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription, pluck, debounceTime, distinctUntilChanged, switchMap, EMPTY } from 'rxjs';
+import { TICKET_TYPES } from 'src/app/core/utils/app-data';
 import { AdminPermissions } from 'src/app/enum/admin-permission.enum';
+import { Bus } from 'src/app/interfaces/common/bus.interface';
 import { Ticket } from 'src/app/interfaces/common/ticket.interface';
 import { Pagination } from 'src/app/interfaces/core/pagination';
+import { Select } from 'src/app/interfaces/core/select';
 import { FilterData } from 'src/app/interfaces/gallery/filter-data';
+import { BusService } from 'src/app/services/common/bus.service';
 import { TicketService } from 'src/app/services/common/ticket.service';
+import { TripService } from 'src/app/services/common/trip.service';
 import { ReloadService } from 'src/app/services/core/reload.service';
 import { UiService } from 'src/app/services/core/ui.service';
 import { UtilsService } from 'src/app/services/core/utils.service';
 import { ConfirmDialogComponent } from 'src/app/shared/components/ui/confirm-dialog/confirm-dialog.component';
-import {Bus} from '../../../interfaces/common/bus.interface';
-import {BusService} from '../../../services/common/bus.service';
-import {TripService} from '../../../services/common/trip.service';
-import {Select} from '../../../interfaces/core/select';
-import {TICKET_TYPES} from '../../../core/utils/app-data';
+
 
 
 @Component({
-  selector: 'app-all-tickets',
-  templateUrl: './all-tickets.component.html',
-  styleUrls: ['./all-tickets.component.scss'],
+  selector: 'app-trip-sheet',
+  templateUrl: './trip-sheet.component.html',
+  styleUrls: ['./trip-sheet.component.scss']
 })
-export class AllTicketsComponent implements OnInit {
+export class TripSheetComponent implements OnInit {
   // Admin Base Data
   adminId: string;
   role: string;
@@ -39,6 +40,7 @@ export class AllTicketsComponent implements OnInit {
   holdPrevData: Ticket[] = [];
   id?: string;
   buss: Bus[] = [];
+  ticketStatistics?: any;
 
   // Pagination
   currentPage = 1;
@@ -275,6 +277,7 @@ export class AllTicketsComponent implements OnInit {
       serviceCharge: 1,
       grandTotal: 1,
       ticketType: 1,
+      paidAmount: 1,
       departureTime: 1,
       arrivalTime: 1,
       from: 1,
@@ -323,23 +326,58 @@ export class AllTicketsComponent implements OnInit {
   }
 
   onExpireTimeCount() {
-    this.tickets = this.tickets?.map(m=>{
-      let time = this.utilsService.getexpiredTime(m.expiredIn, "HH:MM:SS");
-      console.log('time',time);
-      return{
-        ...m,
-        ...{
-          expireTime: time
+
+      let totalTicketSold = 0;
+      let totalSeatSold = 0;
+      let totalSoldAmount = 0;
+      let totalSoldPaidAmount = 0;
+      let totalSoldDue = 0;
+
+      let totalTicketBooked = 0;
+      let totalSeatBooked = 0;
+      let totalBookedPaidAmount = 0;
+      let totalBookedDue = 0;
+      let toatlBookedAmount = 0;
+
+
+      this.tickets?.map(m=>{
+        if(m?.ticketType === 'Sold'){
+          totalSeatSold = totalSeatSold + m?.seats.length;
+          totalSoldAmount = totalSoldAmount + m?.grandTotal;
+          totalSoldPaidAmount = totalSoldPaidAmount + m?.paidAmount;
+          totalTicketSold = totalTicketSold + 1;
+        }else if (m?.ticketType === 'Booked'){
+          totalSeatBooked = totalSeatBooked + m?.seats.length;
+          toatlBookedAmount = toatlBookedAmount + m?.grandTotal;
+          totalBookedPaidAmount = totalBookedPaidAmount + m?.paidAmount;
+          totalTicketBooked = totalTicketBooked + 1;
+        }
+      })
+
+
+      totalSoldDue = totalSoldAmount - totalSoldPaidAmount;
+      totalBookedDue = toatlBookedAmount - totalBookedPaidAmount;
+
+      this.ticketStatistics = {
+        bookingStatistics:{
+          totalTickets: totalTicketBooked,
+          toatlAmount: toatlBookedAmount,
+          totalPaidAmount: totalBookedPaidAmount,
+          totalDue: totalBookedDue,
+          totalSeatBooked: totalSeatBooked
+
+        },
+        soldStatistics:{
+          totalTickets: totalTicketSold,
+          totalAmount: totalSoldAmount,
+          totalPaidAmount: totalSoldPaidAmount,
+          totalDue: totalSoldDue,
+          totalSeatSold: totalSeatSold,
         }
       }
-    })
-
-    this.myInterval = setInterval(() => {
-      this.tickets?.forEach(m=>{
-        let time = this.utilsService.getexpiredTime(m.expiredIn, "HH:MM:SS");
-        m.expireTime = time;
-      })
-    }, 1000);
+      
+      console.log('ticket statistics',this.ticketStatistics);
+      
   }
 
 
@@ -369,43 +407,6 @@ export class AllTicketsComponent implements OnInit {
         },
       });
   }
-
-
-  private deleteMultipleTicketById() {
-    this.spinner.show();
-    this.subDataTwo = this.ticketService
-      .deleteMultipleTicketById(this.selectedIds)
-      .subscribe(
-        (res) => {
-          this.spinner.hide();
-          if (res.success) {
-            // Get Data array
-            const selectedTicket = [];
-            this.selectedIds.forEach((id) => {
-              const fData = this.tickets.find((data) => data._id === id);
-              if (fData) {
-                selectedTicket.push(fData);
-              }
-            });
-            this.selectedIds = [];
-            this.uiService.success(res.message);
-            // fetch Data
-            if (this.currentPage > 1) {
-              this.router.navigate([], { queryParams: { page: 1 } });
-            } else {
-              this.getAllTicket();
-            }
-          } else {
-            this.uiService.warn(res.message);
-          }
-        },
-        (error) => {
-          this.spinner.hide();
-          console.log(error);
-        }
-      );
-  }
-
 
 
   /**
@@ -487,79 +488,6 @@ export class AllTicketsComponent implements OnInit {
     }
   }
 
-
-  /**
-   * COMPONENT DIALOG VIEW
-   * openConfirmDialog()
-   */
-
-  /**
-   * COMPONENT DIALOG VIEW
-   */
-  public openConfirmDialog(type: 'canceled', data?: any) {
-    switch (type) {
-      case 'canceled': {
-        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-          maxWidth: '400px',
-          data: {
-            title: 'Confirm Cancel',
-            message: 'Are you sure you want cancel this ticket?'
-          }
-        });
-        dialogRef.afterClosed().subscribe(dialogResult => {
-          if (dialogResult) {
-            const finalData = {
-              seats: [],
-              oldSeats: [],
-              canceledSeats: data.seats,
-            }
-            this.updateBookedTrip(data._id, finalData);
-          }
-        });
-        break;
-      }
-      default: {
-        break;
-      }
-    }
-
-  }
-
-  private updateMultipleTicketById(data: any) {
-    this.spinner.show();
-    this.subDataThree = this.ticketService.updateMultipleTicketById(this.selectedIds, data)
-      .subscribe(res => {
-        this.spinner.hide();
-        if (res.success) {
-          this.selectedIds = [];
-          this.uiService.success(res.message);
-          this.reloadService.needRefreshData$();
-        } else {
-          this.uiService.warn(res.message)
-        }
-      }, error => {
-        this.spinner.hide()
-        console.log(error);
-      });
-
-  }
-
-  private updateBookedTrip(ticketId: string, data: any) {
-    this.subDataThree = this.tripService.updateBookedTrip(ticketId, data)
-      .subscribe({
-        next: res => {
-          if (res.success) {
-            this.uiService.success(res.message);
-          } else {
-            this.uiService.warn(res.message);
-          }
-          this.reloadService.needRefreshData$();
-        },
-        error: err => {
-          console.log(err)
-        }
-      })
-  }
 
 
   /**

@@ -112,7 +112,7 @@
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-label>Seat Type</mat-label>
                   <mat-select formControlName="seatType" required>
-                    <mat-option *ngFor="let data of seatType" [value]="data?.value">{{ data?.value }}</mat-option>
+                    <mat-option *ngFor="let data of seatType" [value]="data?.value">{{ data?.viewValue }}</mat-option>
                   </mat-select>
                   <mat-error>This field is required.</mat-error>
                 </mat-form-field>

@@ -22,12 +22,12 @@ export const SEAT_TYPES: Select[] = [
     // {value: 'Bunker Double Ac', viewValue: 'Bunker Double Ac'},
     // {value: 'Chair', viewValue: 'Chair'},
 
-    {value: 'singleChair', viewValue: 'Single Chair'},
-    {value: 'singleCabin', viewValue: 'Single Cabin'},
-    {value: 'doubleCabin', viewValue: 'Double Cabin'},
-    {value: 'familyCabin', viewValue: 'Family Cabin'},
-    {value: 'singleSleeper', viewValue: 'Single Sleeper'},
-    {value: 'doubleSleeper', viewValue: 'Double Sleeper'},
-    {value: 'vipAc', viewValue: 'VIP AC'},
+    {value: 'singleChair', viewValue: 'Chair'},
+    {value: 'singleCabin', viewValue: 'Single Non AC'},
+    {value: 'doubleCabin', viewValue: 'Double Non AC'},
+    {value: 'familyCabin', viewValue: 'Family AC'},
+    {value: 'singleSleeper', viewValue: 'Single AC'},
+    {value: 'doubleSleeper', viewValue: 'Double AC'},
+    {value: 'vipAc', viewValue: 'VIP'},
     
   ];
