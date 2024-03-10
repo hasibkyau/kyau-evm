@@ -44,6 +44,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   selectedTrip: Trip = null;
   prices: Price[] = [];
   price: number = 0;
+  isShow: boolean = false;
 
   windowWidth = window.innerWidth;
   dataForm: FormGroup;
@@ -251,24 +252,27 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
    * onShowMobile()
    */
   onShow(event: MouseEvent | any) {
-    event.stopImmediatePropagation();
-    // this.isShow = !this.isShow;
-    if (!this.id) {
-      this.router
-        .navigate([], {
-          queryParams: { trip: this.trip._id },
-          queryParamsHandling: 'merge',
-        })
-        .then();
-    } else {
-      this.selectedTrip = null;
-      this.router
-        .navigate([], {
-          queryParams: { trip: null },
-          queryParamsHandling: 'merge',
-        })
-        .then();
+    // event.stopImmediatePropagation();
+    this.isShow = !this.isShow;
+    if(this.isShow){
+      this.selectedTrip = this.trip;
     }
+    // if (!this.id) {
+    //   this.router
+    //     .navigate([], {
+    //       queryParams: { trip: this.trip._id },
+    //       queryParamsHandling: 'merge',
+    //     })
+    //     .then();
+    // } else {
+    //   this.selectedTrip = null;
+    //   this.router
+    //     .navigate([], {
+    //       queryParams: { trip: null },
+    //       queryParamsHandling: 'merge',
+    //     })
+    //     .then();
+    // }
   }
 
   onShowMobile(event: MouseEvent) {
