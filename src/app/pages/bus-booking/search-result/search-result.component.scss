@@ -230,6 +230,39 @@ $color-border: #e8e8e8;
   }
 }
 
+.seat-plan{
+  margin: auto;
+  text-align: center;
+  border-radius: 3px;
+  img{
+    width: 30px;
+    border-radius: 3px;
+    // border: 1px solid red;
+  }
+
+  .selected{
+    background: #D4EDBC;
+  }
+  
+  .sold{
+    background: #FF99CC;
+  }
+  
+  .booked{
+    background: transparent;
+  }
+  
+  .blocked{
+    background: #4234af5d;
+  }
+  
+  span{
+    font-size: 10px;
+  }
+}
+
+
+
 .ticket-details-main {
   padding: 30px 25px;
   display: grid;
