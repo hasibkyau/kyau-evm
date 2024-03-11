@@ -153,13 +153,22 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
     hasSubMenu: true,
     routerLink: null,
     icon: 'inventory',
-    subMenus: [{
+    subMenus: [
+      {
       id: 1,
       name: 'Trip Sheet',
       hasSubMenu: true,
       routerLink: 'trip-sheet',
       icon: 'arrow_right',
-    },],
+    },
+      {
+      id: 2,
+      name: 'All Trips',
+      hasSubMenu: true,
+      routerLink: 'catalog/all-trip',
+      icon: 'arrow_right',
+    },
+  ],
 
   },
 
