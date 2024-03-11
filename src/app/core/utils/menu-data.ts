@@ -148,6 +148,32 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
   },
 
   {
+    id: 102,
+    name: 'Trip Sheet',
+    hasSubMenu: true,
+    routerLink: null,
+    icon: 'inventory',
+    subMenus: [
+      {
+      id: 1,
+      name: 'Trip Sheet',
+      hasSubMenu: true,
+      routerLink: 'trip-sheet',
+      icon: 'arrow_right',
+    },
+      {
+      id: 2,
+      name: 'All Trips',
+      hasSubMenu: true,
+      routerLink: 'catalog/all-trip',
+      icon: 'arrow_right',
+    },
+  ],
+
+  },
+
+
+  {
     id: 12,
     name: 'SEO Page',
     hasSubMenu: true,
