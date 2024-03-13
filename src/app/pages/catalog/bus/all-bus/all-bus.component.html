@@ -36,7 +36,7 @@
           <button mat-menu-item (click)="sortData({updatedAt: 1}, 1)" [class.dropdown-active]="activeSort === 1">
             Last Update
           </button>
-          <button (click)="sortData({name: -1}, 2)" mat-menu-item [class.dropdown-active]="activeSort === 2">
+          <button (click)="sortData({name: 1}, 2)" mat-menu-item [class.dropdown-active]="activeSort === 2">
             A-Z
           </button>
         </mat-menu>
@@ -92,11 +92,11 @@
             <mat-checkbox #matCheckbox (change)="onAllSelectChange($event)"></mat-checkbox>
           </th>
           <th>Name</th>
-          <th>Coach No</th>
-          <th>Coach Type</th>
+          <!-- <th>Coach No</th> -->
+          <!-- <th>Coach Type</th> -->
           <th>Company</th>
           <th>Total Seat</th>
-          <th>Priority</th>
+          <!-- <th>Priority</th> -->
           <th>Status</th>
           <th>Actions</th>
         </tr>
@@ -107,11 +107,11 @@
                           (ngModelChange)="onCheckChange($event, i, data._id)"></mat-checkbox>
           </td>
           <td>{{data.name | titlecase}}</td>
-          <td>{{data?.coachNo}}</td>
-          <td>{{data.coachType ? (data?.coachType | slugToNormal:'_')  : 'N/A'}}</td>
+          <!-- <td>{{data?.coachNo}}</td> -->
+          <!-- <td>{{data.coachType ? (data?.coachType | slugToNormal:'_')  : 'N/A'}}</td> -->
           <td>{{data?.company | titlecase}}</td>
           <td>{{data?.totalSeat}}</td>
-          <td>{{data?.priority}}</td>
+          <!-- <td>{{data?.priority}}</td> -->
           <td [style.color]="data.status === 'publish' ? 'green' : 'red'">{{data.status | titlecase}}</td>
           <td class="td-action">
             <a [disabled]="data._id === adminId || !checkEditPermission"

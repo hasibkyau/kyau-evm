@@ -71,6 +71,10 @@
   margin: auto;
   text-align: center;
   border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   img{
     width: 30px;
     border-radius: 3px;

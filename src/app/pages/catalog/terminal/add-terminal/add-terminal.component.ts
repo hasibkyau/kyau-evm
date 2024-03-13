@@ -175,6 +175,7 @@ export class AddTerminalComponent implements OnInit {
           if (res.success) {
             this.uiService.success(res.message);
             this.formElement.resetForm();
+            this.initDataForm();
           } else {
             this.uiService.warn(res.message);
           }

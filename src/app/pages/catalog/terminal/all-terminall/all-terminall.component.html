@@ -105,7 +105,7 @@
             ></mat-checkbox>
           </th>
           <th>Terminal Name</th>
-          <th>Priority</th>
+          <!-- <th>Priority</th> -->
           <th>Status</th>
           <th>Action</th>
         </tr>
@@ -125,7 +125,7 @@
           </td>
   
           <td>{{ data.name || "-" | uppercase }}</td>
-          <td>{{ data.priority}}</td>
+          <!-- <td>{{ data.priority}}</td> -->
           <td>{{ data.status}}</td>
           <td class="button">
             <button mat-mini-fab color="accent" [routerLink]="['../edit-terminal/', data._id]">

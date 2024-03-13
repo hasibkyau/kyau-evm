@@ -297,6 +297,7 @@ export class AddBusConfigComponent implements OnInit {
         if (res.success) {
           this.uiService.success(res.message);
           this.formElement.resetForm();
+          this.initDataForm();
         } else {
           this.uiService.warn(res.message);
         }
@@ -362,7 +363,7 @@ export class AddBusConfigComponent implements OnInit {
     const filterData: FilterData = {
       filter: null,
       pagination: null,
-      sort: { createdAt: -1 },
+      sort: { name: 1 },
       select: mSelect,
     };
 
@@ -418,7 +419,8 @@ export class AddBusConfigComponent implements OnInit {
     const filterData: FilterData = {
       filter: null,
       pagination: null,
-      sort: { createdAt: -1 },
+      // sort: { createdAt: -1 },
+      sort: { name: 1 },
       select: mSelect,
     };
 
