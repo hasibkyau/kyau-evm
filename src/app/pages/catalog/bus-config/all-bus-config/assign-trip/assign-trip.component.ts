@@ -61,7 +61,7 @@ export class AssignTripComponent implements OnInit{
   showPopup(data?: any) {
     // Init Data Form
     this.initDataForm();
-    this.trip = data;
+    this.trip = data;    
 
     console.log(data);
     this.popup = true;

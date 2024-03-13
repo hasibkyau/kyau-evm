@@ -132,6 +132,8 @@ ngAfterViewInit(): void {
          serviceCharge: 1,
          status: 1,
          seats:1,
+         boardingPoints: 1,
+         droppingPoints: 1,
          priority:1,
         };
 
@@ -222,6 +224,8 @@ private getAllBusConfig() {
     serviceCharge: 1,
     status: 1,
     seats:1,
+    boardingPoints: 1,
+    droppingPoints: 1,
     priority:1,
     
   };

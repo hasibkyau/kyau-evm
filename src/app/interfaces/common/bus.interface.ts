@@ -18,6 +18,7 @@ export interface Seat {
   seatNo?: string;
   seatType?: string;
   floorNo?: string;
+  price?: number;
   status?:
     | 'Available'
     | 'Booked'

@@ -61,13 +61,13 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
     routerLink: null,
     icon: 'category',
     subMenus: [
-      {
-        id: 1,
-        name: 'Counters',
-        hasSubMenu: true,
-        routerLink: 'catalog/all-counter',
-        icon: 'arrow_right',
-      },
+      // {
+      //   id: 1,
+      //   name: 'Counters',
+      //   hasSubMenu: true,
+      //   routerLink: 'catalog/all-counter',
+      //   icon: 'arrow_right',
+      // },
       {
         id: 2,
         name: ' Terminals',

@@ -36,16 +36,16 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Via Route</mat-label>
                     <mat-select formControlName="viaRoutes" multiple>
-                        <mat-option [value]="data" *ngFor="let data of counters">{{data?.name}}</mat-option>
+                        <mat-option [value]="data" *ngFor="let data of terminals">{{data?.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
             </div>
 
-            <div class="from">
+            <!-- <div class="from">
                 <mat-form-field appearance="outline">
                     <mat-label>Select Boarding Points</mat-label>
                     <mat-select formControlName="boardingPoints" multiple>
-                        <mat-option [value]="data?._id" *ngFor="let data of counters">{{data?.name}}</mat-option>
+                        <mat-option [value]="data?._id" *ngFor="let data of terminals">{{data?.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
             </div>
@@ -54,10 +54,10 @@
                 <mat-form-field appearance="outline">
                     <mat-label>Select Dropping Points</mat-label>
                     <mat-select formControlName="droppingPoints" multiple>
-                        <mat-option [value]="data?._id" *ngFor="let data of counters">{{data?.name}}</mat-option>
+                        <mat-option [value]="data?._id" *ngFor="let data of terminals">{{data?.name}}</mat-option>
                     </mat-select>
                   </mat-form-field>
-            </div>
+            </div> -->
 
 
 

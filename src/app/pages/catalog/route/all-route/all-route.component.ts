@@ -139,6 +139,7 @@ ngAfterViewInit(): void {
           to: 1,
           createdAt: 1,
           priority: 1,
+          viaRoutes: 1,
           status: 1,
         };
 
@@ -156,7 +157,7 @@ ngAfterViewInit(): void {
       })
     )
     .subscribe({
-      next: (res) => {
+      next: (res) => {        
         this.searchRoute = res.data;
         this.routes = this.searchRoute;
         this.totalRoutes = res.count;
@@ -221,6 +222,7 @@ private getAllRoute() {
   const mSelect = {
     from: 1,
     to: 1,
+    viaRoutes: 1,
     createdAt: 1,
     priority: 1,
     status: 1,

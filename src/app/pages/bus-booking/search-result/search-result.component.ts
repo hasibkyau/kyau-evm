@@ -281,8 +281,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
    * SELECT SEAT FUNCTIONALITY
    */
   onSelectSeat(data: Seat) {
-    let price = this.prices.find((p) => p.seatType === data?.seatType);
-    let fare = price?.price;
+
 
     if (data.status === 'Available') {
       let findIndex = this.selectedTrip?.seats.findIndex(
@@ -297,10 +296,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
           isAuth: true,
         },
         applicationChannel: 'admin',
-        // date: this.selectedTrip.date,
-        date: this.date,
+        date: this.selectedTrip.date,
+        // date: this.date,
         seat: data._id,
-        price: fare,
+        price: data?.price,
         gender: 'Male',
         version: data.version,
       };
@@ -324,7 +323,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
           applicationChannel: 'admin',
           date: this.selectedTrip.date,
           seat: data._id,
-          price: fare,
+          price: data?.price,
           gender: 'Male',
           version: data.version,
         };
@@ -380,6 +379,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
             this.selectedSeats.splice(fIndex, 1);
           }
           this.reloadService.needRefreshData$();
+
         } else {
           this.uiService.warn(res.message);
         }
@@ -399,12 +399,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     this.subDataTwo = this.cartService.getCartByTrip(data).subscribe({
       next: (res) => {
         this.carts = res.data;
-        const seats: Seat[] = [];
+        const seats: Seat[] = [];       
 
         if (this.carts.length) {
-          this.price = 0;
           this.carts.forEach((cart: any) => {
-            this.price = (this.price + cart?.price);
             const fSeat = this.selectedTrip.seats.find(
               (f) => f._id === cart.seat
             );
@@ -421,7 +419,6 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
               this.selectedSeats.push(s);
             }
           });
-          this.price = this.ticket?.subTotal;
         }
       },
       error: (err) => {
@@ -431,21 +428,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private bookTrip(data: any) {
-    let mSeats = data?.seats?.map(m=>{
-      return{
-        ...m,
-        ...{
-          price: this.prices.find(p=> p?.seatType === m?.seatType).price
-        }
-      }
-    })
-
-    let mData = {
-      ...data,
-      seats: mSeats
-    }
-    
-    this.subDataThree = this.tripService.bookTrip(mData).subscribe({
+    this.subDataThree = this.tripService.bookTrip(data).subscribe({
       next: (res) => {
         this.isLoading = false;
         if (res.success) {
@@ -454,6 +437,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
         } else {
           this.uiService.warn(res.message);
         }
+        this.initDataForm();
       },
       error: (err) => {
         this.isLoading = false;
@@ -484,9 +468,8 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
 
   private getTripById() {
     this.subDataFour = this.tripService.getTripById(this.id).subscribe({
-      next: (res) => {
+      next: (res) => {    
         this.selectedTrip = res.data;
-        this.prices = res?.data?.prices;
         if (this.selectedTrip) {
           this.selectedTrip.seats.forEach((f) => {
             f.seatAnimation = false;
@@ -510,22 +493,11 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
    */
 
   get totalAmount() {
-    if (this.mode !== 'edit') {
-      if (this.carts.length) {
-        // return this.trip?.price * this.carts.length;
-        return this.price;
-      } else {
-        return 0;
-      }
-    } else {
-      if (this.selectedSeats.length) {
-        return this.ticket?.subTotal
-        // return (this.trip?.price * this.selectedSeats.length);
-        // return this.price;
-      } else {
-        return 0;
-      }
-    }
+    let price = 0;
+    this.selectedSeats?.map(m=>{
+    price = price + m.price;
+    })
+    return price;
   }
 
   get serviceCharge() {

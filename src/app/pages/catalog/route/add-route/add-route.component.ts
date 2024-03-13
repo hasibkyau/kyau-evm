@@ -1,6 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm, FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import {  ActivatedRoute } from '@angular/router';
+import {
+  NgForm,
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+} from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { Counter } from 'src/app/interfaces/common/counter.interface';
@@ -21,190 +27,172 @@ interface AccessOption {
 @Component({
   selector: 'app-add-route',
   templateUrl: './add-route.component.html',
-  styleUrls: ['./add-route.component.scss']
+  styleUrls: ['./add-route.component.scss'],
 })
-
-
 export class AddRouteComponent implements OnInit {
+  // Data Form
+  @ViewChild('formElement') formElement: NgForm;
+  dataForm?: FormGroup;
 
-// Data Form
-@ViewChild('formElement') formElement: NgForm;
-dataForm?: FormGroup;
+  isLoading = false;
 
-isLoading = false;
-
-
-HasAccessControl = new FormControl<AccessOption | null>(
-  null,
-  Validators.required
-);
-
-hasAccess: Select[] = [
-  { value: true, viewValue: 'Yes' },
-  { value: false, viewValue: 'No' },
-];
-
-
-// Store Data
-id?: string;
-route?: Routes;
-counters:Counter[];
-terminals:Terminal[];
-
-// Subscriptions
-private subDataOne: Subscription;
-private subDataTwo: Subscription;
-private subDataThree: Subscription;
-private subDataFour:Subscription;
-private subDataFive:Subscription;
-private subRouteOne: Subscription;
-
-constructor(
-  private fb: FormBuilder,
-  private uiService: UiService,
-  private spinnerService: NgxSpinnerService,
-  private activatedRoute: ActivatedRoute,
-  private routeService: RouteService,
-  private counterService:CounterService,
-  private terminalService:TerminalService
-) {
-}
-
-ngOnInit(): void {
-  // Init Form
-  this.initDataForm();
-
-  // GET ID FORM PARAM
-  this.subRouteOne = this.activatedRoute.paramMap.subscribe((param) => {
-    this.id = param.get('id');
-
-    if (this.id) {
-      this.getRouteById();
-    }
-  });
-
-  //Base 
-  this.getAllCounters();
-  this.getAllTerminals();
-}
-
-/**
- * FORM METHODS
- * initDataForm()
- * setFormValue()
- * onSubmit()
- */
-
-private initDataForm() {
-  this.dataForm = this.fb.group({
-    from: [null,Validators.required],
-    to: [null,Validators.required],
-    viaRoutes:[null],
-    boardingPoints:[null],
-    droppingPoints:[null],
-    priority: [null],
-    status: ['publish'],
-  });
-}
-
-
-private setFormValue() {
-  let boardingPoints:string[];
-  let droppingPoints:string[];
-
-  if(this.route && this.route.boardingPoints){
-    boardingPoints = this.route.boardingPoints.map((v) => v._id);
-  }
-  if(this.route && this.route.droppingPoints){
-    droppingPoints = this.route.droppingPoints.map((v) => v._id);
-  }
-  this.dataForm.patchValue(
-    {
-      ...this.route,
-      from:this.route.from._id,
-      to:this.route.to._id,
-      boardingPoints:boardingPoints,
-      droppingPoints:droppingPoints
-    }
+  HasAccessControl = new FormControl<AccessOption | null>(
+    null,
+    Validators.required
   );
-  
-}
 
+  hasAccess: Select[] = [
+    { value: true, viewValue: 'Yes' },
+    { value: false, viewValue: 'No' },
+  ];
 
+  // Store Data
+  id?: string;
+  route?: Routes;
+  counters: Counter[];
+  terminals: Terminal[];
 
-onSubmit() {
-  if (this.dataForm.invalid) {
-    this.uiService.warn('Please filed all the required field');
-    return;
+  // Subscriptions
+  private subDataOne: Subscription;
+  private subDataTwo: Subscription;
+  private subDataThree: Subscription;
+  private subDataFour: Subscription;
+  private subDataFive: Subscription;
+  private subRouteOne: Subscription;
+
+  constructor(
+    private fb: FormBuilder,
+    private uiService: UiService,
+    private spinnerService: NgxSpinnerService,
+    private activatedRoute: ActivatedRoute,
+    private routeService: RouteService,
+    private counterService: CounterService,
+    private terminalService: TerminalService
+  ) {}
+
+  ngOnInit(): void {
+    // Init Form
+    this.initDataForm();
+
+    // GET ID FORM PARAM
+    this.subRouteOne = this.activatedRoute.paramMap.subscribe((param) => {
+      this.id = param.get('id');
+    });
+
+    //Base
+    // this.getAllCounters();
+    this.getAllTerminals();
   }
 
-  //Merge Data
-  const mData = {
-       ...this.dataForm.value,
-       ...{
-          from: this.terminals.find((m) => m._id === this.dataForm.value.from),
-          to: this.terminals.find((m) => m._id === this.dataForm.value.to)
-       }
+  /**
+   * FORM METHODS
+   * initDataForm()
+   * setFormValue()
+   * onSubmit()
+   */
+
+  private initDataForm() {
+    this.dataForm = this.fb.group({
+      from: [null, Validators.required],
+      to: [null, Validators.required],
+      viaRoutes: [null],
+      boardingPoints: [null],
+      droppingPoints: [null],
+      priority: [null],
+      status: ['publish'],
+    });
   }
 
-  //Filter Boarding Points
-  if (this.dataForm.value.boardingPoints) {
-    mData.boardingPoints = []
-    this.dataForm.value.boardingPoints.map((item) => {
-      mData.boardingPoints.push({
-        _id: item,
-        name: this.counters.find(f => f._id === item)?.name,
-      })
-    })
-  }
-  //Filter Dropping Points
-  if (this.dataForm.value.droppingPoints) {
-    mData.droppingPoints = []
-    this.dataForm.value.droppingPoints.map((item) => {
-      mData.droppingPoints.push({
-        _id: item,
-        name: this.counters.find(f => f._id === item)?.name,
-      })
-    })
+  private setFormValue() {
+    let boardingPoints: string[];
+    let droppingPoints: string[];
+
+    if (this.route && this.route.boardingPoints) {
+      boardingPoints = this.route.boardingPoints.map((v) => v._id);
+    }
+    if (this.route && this.route.droppingPoints) {
+      droppingPoints = this.route.droppingPoints.map((v) => v._id);
+    }
+    this.dataForm.patchValue({
+      ...this.route,
+      from: this.route.from._id,
+      to: this.route.to._id,
+      boardingPoints: boardingPoints,
+      droppingPoints: droppingPoints,
+    });
   }
 
-  if (!this.route) {
-    this.addRoute(mData);
-  } else {
-    this.updateRouteById(mData);
+  onSubmit() {
+    if (this.dataForm.invalid) {
+      this.uiService.warn('Please filed all the required field');
+      return;
+    }
+
+    //Merge Data
+    const mData = {
+      ...this.dataForm.value,
+      ...{
+        from: this.terminals.find((m) => m._id === this.dataForm.value.from),
+        to: this.terminals.find((m) => m._id === this.dataForm.value.to),
+      },
+    };
+
+    //Filter Boarding Points
+    if (this.dataForm.value.boardingPoints) {
+      mData.boardingPoints = [];
+      this.dataForm.value.boardingPoints.map((item) => {
+        mData.boardingPoints.push({
+          _id: item,
+          name: this.terminals.find((f) => f._id === item)?.name,
+        });
+      });
+    }
+    //Filter Dropping Points
+    if (this.dataForm.value.droppingPoints) {
+      mData.droppingPoints = [];
+      this.dataForm.value.droppingPoints.map((item) => {
+        mData.droppingPoints.push({
+          _id: item,
+          name: this.terminals.find((f) => f._id === item)?.name,
+        });
+      });
+    }
+
+    if (!this.route) {
+      this.addRoute(mData);
+    } else {
+      this.updateRouteById(mData);
+    }
   }
-}
 
-/**
- * HTTP REQ HANDLE
- * getRouteById()
- * addRoute()
- * updateRouteById()
- * getAllCounters()
- */
+  /**
+   * HTTP REQ HANDLE
+   * getRouteById()
+   * addRoute()
+   * updateRouteById()
+   * getAllCounters()
+   */
 
-private getRouteById() {
-  this.spinnerService.show();
-  this.subDataOne = this.routeService.getRouteById(this.id).subscribe({
-    next: (res) => {
-      this.spinnerService.hide();
-      if (res.data) {
-        this.route = res.data;
-        this.setFormValue();
-      }
-    },
-    error: (error) => {
-      this.spinnerService.hide();
-      console.log(error);
-    },
-  });
-}
+  private getRouteById() {
+    this.spinnerService.show();
+    this.subDataOne = this.routeService.getRouteById(this.id).subscribe({
+      next: (res) => {
+        this.spinnerService.hide();
+        if (res.data) {
+          this.route = res.data;
+          this.setFormValue();
+        }
+      },
+      error: (error) => {
+        this.spinnerService.hide();
+        console.log(error);
+      },
+    });
+  }
 
-private addRoute(data:any) {
-  this.isLoading = true;
-  this.subDataTwo = this.routeService
-    .addRoute(data)
-    .subscribe({
+  private addRoute(data: any) {
+    this.isLoading = true;
+    this.subDataTwo = this.routeService.addRoute(data).subscribe({
       next: (res) => {
         this.isLoading = false;
         if (res.success) {
@@ -219,105 +207,105 @@ private addRoute(data:any) {
         console.log(error);
       },
     });
-}
+  }
 
-private updateRouteById(data:any) {
-  this.isLoading = true;
-  this.subDataThree = this.routeService
-    .updateRouteById(this.route._id, data)
-    .subscribe({
+  private updateRouteById(data: any) {
+    this.isLoading = true;
+    this.subDataThree = this.routeService
+      .updateRouteById(this.route._id, data)
+      .subscribe({
+        next: (res) => {
+          this.isLoading = false;
+          if (res.success) {
+            this.uiService.success(res.message);
+          } else {
+            this.uiService.warn(res.message);
+          }
+        },
+        error: (error) => {
+          this.isLoading = false;
+          console.log(error);
+        },
+      });
+  }
+
+  // private getAllCounters(){
+  //      const mSelect = {
+  //         name:1,
+  //      }
+  //      const filter:FilterData = {
+  //         select:mSelect,
+  //         pagination:null,
+  //         sort:{createdAt:-1},
+  //         filter:null
+  //      }
+
+  //      this.subDataFour = this.counterService.getAllCounter(filter).subscribe({
+  //       next:(res) => {
+  //            if(res.success){
+  //                this.counters = res.data;
+  //            }
+  //       },
+  //       error:(err) => {
+  //            if(err){
+  //                console.log(err);
+  //            }
+  //       }
+  //      })
+  // }
+
+  private getAllTerminals() {
+    const mSelect = {
+      name: 1,
+    };
+    const filter: FilterData = {
+      select: mSelect,
+      pagination: null,
+      sort: { createdAt: -1 },
+      filter: null,
+    };
+
+    this.subDataFive = this.terminalService.getAllTerminal(filter).subscribe({
       next: (res) => {
-        this.isLoading = false;
         if (res.success) {
-          this.uiService.success(res.message);
-        } else {
-          this.uiService.warn(res.message);
+          this.terminals = res.data;
+        }
+
+        if (this.id) {
+          this.getRouteById();
         }
       },
-      error: (error) => {
-        this.isLoading = false;
-        console.log(error);
+      error: (err) => {
+        if (err) {
+          console.log(err);
+        }
       },
     });
-}
-
-private getAllCounters(){
-     const mSelect = {
-        name:1,
-     }
-     const filter:FilterData = {
-        select:mSelect,
-        pagination:null,
-        sort:{createdAt:-1},
-        filter:null
-     }
-
-     this.subDataFour = this.counterService.getAllCounter(filter).subscribe({
-      next:(res) => {
-           if(res.success){
-               this.counters = res.data;
-           }
-      },
-      error:(err) => {
-           if(err){
-               console.log(err);
-           }
-      }
-     })
-}
-
-
-private getAllTerminals(){
-  const mSelect = {
-     name:1,
-  }
-  const filter:FilterData = {
-     select:mSelect,
-     pagination:null,
-     sort:{createdAt:-1},
-     filter:null
   }
 
-  this.subDataFive = this.terminalService.getAllTerminal(filter).subscribe({
-   next:(res) => {
-        if(res.success){
-            this.terminals = res.data;
-        }
-   },
-   error:(err) => {
-        if(err){
-            console.log(err);
-        }
-   }
-  })
-}
+  /**
+   * ON DESTROY
+   * ngOnDestroy()
+   */
 
-
-
-/**
- * ON DESTROY
- * ngOnDestroy()
- */
-
-ngOnDestroy() {
-  if (this.subDataOne) {
-    this.subDataOne.unsubscribe();
+  ngOnDestroy() {
+    if (this.subDataOne) {
+      this.subDataOne.unsubscribe();
+    }
+    if (this.subDataTwo) {
+      this.subDataTwo.unsubscribe();
+    }
+    if (this.subDataThree) {
+      this.subDataThree.unsubscribe();
+    }
+    if (this.subDataFour) {
+      this.subDataFour.unsubscribe();
+    }
+    if (this.subDataFive) {
+      this.subDataFive.unsubscribe();
+    }
+    if (this.subRouteOne) {
+      this.subRouteOne.unsubscribe();
+    }
   }
-  if (this.subDataTwo) {
-    this.subDataTwo.unsubscribe();
-  }
-  if (this.subDataThree) {
-    this.subDataThree.unsubscribe();
-  }
-  if (this.subDataFour) {
-    this.subDataFour.unsubscribe();
-  }
-  if (this.subDataFive) {
-    this.subDataFive.unsubscribe();
-  }
-  if (this.subRouteOne) {
-    this.subRouteOne.unsubscribe();
-  }
-}
-
 }

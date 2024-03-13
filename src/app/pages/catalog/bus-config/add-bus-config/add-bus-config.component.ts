@@ -11,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Subscription } from 'rxjs';
 import { SEAT_TYPES } from 'src/app/core/db/seat-type.db';
 import { PRODUCT_STATUS } from 'src/app/core/utils/app-data';
-import { BusConfig } from 'src/app/interfaces/common/bus-config.interface';
+import { BusConfig, Price } from 'src/app/interfaces/common/bus-config.interface';
 import { Bus } from 'src/app/interfaces/common/bus.interface';
 import { Counter } from 'src/app/interfaces/common/counter.interface';
 import { Schedule } from 'src/app/interfaces/common/schedule.interface';
@@ -94,7 +94,7 @@ export class AddBusConfigComponent implements OnInit {
 
     this.getAllSchedule();
     this.getAllTerminals();
-    this.getAllCounters();
+    // this.getAllCounters();
     this.getAllBus();
   }
 
@@ -122,7 +122,7 @@ export class AddBusConfigComponent implements OnInit {
       serviceCharge: [null],
       //  seats: [null],
       status: ['publish'],
-      priority: [null, Validators.required],
+      priority: [null],
     });
     this.priceDataArray = this.dataForm.get('prices') as FormArray;
   }
@@ -169,18 +169,57 @@ export class AddBusConfigComponent implements OnInit {
     console.log(this.seatsDataArray);
   }
 
+  // onAddNewSeat() {
+  //   const f = this.fb.group({
+  //     price: [null, Validators.required],
+  //     seatType: [null, Validators.required],
+  //   });
+  //   (this.dataForm?.get('seats') as FormArray).push(f);
+  //   console.log(this.seatsDataArray);
+  // }
+
+  removeFormArrayField(formControl: string, index: number) {
+    let formDataArray: FormArray;
+    switch (formControl) {
+      case 'seat': {
+        // formDataArray = this.seatsDataArray;
+        formDataArray = this.dataForm?.get('prices') as FormArray;
+        break;
+      }
+      default: {
+        formDataArray = null;
+        break;
+      }
+    }
+    formDataArray?.removeAt(index);
+  }
+
   onSubmit() {
     if (this.dataForm.invalid) {
       this.uiService.warn('Please filed all the required field');
       return;
     }
 
+    let mSeat =  this.buss.find((m) => m._id === this.dataForm.value.bus).seats;
+    let prices = this.dataForm.value.prices;
+    console.log(prices);
+    mSeat = mSeat?.map(m=>{
+      let mPrice: Price = prices.find( (f) => f.seatType === m.seatType);
+      return{
+        ...m,
+        ...{
+          price: mPrice?.price ? mPrice.price : 0 
+        }
+      }
+    })
+    
     const mData = {
       ...this.dataForm.value,
       ...{
         // date:this.utilService.getDateString(this.dataForm.value.date),
         bus: this.buss.find((m) => m._id === this.dataForm.value.bus),
-        seats: this.buss.find((m) => m._id === this.dataForm.value.bus).seats,
+        // seats: this.buss.find((m) => m._id === this.dataForm.value.bus).seats,
+        seats: mSeat,
         from: this.terminals.find((m) => m._id === this.dataForm.value.from),
         to: this.terminals.find((m) => m._id === this.dataForm.value.to),
         departureTime: this.schedules.find(
@@ -198,7 +237,7 @@ export class AddBusConfigComponent implements OnInit {
       this.dataForm.value.boardingPoints.map((item) => {
         mData.boardingPoints.push({
           _id: item,
-          name: this.counters.find((f) => f._id === item)?.name,
+          name: this.terminals.find((f) => f._id === item)?.name,
         });
       });
     }
@@ -208,7 +247,7 @@ export class AddBusConfigComponent implements OnInit {
       this.dataForm.value.droppingPoints.map((item) => {
         mData.droppingPoints.push({
           _id: item,
-          name: this.counters.find((f) => f._id === item)?.name,
+          name: this.terminals.find((f) => f._id === item)?.name,
         });
       });
     }
@@ -343,30 +382,30 @@ export class AddBusConfigComponent implements OnInit {
       });
   }
 
-  private getAllCounters() {
-    const mSelect = {
-      name: 1,
-    };
-    const filterData: FilterData = {
-      filter: null,
-      pagination: null,
-      sort: { createdAt: -1 },
-      select: mSelect,
-    };
+  // private getAllCounters() {
+  //   const mSelect = {
+  //     name: 1,
+  //   };
+  //   const filterData: FilterData = {
+  //     filter: null,
+  //     pagination: null,
+  //     sort: { createdAt: -1 },
+  //     select: mSelect,
+  //   };
 
-    this.subDataFour = this.counterService.getAllCounter(filterData).subscribe({
-      next: (res) => {
-        if (res.success) {
-          this.counters = res.data;
-        }
-      },
-      error: (err) => {
-        if (err) {
-          console.log(err);
-        }
-      },
-    });
-  }
+  //   this.subDataFour = this.counterService.getAllCounter(filterData).subscribe({
+  //     next: (res) => {
+  //       if (res.success) {
+  //         this.counters = res.data;
+  //       }
+  //     },
+  //     error: (err) => {
+  //       if (err) {
+  //         console.log(err);
+  //       }
+  //     },
+  //   });
+  // }
 
   private getAllBus() {
     const mSelect = {
