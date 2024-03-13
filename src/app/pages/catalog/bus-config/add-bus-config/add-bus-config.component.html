@@ -232,7 +232,7 @@
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Select Boarding Points</mat-label>
           <mat-select formControlName="boardingPoints" multiple>
-            <mat-option [value]="data?._id" *ngFor="let data of counters">{{
+            <mat-option [value]="data?._id" *ngFor="let data of terminals">{{
               data?.name
             }}</mat-option>
           </mat-select>
@@ -247,7 +247,7 @@
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Select Dropping Points</mat-label>
             <mat-select formControlName="droppingPoints" multiple>
-              <mat-option [value]="data?._id" *ngFor="let data of counters">{{
+              <mat-option [value]="data?._id" *ngFor="let data of terminals">{{
                 data?.name
               }}</mat-option>
             </mat-select>

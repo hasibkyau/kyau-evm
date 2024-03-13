@@ -437,6 +437,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
         } else {
           this.uiService.warn(res.message);
         }
+        this.initDataForm();
       },
       error: (err) => {
         this.isLoading = false;

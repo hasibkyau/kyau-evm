@@ -121,7 +121,9 @@
         <!-- <th>Company</th> -->
         <!-- <th>Price</th> -->
         <!-- <th>Service Charge</th> -->
-        <th>Priority</th>
+        <!-- <th>Priority</th> -->
+        <th>Boarding Points</th>
+        <th>Dropping Points</th>
         <th>Status</th>
         <th>Actions</th>
       </tr>
@@ -153,7 +155,13 @@
         <!-- <td>{{ data?.bus?.name | titlecase }}</td> -->
         <!-- <td>{{data?.price}}</td> -->
         <!-- <td>{{ data?.serviceCharge }}</td> -->
-        <td>{{ data?.priority }}</td>
+        <!-- <td>{{ data?.priority }}</td> -->
+        <td> 
+          <span *ngFor="let data of data?.boardingPoints">{{ data?.name + ', '}}</span>
+        </td>
+        <td> 
+          <span *ngFor="let data of data?.droppingPoints">{{ data?.name + ', '}}</span>
+        </td>
         <td [style.color]="data.status === 'publish' ? 'green' : 'red'">
           {{ data.status | titlecase }}
         </td>
