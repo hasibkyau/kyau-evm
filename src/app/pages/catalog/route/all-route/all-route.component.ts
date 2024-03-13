@@ -147,7 +147,8 @@ ngAfterViewInit(): void {
           pagination: pagination,
           filter: this.filter,
           select: mSelect,
-          sort: {createdAt: -1},
+          sort: {'from.name': 1},
+          // sort: {createdAt: -1},
         };
 
         return this.routeService.getAllRoute(
@@ -232,7 +233,8 @@ private getAllRoute() {
     filter: this.filter,
     pagination: null,
     select: mSelect,
-    sort: {createdAt: -1},
+    sort: {'from.name': 1},
+    // sort: {createdAt: -1},
   };
 
   this.subDataOne = this.routeService

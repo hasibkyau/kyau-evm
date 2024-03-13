@@ -42,7 +42,7 @@ export class AllBusComponent implements OnInit {
 
  // FilterData
  filter: any = null;
- sortQuery: any = {createdAt:-1};
+ sortQuery: any = {name: 1};
  activeSort: number;
  number = [{num: '10'}, {num: '25'}, {num: '50'}, {num: '100'}];
 
@@ -137,7 +137,8 @@ export class AllBusComponent implements OnInit {
            pagination: pagination,
            filter: this.filter,
            select: mSelect,
-           sort: {createdAt: -1},
+           sort: {name: 1},
+          //  sort: {createdAt: -1},
          };
 
          return this.busService.getAllBus(
@@ -224,7 +225,7 @@ export class AllBusComponent implements OnInit {
      filter: this.filter,
      pagination: pagination,
      select: mSelect,
-     sort: this.sortQuery,
+     sort: this.sortQuery
    };
 
    this.subDataOne = this.busService

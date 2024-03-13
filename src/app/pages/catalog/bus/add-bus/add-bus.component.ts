@@ -124,7 +124,7 @@ export class AddBusComponent implements OnInit {
       floorNo: [this.tempFloor, Validators.required],
       seatNo: [null,Validators.required],
       seatType: [null,Validators.required],
-      status: [null,Validators.required],
+      status: ['Available' ,Validators.required],
       xaxis: [null,Validators.required],
       yaxis: [null,Validators.required],
     });
@@ -209,6 +209,7 @@ export class AddBusComponent implements OnInit {
         if (res.success) {
           this.uiService.success(res.message);
           this.formElement.resetForm();
+          this.initDataForm();
         } else {
           this.uiService.warn(res.message);
         }

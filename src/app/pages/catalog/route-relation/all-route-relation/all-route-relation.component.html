@@ -105,7 +105,8 @@
             ></mat-checkbox>
           </th>
           <th>From</th>
-          <th>Priority</th>
+          <th>To</th>
+          <!-- <th>Priority</th> -->
           <th>Status</th>
           <th>Created At</th>
   
@@ -127,7 +128,12 @@
           </td>
   
           <td>{{ data?.from?.name || "-" | uppercase }}</td>
-          <td>{{ data.priority || "-" }}</td>
+          <td>
+            <span *ngFor="let terminal of data?.to; let i=index">
+              {{ i+1 < data?.to.length ? (terminal?.name + ', ') : terminal?.name}}
+            </span>
+          </td>
+          <!-- <td>{{ data.priority || "-" }}</td> -->
           <td>{{ data.status | uppercase }}</td>
           <td>{{ data.createdAt || "-" | date }}</td>
   

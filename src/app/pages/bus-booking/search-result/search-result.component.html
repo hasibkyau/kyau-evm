@@ -76,14 +76,14 @@
                 </div>
               </li>
               
-              <li>
+              <!-- <li>
                 <div [class]="'seat-plan blocked'">
                   <img [src]="'/assets/images/seats/Blocked/singleChair.png'" alt="">
                 </div>
                 <div class="seat-type">
                   <h3>BLOCKED</h3>
                 </div>
-              </li>
+              </li> -->
 
               <li>
                 <div [class]="'seat-plan selected'">
@@ -152,7 +152,8 @@
                       'grid-column-start': data?.yaxis
                     }">
                       <div (click)="onSelectSeat(data, selectedTrip)" [class]="'seat-plan'">
-                        <img [class]="data?.status === 'Selected' ? 'selected' 
+                        <img 
+                        [class]="data?.status === 'Selected' ? 'selected' 
                   : data?.status === 'Sold' ? 'sold' 
                   : data?.status === 'Booked' ? 'booked' 
                   : data?.status === 'Blocked' ? 'blocked' 

@@ -43,7 +43,7 @@ totalBusConfigsStore = 0;
 
 // FilterData
 filter: any = null;
-sortQuery: any = {createdAt:-1};
+sortQuery: any = {'from.name': 1};
 activeSort: number;
 number = [{num: '10'}, {num: '25'}, {num: '50'}, {num: '100'}];
 
@@ -141,7 +141,7 @@ ngAfterViewInit(): void {
           pagination: pagination,
           filter: this.filter,
           select: mSelect,
-          sort: {createdAt: -1},
+          sort: {'name.name': 1},
         };
 
         return this.busConfigService.getAllBusConfig(

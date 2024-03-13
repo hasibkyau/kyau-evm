@@ -137,6 +137,7 @@ ngAfterViewInit(): void {
         // Select
         const mSelect = {
           from: 1,
+          to: 1,
           createdAt: 1,
           priority: 1,
           status: 1,
@@ -146,7 +147,8 @@ ngAfterViewInit(): void {
           pagination: pagination,
           filter: this.filter,
           select: mSelect,
-          sort: {createdAt: -1},
+          sort: {'from.name': 1},
+          // sort: {createdAt: -1},
         };
 
         return this.routeRelationService.getAllRouteRelation(
@@ -220,6 +222,7 @@ private getAllRouteRelation() {
   // Select
   const mSelect = {
     from: 1,
+    to: 1,
     createdAt: 1,
     priority: 1,
     status: 1,
@@ -229,7 +232,8 @@ private getAllRouteRelation() {
     filter: this.filter,
     pagination: null,
     select: mSelect,
-    sort: {createdAt: -1},
+    sort: {'from.name': 1},
+    // sort: {createdAt: -1},
   };
 
   this.subDataOne = this.routeRelationService

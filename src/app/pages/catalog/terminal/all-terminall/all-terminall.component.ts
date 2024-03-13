@@ -142,7 +142,7 @@ export class AllTerminallComponent implements OnInit {
             pagination: pagination,
             filter: this.filter,
             select: mSelect,
-            sort: { createdAt: -1 },
+            sort: {name: 1}
           };
 
           return this.terminalService.getAllTerminal(
@@ -224,7 +224,7 @@ export class AllTerminallComponent implements OnInit {
       filter: this.filter,
       pagination: null,
       select: mSelect,
-      sort: { createdAt: -1 },
+      sort: {name: 1}
     };
 
     this.subDataOne = this.terminalService

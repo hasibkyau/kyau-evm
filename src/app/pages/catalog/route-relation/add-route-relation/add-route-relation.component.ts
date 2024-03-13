@@ -183,6 +183,7 @@ private addRoute(data:any) {
         if (res.success) {
           this.uiService.success(res.message);
           this.formElement.resetForm();
+          this.initDataForm();
         } else {
           this.uiService.warn(res.message);
         }
