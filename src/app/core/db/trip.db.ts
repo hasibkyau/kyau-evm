@@ -5,13 +5,13 @@ export const ALL_TRIP = [
     "status": "publish",
     "bus": {
       "_id": "653e419a7739c90b515ddee2",
-      "name": "Shahzadpur Travel",
+      "name": "Mk Shipping Lines",
       "coachType": "NON_AC",
       "totalSeat": 49,
       "totalSeatAvailable": 45,
       "company": {
         "_id": "653e419a7739c90b515dde56",
-        "name": "Shahzadpur Travel"
+        "name": "Mk Shipping Lines"
       }
     },
     "departureTime": {
@@ -626,13 +626,13 @@ export const ALL_TRIP = [
     "status": "publish",
     "bus": {
       "_id": "653e419a7739c90b515ddee53",
-      "name": "Shahzadpur Travel",
+      "name": "Mk Shipping Lines",
       "coachType": "NON_AC",
       "totalSeat": 49,
       "totalSeatAvailable": 47,
       "company": {
         "_id": "653e419a7739c90b515dde56",
-        "name": "Shahzadpur Travel"
+        "name": "Mk Shipping Lines"
       }
     },
     "departureTime": {
@@ -1234,13 +1234,13 @@ export const ALL_TRIP = [
     "status": "publish",
     "bus": {
       "_id": "653e419a7739c90b515ddee53",
-      "name": "Shahzadpur Travel",
+      "name": "Mk Shipping Lines",
       "coachType": "NON_AC",
       "totalSeat": 45,
       "totalSeatAvailable": 40,
       "company": {
         "_id": "653e419a7739c90b515dde56",
-        "name": "Shahzadpur Travel",
+        "name": "Mk Shipping Lines",
       }
     },
     "departureTime": {
@@ -1800,13 +1800,13 @@ export const ALL_TRIP = [
     "status": "publish",
     "bus": {
       "_id": "653e419a7739c90b515ddee5",
-      "name": "Shahzadpur Travel",
+      "name": "Mk Shipping Lines",
       "coachType": "NON_AC",
       "totalSeat": 49,
       "totalSeatAvailable": 47,
       "company": {
         "_id": "653e419a7739c90b515dde58",
-        "name": "Shahzadpur Travel"
+        "name": "Mk Shipping Lines"
       }
     },
     "departureTime": {
@@ -2454,13 +2454,13 @@ export const ALL_TRIP = [
     "status": "publish",
     "bus": {
       "_id": "653e419a7739c90b515dddd5",
-      "name": "Shahzadpur Travel",
+      "name": "Mk Shipping Lines",
       "coachType": "NON_AC",
       "totalSeat": 49,
       "totalSeatAvailable": 47,
       "company": {
         "_id": "653e419a7739c90b515dde18",
-        "name": "Shahzadpur Travel"
+        "name": "Mk Shipping Lines"
       }
     },
     "departureTime": {

@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
-  name: 'mkshippinglines',
-  domain: 'mkshippinglines.com',
-  apiBaseLink: 'https://api.mkshippinglines.com.com',
-  ftpBaseLink: 'https://api.mkshippinglines.com.com',
+  name: 'bd.mkshippinglines.com',
+  domain: 'bd.mkshippinglines.com',
+  apiBaseLink: 'https://api.bd.mkshippinglines.com',
+  ftpBaseLink: 'https://api.bd.mkshippinglines.com',
   appBaseUrl: '/',
   userBaseUrl: '/',
   userProfileUrl: '/my-profile',
