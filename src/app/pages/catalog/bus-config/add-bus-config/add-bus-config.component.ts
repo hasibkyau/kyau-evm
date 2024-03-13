@@ -175,12 +175,24 @@ export class AddBusConfigComponent implements OnInit {
       return;
     }
 
+    let mSeat =  this.buss.find((m) => m._id === this.dataForm.value.bus).seats;
+    let prices = this.dataForm.value.prices;
+    mSeat = mSeat?.map(m=>{
+      return{
+        ...m,
+        ...{
+          price: prices.find( (f) => f.seatType === m.seatType).price
+        }
+      }
+    })
+    
     const mData = {
       ...this.dataForm.value,
       ...{
         // date:this.utilService.getDateString(this.dataForm.value.date),
         bus: this.buss.find((m) => m._id === this.dataForm.value.bus),
-        seats: this.buss.find((m) => m._id === this.dataForm.value.bus).seats,
+        // seats: this.buss.find((m) => m._id === this.dataForm.value.bus).seats,
+        seats: mSeat,
         from: this.terminals.find((m) => m._id === this.dataForm.value.from),
         to: this.terminals.find((m) => m._id === this.dataForm.value.to),
         departureTime: this.schedules.find(

@@ -99,7 +99,16 @@
                   <img class="sold" [src]="'/assets/images/seats/Sold/singleChair.png'" alt="">
                 </div>
                 <div class="seat-type">
-                  <h3>SOLD</h3>
+                  <h3>SOLD (M)</h3>
+                </div>
+              </li>
+
+              <li>
+                <div [class]="'seat-plan'">
+                  <img class="sold" [src]="'/assets/images/seats/Sold/Female/singleChair.png'" alt="">
+                </div>
+                <div class="seat-type">
+                  <h3>SOLD (F)</h3>
                 </div>
               </li>
 
@@ -147,7 +156,7 @@
                   : data?.status === 'Sold' ? 'sold' 
                   : data?.status === 'Booked' ? 'booked' 
                   : data?.status === 'Blocked' ? 'blocked' 
-                  :''" [src]="'/assets/images/seats/' + (data?.status ? data?.status : 'Available') + '/' + (data?.seatType ? data?.seatType : 'singleChair')  + '.png'"
+                  :''" [src]="'/assets/images/seats/' + (data?.status ? ((data?.status === 'Sold' && data?.gender !== 'Male') ? 'Sold/Female' : data?.status) : 'Available') + '/' + (data?.seatType ? data?.seatType : 'singleChair')  + '.png'"
                           alt="">
                         <span>{{data?.seatNo}}</span>
                         <span [matTooltip]="data.seatNo"></span>
@@ -290,7 +299,7 @@
                         <tr *ngFor="let seat of canceledSeats">
                           <td>{{ seat?.seatNo }}</td>
                           <td>{{ seat?.seatType }}</td>
-                          <td>৳ {{ trip?.price }}</td>
+                          <td>৳ {{ seat?.price }}</td>
                           <td *ngIf="mode === 'edit'">
                             <mat-icon (click)="onRemoveCanceledSeat(seat)"
                               style="font-size: 16px; cursor: pointer">close</mat-icon>
