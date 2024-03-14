@@ -42,7 +42,7 @@
     img{
       width: 60px;
     }
- 
+
   }
   .vehicle-form{
     // border: 1px solid #418D43;
@@ -84,19 +84,19 @@
   .selected{
     background: #D4EDBC;
   }
-  
+
   .sold{
     background: transparent;
   }
-  
+
   .booked{
     background: transparent;
   }
-  
+
   .blocked{
     background: transparent;
   }
-  
+
   span{
     font-size: 10px;
   }
@@ -258,6 +258,7 @@
   flex: 7;
   //height: 200px;
   //background: #28ffb5;
+  //scroll-behavior: smooth;
   margin: 10px 12px;
 }
 
@@ -266,6 +267,12 @@
   //height: 200px;
   //background: #2894ff;
   margin: 10px 12px 0 10px;
+  //display: block;
+  max-height: 55vh;
+  position: sticky;
+  position: -webkit-sticky;
+  scroll-behavior: smooth;
+  top: 0;
 }
 
 .border-dashed {
