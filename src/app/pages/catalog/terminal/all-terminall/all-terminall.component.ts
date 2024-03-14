@@ -56,7 +56,7 @@ export class AllTerminallComponent implements OnInit {
   // Pagination
   currentPage = 1;
   totalTerminals = 0;
-  TerminalsPerPage = 5;
+  TerminalsPerPage = 30;
   totalTerminalsStore = 0;
 
   // FilterData

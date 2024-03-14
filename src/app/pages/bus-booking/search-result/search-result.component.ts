@@ -42,6 +42,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   @Input() date: string;
 
   selectedTrip: Trip = null;
+  selectedTripFloors: string[] = [];
   prices: Price[] = [];
   price: number = 0;
 
@@ -90,10 +91,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     private busConfigService: BusConfigService
   ) {}
 
-  ngOnInit(): void {    
+  ngOnInit(): void {
     // Reload Data
     this.subReload = this.reloadService.refreshData$.subscribe(() => {
-      this.getCartByTrip();
+      // this.getCartByTrip();
       this.getTripById();
     });
 
@@ -399,7 +400,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     this.subDataTwo = this.cartService.getCartByTrip(data).subscribe({
       next: (res) => {
         this.carts = res.data;
-        const seats: Seat[] = [];       
+        const seats: Seat[] = [];
 
         if (this.carts.length) {
           this.carts.forEach((cart: any) => {
@@ -468,13 +469,19 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
 
   private getTripById() {
     this.subDataFour = this.tripService.getTripById(this.id).subscribe({
-      next: (res) => {    
+      next: (res) => {
         this.selectedTrip = res.data;
+        const floors = [];
         if (this.selectedTrip) {
           this.selectedTrip.seats.forEach((f) => {
             f.seatAnimation = false;
+            const fIndex = floors.findIndex(g => g === f.floorNo);
+            if (fIndex === -1) {
+              floors.push(f.floorNo)
+            }
           });
-          // this.isShow = true;
+          this.selectedTripFloors = floors.sort();
+          this.floorSelected = this.selectedTripFloors[0];
           this.getCartByTrip();
         }
       },

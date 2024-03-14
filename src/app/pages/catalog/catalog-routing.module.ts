@@ -1,10 +1,5 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AddTypeComponent} from "./types/add-type/add-type.component";
-import {AllGenericComponent} from "./generic/all-generic/all-generic.component";
-import {AddGenericComponent} from "./generic/add-generic/add-generic.component";
-import {AllUnitComponent} from "./unit/all-unit/all-unit.component";
-import {AddUnitComponent} from "./unit/add-unit/add-unit.component";
 import {AllTerminallComponent} from './terminal/all-terminall/all-terminall.component';
 import {AddTerminalComponent} from './terminal/add-terminal/add-terminal.component';
 import {AllCounterComponent} from './counter/all-counter/all-counter.component';
@@ -47,16 +42,6 @@ const routes: Routes = [
   {path: 'add-bus-config', component: AddBusConfigComponent},
   {path: 'all-bus-config', component: AllBusConfigComponent},
   {path: 'edit-bus-config/:id', component: AddBusConfigComponent},
-
-
-  {path: 'add-type', component: AddTypeComponent},
-  {path: 'edit-type/:id', component: AddTypeComponent},
-  {path: 'all-generic', component: AllGenericComponent},
-  {path: 'add-generic', component: AddGenericComponent},
-  {path: 'edit-generic/:id', component: AddGenericComponent},
-  {path: 'all-unit', component: AllUnitComponent},
-  {path: 'add-unit', component: AddUnitComponent},
-  {path: 'edit-unit/:id', component: AddUnitComponent},
 
 ];
 

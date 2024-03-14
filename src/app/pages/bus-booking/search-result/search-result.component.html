@@ -51,7 +51,6 @@
               <button (click)="onShow($event)">
                 {{ id ? "Hide Seats" : "Show Seats" }}
               </button>
-              <span>Cancellation Policy</span>
             </div>
           </div>
         </div>
@@ -132,31 +131,34 @@
               </li> -->
             </ul>
             <div class="floor-container">
-              <div
-                [class]="floorSelected === '1' ? 'floor floor-active' : 'floor'"
-                (click)="onToggleFloor('1')"
-              >
-                Floor 1
-              </div>
-              <div
-                [class]="floorSelected === '2' ? 'floor floor-active' : 'floor'"
-                (click)="onToggleFloor('2')"
-              >
-                Floor 2
-              </div>
-              <div
-                [class]="floorSelected === '3' ? 'floor floor-active' : 'floor'"
-                (click)="onToggleFloor('3')"
-              >
-                Floor 3
-              </div>
 
               <div
-                [class]="floorSelected === '4' ? 'floor floor-active' : 'floor'"
-                (click)="onToggleFloor('4')"
+                *ngFor="let fl of selectedTripFloors"
+                [class]="floorSelected === fl ? 'floor floor-active' : 'floor'"
+                (click)="onToggleFloor(fl)"
               >
-                Floor 4
+                Floor {{fl}}
               </div>
+
+<!--              <div-->
+<!--                [class]="floorSelected === '2' ? 'floor floor-active' : 'floor'"-->
+<!--                (click)="onToggleFloor('2')"-->
+<!--              >-->
+<!--                Floor 2-->
+<!--              </div>-->
+<!--              <div-->
+<!--                [class]="floorSelected === '3' ? 'floor floor-active' : 'floor'"-->
+<!--                (click)="onToggleFloor('3')"-->
+<!--              >-->
+<!--                Floor 3-->
+<!--              </div>-->
+
+<!--              <div-->
+<!--                [class]="floorSelected === '4' ? 'floor floor-active' : 'floor'"-->
+<!--                (click)="onToggleFloor('4')"-->
+<!--              >-->
+<!--                Floor 4-->
+<!--              </div>-->
             </div>
           </div>
           <div class="ticket-details-main">
@@ -294,7 +296,7 @@
                           <td>{{ seat?.seatType }}</td>
                           <!-- <td>৳ {{ trip?.price }}</td> -->
                           <td *ngIf="mode !== 'edit'">
-                            ৳ {{ carts[i]?.price }}
+                            ৳ {{ seat?.price }}
                           </td>
                           <td *ngIf="mode === 'edit'">৳ {{ seat?.price }}</td>
                           <td *ngIf="mode === 'edit' && seat?.type !== 'new'">

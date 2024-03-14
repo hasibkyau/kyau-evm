@@ -9,8 +9,8 @@ export const environment = {
   // apiBaseLink: 'https://api.bd.mkshippinglines.com',
   // ftpBaseLink: 'https://api.bd.mkshippinglines.com',
 
-  apiBaseLink: 'http://192.168.0.160:3000',
-  ftpBaseLink: 'http://192.168.0.160:3000',
+  apiBaseLink: 'http://localhost:3000',
+  ftpBaseLink: 'http://localhost:3000',
 
   appBaseUrl: '/',
   userBaseUrl: '/',

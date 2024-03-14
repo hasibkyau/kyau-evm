@@ -5,7 +5,7 @@
       <div class="title">
         <h2>All Route</h2>
       </div>
-  
+
       <form class="table-search" #searchForm="ngForm">
         <input
           type="text"
@@ -17,7 +17,7 @@
         />
         <button><i class="fa fa-search"></i></button>
       </form>
-  
+
       <div class="action">
               <div class="sort">
           <button
@@ -45,7 +45,7 @@
             </button>
           </mat-menu>
         </div>
-  
+
         <button
           mat-raised-button
           color="primary"
@@ -57,9 +57,9 @@
       </div>
     </div>
     <!-- END TOP DATA HEADER -->
-  
+
     <hr class="center-square" />
-  
+
     <div class="table-wrapper space">
       <div class="table-action" [class.dual]="activeSort || filter">
         <div class="left" *ngIf="activeSort || filter">
@@ -67,13 +67,13 @@
             <mat-icon>close</mat-icon>
             Clear FilterData
           </button>
-  
-  
-  
+
+
+
         </div>
-  
+
         <div class="right" *ngIf="selectedIds && selectedIds.length">
-  
+
           <button *ngIf="checkEditPermission" mat-stroked-button color="primary" [matMenuTriggerFor]="menu">
             Is Featured
             <mat-icon>arrow_drop_down</mat-icon>
@@ -82,8 +82,8 @@
             <button mat-menu-item (click)="openConfirmDialog('edit', {isFeatured: true})">Yes</button>
             <button mat-menu-item (click)="openConfirmDialog('edit', {isFeatured: false})">No</button>
           </mat-menu>
-  
-  
+
+
           <button
             mat-stroked-button
             color="warn"
@@ -95,7 +95,7 @@
         </div>
       </div>
       <!-- END Table Action -->
-  
+
       <table>
         <tr>
           <th class="t-checkbox" class="mat-check">
@@ -110,7 +110,7 @@
           <th>Via Routes</th>
           <th>Status</th>
           <th>Created At</th>
-  
+
           <th>Action</th>
         </tr>
         <tr *ngFor="
@@ -127,27 +127,27 @@
             <mat-checkbox class="t-mat-checkbox" [(ngModel)]="data.select"
                           (ngModelChange)="onCheckChange($event, i, data._id)"></mat-checkbox>
           </td>
-  
-          <td>{{ data.from?.name | uppercase }}</td>
-          <td>{{ data.to?.name  | uppercase }}</td>
+
+          <td>{{ data.from?.name }}</td>
+          <td>{{ data.to?.name }}</td>
           <!-- <td>{{ data.priority || "-" }}</td> -->
-          <td> 
+          <td>
             <span *ngFor="let route of data?.viaRoutes; let i=index">{{(i+1 < data?.viaRoutes.length) ? (route?.name + ', ') : route?.name}}</span>
           </td>
-          <td>{{ data.status | uppercase }}</td>
+          <td>{{ data.status }}</td>
           <td>{{ data.createdAt || "-" | date }}</td>
-  
+
           <td class="button">
             <button mat-mini-fab color="accent" [routerLink]="['../edit-route/', data._id]">
               <mat-icon>edit</mat-icon>
             </button>
           </td>
         </tr>
-  
-  
+
+
       </table>
     </div>
-  
+
     <div class="pagination-container">
       <pagination-controls
         class="data-pagination"
@@ -158,18 +158,17 @@
       </pagination-controls>
     </div>
     <!-- END PAGINATION -->
-  
+
   </section>
-  
+
   <!-- TEMPLATE NGX SPINNER-->
   <ngx-spinner bdColor = "rgba(0,0,0,0.3)" size = "medium" color = "#fff" type = "ball-scale-pulse" [fullScreen] = "true">
     <p style="color: white" > Loading... </p>
   </ngx-spinner>
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
