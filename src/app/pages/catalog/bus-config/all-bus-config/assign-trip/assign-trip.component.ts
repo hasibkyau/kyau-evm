@@ -49,11 +49,7 @@ export class AssignTripComponent implements OnInit{
     private fb: FormBuilder,
     private uiService: UiService,
     private tripService: TripService,
-    private spinnerService: NgxSpinnerService,
-    private scheduleService: ScheduleService,
-    private terminalService: TerminalService,
     private utilService:UtilsService,
-    private busConfigService: BusConfigService
   ) {}
 
   ngOnInit(): void {}

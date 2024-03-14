@@ -45,6 +45,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   selectedTripFloors: string[] = [];
   prices: Price[] = [];
   price: number = 0;
+  availableSeats: number = 0;
 
   windowWidth = window.innerWidth;
   dataForm: FormGroup;
@@ -92,6 +93,12 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.trip?.seats?.map(m=>{
+      if(m?.status === 'Available'){
+        this.availableSeats += 1;
+      }
+    })
+
     // Reload Data
     this.subReload = this.reloadService.refreshData$.subscribe(() => {
       // this.getCartByTrip();
@@ -282,8 +289,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
    * SELECT SEAT FUNCTIONALITY
    */
   onSelectSeat(data: Seat) {
-
-
+    
     if (data.status === 'Available') {
       let findIndex = this.selectedTrip?.seats.findIndex(
         (s: any) => s._id === data?._id
@@ -498,6 +504,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
    * serviceCharge()
    * grandTotal()
    */
+
+  get totalAvailableSeats() {
+    return this.availableSeats;
+  }
 
   get totalAmount() {
     let price = 0;
