@@ -139,6 +139,8 @@ export class AddNewBookingComponent implements OnInit {
       status: 1,
       seats: 1,
       priority: 1,
+      boardingPoints: 1,
+      droppingPoints: 1
 
     };
 
