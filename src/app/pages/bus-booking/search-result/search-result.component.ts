@@ -282,8 +282,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
    * SELECT SEAT FUNCTIONALITY
    */
   onSelectSeat(data: Seat) {
-
-
+    
     if (data.status === 'Available') {
       let findIndex = this.selectedTrip?.seats.findIndex(
         (s: any) => s._id === data?._id
