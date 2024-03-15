@@ -139,26 +139,6 @@
               >
                 Floor {{fl}}
               </div>
-
-<!--              <div-->
-<!--                [class]="floorSelected === '2' ? 'floor floor-active' : 'floor'"-->
-<!--                (click)="onToggleFloor('2')"-->
-<!--              >-->
-<!--                Floor 2-->
-<!--              </div>-->
-<!--              <div-->
-<!--                [class]="floorSelected === '3' ? 'floor floor-active' : 'floor'"-->
-<!--                (click)="onToggleFloor('3')"-->
-<!--              >-->
-<!--                Floor 3-->
-<!--              </div>-->
-
-<!--              <div-->
-<!--                [class]="floorSelected === '4' ? 'floor floor-active' : 'floor'"-->
-<!--                (click)="onToggleFloor('4')"-->
-<!--              >-->
-<!--                Floor 4-->
-<!--              </div>-->
             </div>
           </div>
           <div class="ticket-details-main">
@@ -166,7 +146,7 @@
               <div class="seat-area-main">
                 <div class="seat-area-top">
                   <img
-                    src="https://bdtickets.com/images/driver-icon.webp"
+                    src="/assets/images/driver-icon.webp"
                     alt=""
                   />
                 </div>
@@ -184,29 +164,8 @@
                         [class]="'seat-plan'"
                       >
                         <img
-                          [class]="
-                            data?.status === 'Selected'
-                              ? 'selected'
-                              : data?.status === 'Sold'
-                              ? 'sold'
-                              : data?.status === 'Booked'
-                              ? 'booked'
-                              : data?.status === 'Blocked'
-                              ? 'blocked'
-                              : ''
-                          "
-                          [src]="
-                            '/assets/images/seats/' +
-                            (data?.status
-                              ? data?.status === 'Sold' &&
-                                data?.gender !== 'Male'
-                                ? 'Sold/Female'
-                                : data?.status
-                              : 'Available') +
-                            '/' +
-                            (data?.seatType ? data?.seatType : 'singleChair') +
-                            '.png'
-                          "
+                          [class]="data?.status === 'Selected'? 'selected': ''"
+                          [src]="data.seatType | seatImage: data.status : data.status === 'Sold' ? data.gender : null"
                           alt=""
                         />
                         <span>{{ data?.seatNo }}</span>
@@ -296,9 +255,9 @@
                           <td>{{ seat?.seatType }}</td>
                           <!-- <td>৳ {{ trip?.price }}</td> -->
                           <td *ngIf="mode !== 'edit'">
-                            ৳ {{ seat?.price }}
+                            ৳ {{ selectedTrip.prices | price : seat.seatType }}
                           </td>
-                          <td *ngIf="mode === 'edit'">৳ {{ seat?.price }}</td>
+                          <td *ngIf="mode === 'edit'">৳ {{ selectedTrip.prices | price : seat.seatType }}</td>
                           <td *ngIf="mode === 'edit' && seat?.type !== 'new'">
                             <mat-icon
                               (click)="onRemoveBookedSeat(seat)"
@@ -328,7 +287,7 @@
                         <tr *ngFor="let seat of canceledSeats">
                           <td>{{ seat?.seatNo }}</td>
                           <td>{{ seat?.seatType }}</td>
-                          <td>৳ {{ seat?.price }}</td>
+                          <td>৳ {{ selectedTrip.prices | price : seat.seatType }}</td>
                           <td *ngIf="mode === 'edit'">
                             <mat-icon
                               (click)="onRemoveCanceledSeat(seat)"
@@ -500,7 +459,7 @@
                         *ngIf="isLoading"
                         type="button"
                       >
-                        Please wai...
+                        Please wait...
                       </button>
                     </div>
                   </form>
@@ -517,7 +476,7 @@
 <mat-menu #menuBoarding="matMenu">
   <button
     mat-menu-item
-    *ngFor="let b of trip?.boardingPoints"
+    *ngFor="let b of selectedTrip?.boardingPoints"
     (click)="onSelectBoardingPoint(b)"
   >
     {{ b?.name }}
@@ -527,7 +486,7 @@
 <mat-menu #menuDropping="matMenu">
   <button
     mat-menu-item
-    *ngFor="let d of trip?.droppingPoints"
+    *ngFor="let d of selectedTrip?.droppingPoints"
     (click)="onSelectDroppingPoint(d)"
   >
     {{ d?.name }}

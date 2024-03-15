@@ -120,7 +120,7 @@
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-label>Select Seat Status</mat-label>
                   <mat-select formControlName="status" required>
-                    <mat-option value="Available" selected>Available</mat-option>
+                    <mat-option value="Available">Available</mat-option>
                     <mat-option value="Booked">Booked</mat-option>
                     <mat-option value="Selected">Selected</mat-option>
                     <mat-option value="Sold">Sold</mat-option>
@@ -191,7 +191,7 @@
             (click)="onBusFloorSelect('1')">
             Floor 1
           </button>
-          <button [class]="tempFloor === '2 '? 'floor-selected' : ''" mat-stroked-button color="warn" type="button"
+          <button [class]="tempFloor === '2'? 'floor-selected' : ''" mat-stroked-button color="warn" type="button"
             (click)="onBusFloorSelect('2')">
             Floor 2
           </button>
@@ -207,44 +207,19 @@
         <div class="seat-area">
           <div class="seat-area-main">
             <div class="seat-area-top">
-              <img src="https://bdtickets.com/images/driver-icon.webp" alt="" />
+              <img src="/assets/images/driver-icon.webp" alt="" />
             </div>
             <ul>
               <ng-container *ngFor="let data of dataForm?.value.seats">
-                <li *ngIf="data?.floorNo === tempFloor" [ngStyle]="{
+                <li *ngIf="data.floorNo === tempFloor" [ngStyle]="{
                     'grid-row-start': data?.xaxis,
                     'grid-column-start': data?.yaxis
                   }">
                   <div [class]="'seat-plan'">
-                    <img [class]="data?.status === 'Selected' ? 'selected' 
-              : data?.status === 'Sold' ? 'sold' 
-              : data?.status === 'Booked' ? 'booked' 
-              : data?.status === 'Blocked' ? 'blocked' 
-              :''" [src]="'/assets/images/seats/' + (data?.status ? data?.status : 'Available') + '/' + (data?.seatType ? data?.seatType : 'singleChair')  + '.png'"
-                      alt="">
+                    <img [src]="data.seatType | seatImage: data?.status" alt="">
                     <span>{{data?.seatNo}}</span>
                     <span [matTooltip]="data.seatNo"></span>
                   </div>
-
-                  <!-- <div style="justify-self: center; width: 26px; height: 30px">
-                    <span class="seat" [ngClass]="{
-                        blocked: (data?.status | lowercase) === 'locked',
-                        'sold-m': (data?.status | lowercase) === 'sold',
-                        selected: (data?.status | lowercase) === 'selected',
-                        'booked-m': (data?.status | lowercase) === 'booked'
-                      }">
-                      <div class="hand" [ngClass]="{
-                          search_hand__Yoq3T:
-                            seatAnimation === true &&
-                            data?.seatId === selectedSeat?.seatId
-                        }">
-
-               
-
-                      </div>
-
-                    </span>
-                  </div> -->
                 </li>
               </ng-container>
             </ul>

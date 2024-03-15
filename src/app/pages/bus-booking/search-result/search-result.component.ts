@@ -26,11 +26,13 @@ import { Subscription } from 'rxjs';
 import { Ticket } from '../../../interfaces/common/ticket.interface';
 import { BusConfigService } from 'src/app/services/common/bus-config.service';
 import { Price } from 'src/app/interfaces/common/bus-config.interface';
+import {PricePipe} from '../../../shared/pipes/price.pipe';
 
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss'],
+  providers: [PricePipe]
 })
 export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild('confirm') confirm!: ConfirmDialogComponent;
@@ -89,6 +91,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private utilsService: UtilsService,
+    private pricePipe: PricePipe,
     private busConfigService: BusConfigService
   ) {}
 
@@ -289,7 +292,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
    * SELECT SEAT FUNCTIONALITY
    */
   onSelectSeat(data: Seat) {
-    
+
     if (data.status === 'Available') {
       let findIndex = this.selectedTrip?.seats.findIndex(
         (s: any) => s._id === data?._id
@@ -511,10 +514,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
 
   get totalAmount() {
     let price = 0;
-    this.selectedSeats?.map(m=>{
-    price = price + m.price;
+    this.selectedSeats.forEach(seat => {
+      price += this.pricePipe.transform(this.selectedTrip.prices, seat.seatType);
     })
-    return price;
+    return price
   }
 
   get serviceCharge() {

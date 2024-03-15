@@ -10,6 +10,7 @@ import { SlugToNormalPipe } from './slug-to-normal.pipe';
 import { SafeHtmlCustomPipe } from './safe-html.pipe';
 import {ExpiredInPipe} from './expired-in.pipe';
 import {TicketSeatsPipe} from './ticket-seats.pipe';
+import {SeatImagePipe} from './seat-image.pipe';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import {TicketSeatsPipe} from './ticket-seats.pipe';
     SlugToNormalPipe,
     SafeHtmlCustomPipe,
     ExpiredInPipe,
-    TicketSeatsPipe
+    TicketSeatsPipe,
+    SeatImagePipe
   ],
   imports: [
     CommonModule
@@ -38,7 +40,8 @@ import {TicketSeatsPipe} from './ticket-seats.pipe';
     SlugToNormalPipe,
     SafeHtmlCustomPipe,
     ExpiredInPipe,
-    TicketSeatsPipe
+    TicketSeatsPipe,
+    SeatImagePipe
   ]
 })
 export class PipesModule {

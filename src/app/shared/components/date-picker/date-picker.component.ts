@@ -10,10 +10,11 @@ export class DatePickerComponent implements OnInit {
   @ViewChild('navmenu', { static: true }) navMenu: MatMenu;
 
   @Output() passDataEvent = new EventEmitter();
-  @Input() inputDate: string = null;
+  @Input() inputDate: any = null;
   @Input() label: string = null;
   @Input() touched: boolean = false;
   @Input() isLocal: boolean = true;
+  @Input() minDate: Date = null;
 
   errorMsg: boolean = false;
 

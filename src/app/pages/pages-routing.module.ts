@@ -59,20 +59,12 @@ const routes: Routes = [
         loadChildren: () => import('./blog/blog.module').then(m => m.BlogModule),
       },
       {
-        path: 'sales',
-        loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule),
-      },
-      {
         path: 'contact',
         loadChildren: () => import('./contact/contact.module').then(m => m.ContactModule),
       },
       {
         path: 'review',
         loadChildren: () => import('./reviews/reviews.module').then(m => m.ReviewsModule),
-      },
-      {
-        path: 'offer',
-        loadChildren: () => import('./offer/offer.module').then(m => m.OfferModule),
       },
       {
         path: 'discount-percent',

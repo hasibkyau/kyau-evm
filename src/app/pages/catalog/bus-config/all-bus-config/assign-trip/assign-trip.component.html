@@ -18,7 +18,7 @@
         >
           <div class="top-input">
             <div class="title">
-              <h2>{{ id ? "Edit" : "Add New" }} Trip</h2>
+              <h2>Add Trip</h2>
             </div>
           </div>
 
@@ -26,7 +26,7 @@
             <div class="main">
               <div class="left">
                 <div class="title">
-                  <h2>Trip Date: {{ date | date }}</h2>
+                  <h2>Trip Date: {{ dataForm.value.date | date }}</h2>
                 </div>
                 <div class="sub-title">
                   <h3>
@@ -39,21 +39,25 @@
                     To: <span>{{ trip?.to?.name }}</span>
                   </h3>
                   <h3>
-                    Deprature Time: <span>{{ trip?.departureTime?.name }}</span>
+                    Departure Time: <span>{{ trip?.departureTime?.name }}</span>
                   </h3>
                   <h3>
                     Arrival Time: <span>{{ trip?.arrivalTime?.name }}</span>
                   </h3>
                   <div class="save">
-                    <button (click)="onSubmit()" type="button">
+                    <button *ngIf="!isLoading" (click)="onSubmit()" type="button">
                       <span>Add New Trip</span>
+                    </button>
+                    <button style="opacity: 0.7" *ngIf="isLoading" type="button">
+                      <span>Please wait...</span>
                     </button>
                   </div>
                 </div>
               </div>
               <div class="right">
                 <app-date-picker
-                  [inputDate]="date"
+                  [inputDate]="today"
+                  [minDate]="today"
                   (passDataEvent)="onDateSelect($event)"
                 ></app-date-picker>
               </div>

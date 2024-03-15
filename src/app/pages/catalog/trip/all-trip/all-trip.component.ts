@@ -133,8 +133,6 @@ export class AllTripComponent implements OnInit {
       status: event.target.checked ? 'publish' : 'draft'
     }
     this.updateBusConfigById(mData, id);
-    // this.onSubmit(mData);
-    console.log('adding trip', mData);
   }
 
   // onSubmit(data:any) {
@@ -270,7 +268,7 @@ export class AllTripComponent implements OnInit {
       .getAllTrip(filter, null)
       .subscribe({
         next: (res) => {
-          if (res.success) {            
+          if (res.success) {
             this.trips = res.data;
             this.totalTrips = res.count;
           }
