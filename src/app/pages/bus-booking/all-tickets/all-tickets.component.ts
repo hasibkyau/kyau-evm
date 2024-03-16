@@ -174,6 +174,7 @@ export class AllTicketsComponent implements OnInit {
           // Select
           const mSelect = {
             ticketNo: 1,
+            trip: 1,
             date: 1,
             name: 1,
             phoneNo: 1,
@@ -267,6 +268,7 @@ export class AllTicketsComponent implements OnInit {
     // Select
     const mSelect = {
       ticketNo: 1,
+      trip: 1,
       date: 1,
       name: 1,
       phoneNo: 1,
@@ -307,7 +309,7 @@ export class AllTicketsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           console.log('all ticket',res?.data);
-          
+
           if (res.success) {
             this.tickets = res.data;
             this.totalTickets = res.count;
@@ -509,10 +511,13 @@ export class AllTicketsComponent implements OnInit {
         dialogRef.afterClosed().subscribe(dialogResult => {
           if (dialogResult) {
             const finalData = {
+              trip: data.trip,
               seats: [],
               oldSeats: [],
               canceledSeats: data.seats,
+              ticketType: 'Canceled'
             }
+            // console.log('finalData', finalData)
             this.updateBookedTrip(data._id, finalData);
           }
         });
