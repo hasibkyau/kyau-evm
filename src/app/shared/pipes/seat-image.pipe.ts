@@ -23,13 +23,31 @@ export class SeatImagePipe implements PipeTransform {
       case 'familyAc' : {
         return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/familyCabin.png`;
       }
+      case 'familyNonAc' : {
+        return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/familyCabin.png`;
+      }
+      case 'semiFamilyAc' : {
+        return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/familyCabin.png`;
+      }
+      case 'semiFamilyNonAc' : {
+        return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/familyCabin.png`;
+      }
       case 'singleAc' : {
-        return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/singleSleeper.png`;
+        return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/singleCabin.png`;
       }
       case 'doubleAc' : {
+        return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/doubleCabin.png`;
+      }
+      case 'singleSleeper' : {
+        return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/singleSleeper.png`;
+      }
+      case 'doubleSleeper' : {
         return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/doubleSleeper.png`;
       }
       case 'vip' : {
+        return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/vipAc.png`;
+      }
+      case 'semiVip' : {
         return `/assets/images/seats/${status + (gender === 'Female' ? '/Female' : '')}/vipAc.png`;
       }
       default: {

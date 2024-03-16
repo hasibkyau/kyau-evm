@@ -7,6 +7,12 @@ export const SEAT_TYPES: Select[] = [
   {value: 'singleAc', viewValue: 'Single AC'},
   {value: 'doubleNonAc', viewValue: 'Double Non AC'},
   {value: 'doubleAc', viewValue: 'Double AC'},
+  {value: 'singleSleeper', viewValue: 'Single Sleeper'},
+  {value: 'doubleSleeper', viewValue: 'Double Sleeper'},
   {value: 'familyAc', viewValue: 'Family AC'},
+  {value: 'familyNonAc', viewValue: 'Family Non AC'},
+  {value: 'semiFamilyAc', viewValue: 'Semi Family AC'},
+  {value: 'semiFamilyNonAc', viewValue: 'Semi Family Non AC'},
+  {value: 'semiVip', viewValue: 'Semi VIP'},
   {value: 'vip', viewValue: 'VIP'},
 ];
