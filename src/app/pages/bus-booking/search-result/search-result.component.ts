@@ -1,31 +1,22 @@
-import {
-  Component,
-  HostListener,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UiService } from 'src/app/services/core/ui.service';
-import { Trip } from 'src/app/interfaces/common/trip.interface';
-import { Seat } from '../../../interfaces/common/bus.interface';
-import { Cart } from '../../../interfaces/common/cart.interface';
-import { AdminService } from '../../../services/admin/admin.service';
-import { CartService } from '../../../services/common/cart.service';
-import { ReloadService } from '../../../services/core/reload.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TripService } from '../../../services/common/trip.service';
-import { UtilsService } from '../../../services/core/utils.service';
-import { BOOKING_TIME } from '../../../core/utils/app-data';
-import { Select } from '../../../interfaces/core/select';
-import { Subscription } from 'rxjs';
-import { Ticket } from '../../../interfaces/common/ticket.interface';
-import { BusConfigService } from 'src/app/services/common/bus-config.service';
-import { Price } from 'src/app/interfaces/common/bus-config.interface';
+import {Component, HostListener, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild,} from '@angular/core';
+import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UiService} from 'src/app/services/core/ui.service';
+import {Trip} from 'src/app/interfaces/common/trip.interface';
+import {Seat} from '../../../interfaces/common/bus.interface';
+import {Cart} from '../../../interfaces/common/cart.interface';
+import {AdminService} from '../../../services/admin/admin.service';
+import {CartService} from '../../../services/common/cart.service';
+import {ReloadService} from '../../../services/core/reload.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TripService} from '../../../services/common/trip.service';
+import {UtilsService} from '../../../services/core/utils.service';
+import {BOOKING_TIME} from '../../../core/utils/app-data';
+import {Select} from '../../../interfaces/core/select';
+import {Subscription} from 'rxjs';
+import {Ticket} from '../../../interfaces/common/ticket.interface';
+import {BusConfigService} from 'src/app/services/common/bus-config.service';
+import {Price} from 'src/app/interfaces/common/bus-config.interface';
 import {PricePipe} from '../../../shared/pipes/price.pipe';
 
 @Component({
@@ -93,11 +84,12 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     private utilsService: UtilsService,
     private pricePipe: PricePipe,
     private busConfigService: BusConfigService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.trip?.seats?.map(m=>{
-      if(m?.status === 'Available'){
+    this.trip?.seats?.map(m => {
+      if (m?.status === 'Available') {
         this.availableSeats += 1;
       }
     })
@@ -267,19 +259,30 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     if (!this.id) {
       this.router
         .navigate([], {
-          queryParams: { trip: this.trip._id },
+          queryParams: {trip: this.trip._id},
           queryParamsHandling: 'merge',
         })
         .then();
     } else {
-      this.selectedTrip = null;
-      this.router
-        .navigate([], {
-          queryParams: { trip: null },
-          queryParamsHandling: 'merge',
-        })
-        .then();
+      if (this.trip._id === this.selectedTrip._id) {
+        this.selectedTrip = null;
+        this.router
+          .navigate([], {
+            queryParams: {trip: null},
+            queryParamsHandling: 'merge',
+          })
+          .then();
+      } else {
+        this.router
+          .navigate([], {
+            queryParams: {trip: this.trip._id},
+            queryParamsHandling: 'merge',
+          })
+          .then();
+      }
     }
+
+
   }
 
   onShowMobile(event: MouseEvent) {
@@ -416,7 +419,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
             const fSeat = this.selectedTrip.seats.find(
               (f) => f._id === cart.seat
             );
-            seats.push({ ...fSeat, ...{ type: 'new' } });
+            seats.push({...fSeat, ...{type: 'new'}});
           });
         }
 
@@ -480,6 +483,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     this.subDataFour = this.tripService.getTripById(this.id).subscribe({
       next: (res) => {
         this.selectedTrip = res.data;
+
         const floors = [];
         if (this.selectedTrip) {
           this.selectedTrip.seats.forEach((f) => {
@@ -492,6 +496,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
           this.selectedTripFloors = floors.sort();
           this.floorSelected = this.selectedTripFloors[0];
           this.getCartByTrip();
+
+          setTimeout(() => {
+            window.scrollTo({top: 300, behavior: 'smooth'});
+          }, 300)
         }
       },
       error: (err) => {

@@ -2,7 +2,7 @@
 <div class="section" *ngIf="trip">
   <div class="container">
     <div class="section-main">
-      <div class="ticket-area" [class]="selectedTrip ? 'active-border' : ''">
+      <div class="ticket-area" [class]="selectedTrip && trip._id === id ? 'active-border' : ''">
         <div class="ticket-info" (click)="onShowMobile($event)">
           <div class="ticket-search-info">
             <h3>{{ trip?.bus?.name }}</h3>
@@ -49,12 +49,12 @@
             </div>
             <div class="ticket-control-btn">
               <button (click)="onShow($event)">
-                {{ id ? "Hide Seats" : "Show Seats" }}
+                {{ trip._id === id ? "Hide Seats" : "Show Seats" }}
               </button>
             </div>
           </div>
         </div>
-        <div class="ticket-details-area" *ngIf="selectedTrip">
+        <div class="ticket-details-area" *ngIf="selectedTrip && trip._id === id">
           <div class="ticket-details-top">
             <ul>
               <li>
