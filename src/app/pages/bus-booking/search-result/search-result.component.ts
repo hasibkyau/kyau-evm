@@ -240,6 +240,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
           seats: this.selectedSeats.filter((f) => f.type === 'new'),
           oldSeats: this.selectedSeats.filter((f) => f.type !== 'new'),
           canceledSeats: this.canceledSeats,
+          user: this.ticket.user
         },
       };
       this.updateBookedTrip(finalData);
