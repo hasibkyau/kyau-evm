@@ -54,11 +54,11 @@
     </div>
 
     <div class="sort">
-      <button mat-raised-button color="primary" [matMenuTriggerFor]="menuCat">
-        Bus
+      <button mat-raised-button color="primary" [matMenuTriggerFor]="matMenuBus">
+        Launch
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
-      <mat-menu #menuCat="matMenu">
+      <mat-menu #matMenuBus="matMenu">
         <button
           *ngFor="let data of buss; let i = index"
           mat-menu-item
