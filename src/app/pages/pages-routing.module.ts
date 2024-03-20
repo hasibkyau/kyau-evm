@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {CheckAuthAccessGuard} from '../auth-guard/check-auth-access.guard';
 import {PagesComponent} from './pages.component';
 import { TripSheetComponent } from './trip-sheet/trip-sheet.component';
+import { PrintTripComponent } from './trip-sheet/print-trip/print-trip.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
         loadChildren: () => import('./catalog/catalog.module').then(m => m.CatalogModule),
       },
       {path: 'trip-sheet', component: TripSheetComponent},
+      {path: 'trip-sheet/:id', component: PrintTripComponent},
 
       {
         path: 'admin-control',
