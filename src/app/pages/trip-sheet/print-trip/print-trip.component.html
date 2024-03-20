@@ -1,0 +1,182 @@
+<section class="admin-data-sec">
+  <div class="top-data-header">
+    <div class="left title">
+      <h2>Trip Details</h2>
+    </div>
+
+    <div class="right button-container">
+      <div class="cancel-btn">
+        <button mat-stroked-button color="accent" routerLink="../">
+          <mat-icon>close</mat-icon>
+          Cancel
+        </button>
+      </div>
+      <div class="print-btn">
+        <button
+          mat-stroked-button
+          color="warn"
+          matTooltip="Print Trip Sheet"
+          ngxPrint
+          styleSheetFile="../../../../assets/css/base-table.css"
+          printSectionId="all-tickets-print-table"
+        >
+          Print Trip Sheet
+          <mat-icon>print</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- END TOP DATA HEADER -->
+  <div id="all-tickets-print-table">
+    <h4 style="text-align: center">Trip Sheet</h4>
+    <table
+      style="
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 20px;
+        font-size: 12px;
+      "
+    >
+      <tr>
+        <th>Launch</th>
+        <th>Route</th>
+        <th>Starting Place</th>
+        <th>Journey Date Time</th>
+        <th>Ticket Sold</th>
+        <th>Seats Sold</th>
+      </tr>
+      <tr>
+        <td
+          style="
+            border: 1px solid #656565;
+            text-align: left;
+            padding: 5px;
+            font-size: 12px;
+          "
+        >
+          {{ tripDetails?.launch }}
+        </td>
+  
+        <td
+          style="
+            border: 1px solid #656565;
+            text-align: left;
+            padding: 5px;
+            font-size: 12px;
+          "
+        >
+        {{ tripDetails?.route }}
+        </td>
+  
+        <td
+          style="
+            border: 1px solid #656565;
+            text-align: left;
+            padding: 5px;
+            font-size: 12px;
+          "
+        >
+        {{ tripDetails?.startingPlace }}
+        </td>
+  
+        <td
+          style="
+            border: 1px solid #656565;
+            text-align: left;
+            padding: 5px;
+            font-size: 12px;
+          "
+        >
+        {{ tripDetails?.journeyDate }}
+        </td>
+  
+        <td
+          style="
+            border: 1px solid #656565;
+            text-align: left;
+            padding: 5px;
+            font-size: 12px;
+          "
+        >
+        {{ tripDetails?.ticketSold }}
+        </td>
+  
+        <td
+          style="
+            border: 1px solid #656565;
+            text-align: left;
+            padding: 5px;
+            font-size: 12px;
+          "
+        >
+        {{ tripDetails?.seatSold }}
+        </td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <th>SL</th>
+        <th>Ticket No</th>
+        <th>Cabin</th> 
+        <th>{{'Pass. Name'}}</th> 
+        <th>Phone No<Noscript></Noscript></th>
+        <th>Paid</th>
+        <th>Discount</th>
+        <th>Due</th>
+        <th>From Station</th>
+        <th>To Station</th>
+        <th>Ticket Status</th>
+        <th>Booked By</th>
+        <th>Issued By</th>
+        <th>Remarks</th>
+      </tr>
+      <tr *ngFor="let data of tripSheets; let i=index">
+        <td>{{ i+1 }}</td>
+        <td>{{ data?.ticketNo ? data?.ticketNo : 'N/A'}}</td>
+        <td>{{ data?.cabin }}</td>
+        <td>{{ data?.passengerName }}</td>
+        <td>{{ data?.phoneNo }}</td>
+        <td>{{ data?.paid }}</td>
+        <td>{{ data?.discount }}</td>
+        <td>{{ data?.due }}</td>
+        <td>{{ data?.from }}</td>
+        <td>{{ data?.to }}</td>
+        <td>{{ data?.ticketStatus }}</td>
+        <td>{{ data?.bookedBy }}</td>
+        <td>{{ data?.issuedBy }}</td>
+        <td>{{ data?.remarks ? data?.remarks : 'N/A' }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total Paid: {{tripDetails?.totalPaid ? tripDetails?.totalPaid : 0}}</td>
+        <td></td>
+        <td>Total Due: {{tripDetails?.totalDue ? tripDetails?.totalDue : 0}}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+
+  <!-- LOADING TEMPLATE -->
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.5)"
+    size="medium"
+    color="#fff"
+    type="ball-atom"
+    [fullScreen]="false"
+  >
+    <p style="color: white">Loading...</p>
+  </ngx-spinner>
+</section>
+
+

@@ -1,9 +1,4 @@
 <section class="admin-data-sec">
-  <div class="top-data-header" style="display: block">
-    <app-search-trip></app-search-trip>
-  </div>
-  <!-- END TOP DATA HEADER -->
-
   <div class="top-data-header">
     <div class="title">
       <h2>Trip Sheet</h2>
@@ -11,26 +6,18 @@
   </div>
   <!-- END TOP DATA HEADER -->
 
+  <div class="top-data-header" style="display: block">
+    <app-search-trip></app-search-trip>
+  </div>
+  <!-- END TOP DATA HEADER -->
+
   <div class="action-multiple">
     <div class="sort">
-      <button mat-raised-button color="primary" [matMenuTriggerFor]="menuCat">
-        Ticket Type
-        <mat-icon>arrow_drop_down</mat-icon>
-      </button>
-      <mat-menu #menuCat="matMenu">
-        <button
-          *ngFor="let data of ticketTypes; let i = index"
-          mat-menu-item
-          (click)="filterData(data.value, i, 'ticketType')"
-          [class.dropdown-active]="activeFilter2 === i"
-        >
-          {{ data.viewValue }}
-        </button>
-      </mat-menu>
-    </div>
-
-    <div class="sort">
-      <button mat-raised-button color="primary" [matMenuTriggerFor]="matMenuBus">
+      <button
+        mat-raised-button
+        color="primary"
+        [matMenuTriggerFor]="matMenuBus"
+      >
         Launch
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
@@ -70,105 +57,68 @@
     </div>
   </div>
 
-  <div class="table-wrapper space">
-    <div class="table-action" [class.dual]="activeSort || filter">
-      <div class="left" *ngIf="activeSort || filter">
-        <button mat-stroked-button color="accent" (click)="onRemoveAllQuery()">
-          <mat-icon>close</mat-icon>
-          Clear FilterData
-        </button>
-      </div>
-
-      <div class="right" *ngIf="selectedIds && selectedIds.length">
-        <!-- <button *ngIf="checkEditPermission" mat-stroked-button color="primary" [matMenuTriggerFor]="menu">
-               Change Status
-               <mat-icon>arrow_drop_down</mat-icon>
-             </button>
-             <mat-menu #menu="matMenu">
-               <button mat-menu-item (click)="openConfirmDialog('edit', {status: 'publish'})">Publish</button>
-               <button mat-menu-item (click)="openConfirmDialog('edit', {status: 'draft'})">Draft</button>
-             </mat-menu> -->
-
-        <!-- <button *ngIf="checkDeletePermission" mat-stroked-button color="warn" (click)="openConfirmDialog('delete')"
-                     matTooltip="Delete">
-               <mat-icon>delete</mat-icon>
-             </button> -->
-        <ng-container *ngIf="checkDeletePermission">
-          <button
-
-            mat-stroked-button
-            color="warn"
-            matTooltip="Print Trip Sheet"
-            ngxPrint
-            styleSheetFile="../../../../assets/css/base-table.css"
-            printSectionId="all-tickets-print-table"
+  <div class="table-wrapper space" *ngFor="let trip of trips">
+    <div class="section" *ngIf="trip">
+      <div class="container">
+        <div class="section-main">
+          <div
+            class="ticket-area"
+            [class]="selectedTrip && trip._id === id ? 'active-border' : ''"
           >
-            Print Trip Sheet
-            <mat-icon>print</mat-icon>
-          </button>
-        </ng-container>
+            <div class="ticket-info" (click)="onShowMobile($event)">
+              <div class="ticket-search-info">
+                <h3>{{ trip?.bus?.name }}</h3>
+                <!-- <p>
+                Coach Type: <span>{{ trip?.bus?.coachType }}</span>
+              </p> -->
+                <ul class="ticket-search-time">
+                  <li>
+                    <span>{{ trip?.departureTime?.name }}</span>
+                  </li>
+                  <li>
+                    <span>{{ trip?.arrivalTime?.name }}</span>
+                  </li>
+                </ul>
+                <ul class="ticket-search-point">
+                  <li>
+                    Starting Point: <span>{{ trip?.from?.name }}</span>
+                  </li>
+                  <li>
+                    End Point: <span>{{ trip?.to?.name }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="ticket-time-info">
+                <h4>DEPARTURE</h4>
+                <h4>Time</h4>
+                <span>{{ trip?.departureTime?.name }}</span>
+              </div>
+              <div class="ticket-time-info">
+                <h4>ARRIVAL</h4>
+                <h4>Time</h4>
+                <span>{{ trip?.arrivalTime?.name }}</span>
+              </div>
+              <div class="ticket-time-info">
+                <h4>SEATS</h4>
+                <h4>AVAILABLE</h4>
+                <span>{{ totalAvailableSeats }}</span>
+              </div>
+              <div class="ticket-price-info">
+                <div class="price">
+                  <!-- <span>{{ trip?.bus?.totalSeat }} Seats Available</span> -->
+                  <!-- <h3>৳{{ trip?.price }}</h3> -->
+                </div>
+                <div class="ticket-control-btn">
+                  <button [routerLink]="['./',trip._id]">View Trip Sheet</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <!-- END Table Action -->
-
-    <table>
-      <tr>
-        <th class="t-checkbox">
-          <mat-checkbox
-            #matCheckbox
-            (change)="onAllSelectChange($event)"
-          ></mat-checkbox>
-        </th>
-        <th>Ticket No</th>
-        <th>Name</th>
-        <th>phone</th>
-        <th>Bus</th>
-        <th>Ticket Type</th>
-        <th>Seats</th>
-        <!-- <th>Departure Time</th>
-        <th>Arrival Time</th> -->
-        <th>From</th>
-        <th>To</th>
-        <th>Price</th>
-      </tr>
-      <ng-container></ng-container>
-      <tr
-        *ngFor="
-            let data of tickets; let i = index"
-      >
-        <td class="t-checkbox">
-          <mat-checkbox
-            class="t-mat-checkbox"
-            [(ngModel)]="data.select"
-            (ngModelChange)="onCheckChange($event, i, data._id)"
-          ></mat-checkbox>
-        </td>
-        <td>{{ data.ticketNo }}</td>
-        <td>{{ data.name | titlecase }}</td>
-        <td>{{ data?.phoneNo }}</td>
-        <td>{{ data.bus?.name ?? "-" }}</td>
-        <td
-          style="font-weight: 600"
-          [ngStyle]="getTicketTypeStyle(data?.ticketType)"
-        >
-          {{ data?.ticketType === 'Sold' ? 'Issued' : data?.ticketType }}
-        </td>
-        <td>
-          {{
-            data
-              | ticketSeats
-              : (data.ticketType === "Canceled" ? "Canceled" : null)
-          }}
-        </td>
-        <!-- <td>{{ data?.departureTime?.name }}</td>
-        <td>{{ data?.arrivalTime?.name }}</td> -->
-        <td>{{ data?.from?.name }}</td>
-        <td>{{ data?.to?.name }}</td>
-        <td>{{ data?.grandTotal }}</td>
-      </tr>
-    </table>
   </div>
-
 
   <!-- LOADING TEMPLATE -->
   <ngx-spinner
@@ -181,108 +131,3 @@
     <p style="color: white">Loading...</p>
   </ngx-spinner>
 </section>
-
-
-<!-- Print Table Html Code -->
-<div id="all-tickets-print-table" style="display: none">
-  <h4 style="text-align: center">Trip Sheet</h4>
-  <table style="
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 20px;
-    font-size: 12px;">
-    <tr>
-      <th>Launch</th>
-      <th>Route</th>
-      <th>Starting Place</th>
-      <th>Journey Date Time</th>
-      <th>Ticket Sold</th>
-      <th>Seats Sold</th>
-    </tr>
-    <tr>
-      <td style="
-        border: 1px solid #656565;
-        text-align: left;
-        padding: 5px;
-        font-size: 12px;">{{ tickets[0]?.bus?.name }}
-      </td>
-
-      <td style="
-        border: 1px solid #656565;
-        text-align: left;
-        padding: 5px;
-        font-size: 12px;">{{ tickets[0]?.from?.name }} -> {{ tickets[0]?.to?.name }}
-      </td>
-
-      <td style="
-        border: 1px solid #656565;
-        text-align: left;
-        padding: 5px;
-        font-size: 12px;">{{ tickets[0]?.from?.name }}
-      </td>
-
-      <td style="
-        border: 1px solid #656565;
-        text-align: left;
-        padding: 5px;
-        font-size: 12px;">{{ tickets[0]?.date }} - {{ tickets[0]?.departureTime?.name }}
-      </td>
-
-
-      <td style="
-        border: 1px solid #656565;
-        text-align: left;
-        padding: 5px;
-        font-size: 12px;">{{ totalTickets }}
-      </td>
-
-      <td style="
-        border: 1px solid #656565;
-        text-align: left;
-        padding: 5px;
-        font-size: 12px;">{{ tickets.length }}
-      </td>
-
-    </tr>
-  </table>
-  <table>
-    <tr>
-      <th>Ticket No</th>
-      <th>Name</th>
-      <th>phone</th>
-      <th>Bus</th>
-      <th>Ticket Type</th>
-      <th>Seats</th>
-      <!-- <th>Departure Time</th>
-      <th>Arrival Time</th> -->
-      <th>From</th>
-      <th>To</th>
-      <th>Price</th>
-    </tr>
-    <tr *ngFor="let data of tickets">
-      <td>{{ data.ticketNo }}</td>
-      <td>{{ data.name | titlecase }}</td>
-      <td>{{ data?.phoneNo }}</td>
-      <td>{{ data.bus?.name ?? "-" }}</td>
-      <td
-        style="font-weight: 600"
-        [ngStyle]="getTicketTypeStyle(data?.ticketType)"
-      >
-        {{ data?.ticketType }}
-      </td>
-      <td>
-        {{
-          data
-            | ticketSeats
-            : (data.ticketType === "Canceled" ? "Canceled" : null)
-        }}
-      </td>
-      <!-- <td>{{ data?.departureTime?.name }}</td>
-      <td>{{ data?.arrivalTime?.name }}</td> -->
-      <td>{{ data?.from?.name }}</td>
-      <td>{{ data?.to?.name }}</td>
-      <td>{{ data?.grandTotal }}</td>
-    </tr>
-  </table>
-</div>

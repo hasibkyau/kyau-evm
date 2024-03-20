@@ -108,9 +108,7 @@ export class AddNewBookingComponent implements OnInit {
         //   }
         // }
 
-        console.log('After Mode', this.mode)
         if (this.filter) {
-          console.log('After Mode', this.mode)
           this.getAllTrips();
         }
 
@@ -157,8 +155,6 @@ export class AddNewBookingComponent implements OnInit {
       .subscribe({
         next: (res) => {
           if (res.success) { 
-            console.log(res);
-                       
             this.trips = res.data;
           }
         },

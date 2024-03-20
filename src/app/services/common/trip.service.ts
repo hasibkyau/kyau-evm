@@ -67,6 +67,14 @@ export class TripService {
     return this.httpClient.get<{ data: Trip, message: string, success: boolean }>(API_URL + 'get-by/' + id, { params });
   }
 
+  getTripSheetById(id: string, select?: string) {
+    let params = new HttpParams();
+    if (select) {
+      params = params.append('select', select);
+    }
+    return this.httpClient.get<{ data: Trip, message: string, success: boolean }>(API_URL + 'get-trip-sheet-by-trip/' + id, { params });
+  }
+
   updateTripById(id: string, data: Trip) {
     return this.httpClient.put<{ message: string, success: boolean }>(API_URL + 'update/' + id, data);
   }

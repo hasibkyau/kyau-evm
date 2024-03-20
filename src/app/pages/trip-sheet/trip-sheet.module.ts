@@ -15,10 +15,12 @@ import { TripSheetComponent } from './trip-sheet.component';
 import { NgxSpinner } from 'ngx-spinner';
 import { RouterLink } from '@angular/router';
 import { NgxPrintModule } from 'ngx-print';
+import { PrintTripComponent } from './print-trip/print-trip.component';
 
 @NgModule({
   declarations: [
-    TripSheetComponent
+    TripSheetComponent,
+    PrintTripComponent
   ],
   imports: [
     CommonModule,
