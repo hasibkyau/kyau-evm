@@ -157,9 +157,8 @@
         <!--        <th>Status</th>-->
         <th>Actions</th>
       </tr>
-      <ng-container></ng-container>
-      <tr
-        *ngFor="
+      <ng-container
+      *ngFor="
           let data of tickets
             | paginate
               : {
@@ -170,6 +169,7 @@
           let i = index
         "
       >
+      <tr *ngIf="data?.ticketType !== 'Canceled'">
         <td class="t-checkbox">
           <mat-checkbox
             class="t-mat-checkbox"
@@ -223,6 +223,7 @@
           </a>
         </td>
       </tr>
+    </ng-container>
     </table>
   </div>
 

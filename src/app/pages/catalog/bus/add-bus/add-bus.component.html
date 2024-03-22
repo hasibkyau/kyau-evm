@@ -18,7 +18,7 @@
       </button>
       <button *ngIf="isLoading" mat-raised-button color="primary" type="submit">
         <span class="spinner"></span>
-      </button>
+      </button> 
     </div>
   </div>
   <!-- END Input Form Header -->
@@ -104,10 +104,6 @@
                   <mat-label>Seat No</mat-label>
                   <input formControlName="seatNo" type="text" matInput [placeholder]="'Enter Name'" />
                 </mat-form-field>
-                <!-- <mat-form-field appearance="outline">
-                <mat-label>Seat Type</mat-label>
-                <textarea formControlName="seatType" matInput placeholder="Enter value" [rows]="1"></textarea>
-              </mat-form-field> -->
 
                 <mat-form-field appearance="outline" class="w-100">
                   <mat-label>Seat Type</mat-label>
@@ -137,6 +133,11 @@
                 <mat-form-field appearance="outline">
                   <mat-label>Y Axis</mat-label>
                   <input formControlName="yaxis" type="number" digitOnly matInput placeholder="Enter Y Axis" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                  <mat-label>Serial No</mat-label>
+                  <input formControlName="serialNo" type="number" digitOnly matInput [placeholder]="'Enter Seat Serial'" />
                 </mat-form-field>
 
                 <button class="btn-form-field-remove" type="button" mat-mini-fab color="warn"
