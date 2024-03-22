@@ -495,6 +495,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
             }
           });
           this.selectedTripFloors = floors.sort();
+
           // this.floorSelected = this.selectedTripFloors[0];
           this.getCartByTrip();
 
