@@ -112,6 +112,7 @@ export class AddBusComponent implements OnInit {
           status: [m.status],
           xaxis: [m.xaxis],
           yaxis: [m.yaxis],
+          serialNo: [m.serialNo],
         });
         (this.dataForm?.get('seats') as FormArray).push(f);
       });
@@ -122,11 +123,12 @@ export class AddBusComponent implements OnInit {
   onAddNewSeat() {
     const f = this.fb.group({
       floorNo: [this.tempFloor, Validators.required],
-      seatNo: [null,Validators.required],
+      seatNo: [null, Validators.required],
       seatType: [null,Validators.required],
       status: ['Available' ,Validators.required],
       xaxis: [null,Validators.required],
       yaxis: [null,Validators.required],
+      serialNo: [null,Validators.required],
     });
     (this.dataForm?.get('seats') as FormArray).push(f);
     console.log(this.seatsDataArray);

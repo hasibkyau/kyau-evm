@@ -30,6 +30,7 @@ export interface Seat {
   bookedFor?: number;
   gender?: 'Male' | 'Female';
   seatTypeId?: string;
+  serialNo?: number;
   version?: number;
   seatAnimation?: boolean;
   type?: 'new' | 'old';
