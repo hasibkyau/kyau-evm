@@ -46,7 +46,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   dataForm: FormGroup;
   selectedGender = 'Male';
   isLoading: boolean = false;
-  floorSelected: string = '1';
+  floorSelected: string = null;
 
   bookingTimes: Select[] = BOOKING_TIME;
 
@@ -499,8 +499,9 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
             }
           });
           this.selectedTripFloors = floors.sort();
-
-          // this.floorSelected = this.selectedTripFloors[0];
+          if(!this.floorSelected){
+            this.floorSelected = this.selectedTripFloors[0];
+          }
           this.getCartByTrip();
 
           setTimeout(() => {
