@@ -1,4 +1,4 @@
-import {AdminMenu} from '../../interfaces/core/admin-menu.interface';
+import { AdminMenu } from '../../interfaces/core/admin-menu.interface';
 
 export const SUPER_ADMIN_MENU: AdminMenu[] = [
   {
@@ -39,7 +39,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
       },
       {
         id: 4,
-        name: 'Shop Information',
+        name: 'Site Information',
         hasSubMenu: true,
         routerLink: 'customization/shop-information',
         icon: 'arrow_right',
@@ -50,7 +50,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'customization/all-order-guide',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
 
@@ -118,8 +118,6 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         routerLink: 'catalog/all-trip',
         icon: 'arrow_right',
       },
-
-
     ],
   },
 
@@ -143,7 +141,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'bus-booking/all-tickets',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
 
@@ -155,16 +153,14 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
     icon: 'inventory',
     subMenus: [
       {
-      id: 1,
-      name: 'Trip Sheet',
-      hasSubMenu: true,
-      routerLink: 'trip-sheet',
-      icon: 'arrow_right',
-    },
-  ],
-
+        id: 1,
+        name: 'Trip Sheet',
+        hasSubMenu: true,
+        routerLink: 'trip-sheet',
+        icon: 'arrow_right',
+      },
+    ],
   },
-
 
   {
     id: 12,
@@ -186,9 +182,8 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'seo/all-seo-page',
         icon: 'arrow_right',
-      }
+      },
     ],
-
   },
 
   {
@@ -211,10 +206,9 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'bus-gallery/all-bus-gallery',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
-
 
   {
     id: 4,
@@ -236,7 +230,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'gallery/all-folders',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
 
@@ -336,7 +330,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'offer/all-coupon',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
 
@@ -353,7 +347,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'user/user-list',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
   {
@@ -369,7 +363,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'admin-control/all-admins',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
 
@@ -386,7 +380,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'blog/all-blog',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
   {
@@ -409,7 +403,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'contact/all-newsletter',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
 
@@ -426,8 +420,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'review',
         icon: 'arrow_right',
-      }
-
+      },
     ],
   },
 
@@ -444,11 +437,9 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'additionl-page/page-list',
         icon: 'arrow_right',
-      }
-
+      },
     ],
   },
-
 
   {
     id: 13,
@@ -459,9 +450,7 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
 
     subMenus: [],
   },
-
-
-]
+];
 
 //Super Counter Menu
 export const SUPER_COUNTER_MENUE: AdminMenu[] = [
@@ -494,7 +483,7 @@ export const SUPER_COUNTER_MENUE: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'bus-booking/all-tickets',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
 
@@ -506,14 +495,13 @@ export const SUPER_COUNTER_MENUE: AdminMenu[] = [
     icon: 'inventory',
     subMenus: [
       {
-      id: 1,
-      name: 'Trip Sheet',
-      hasSubMenu: true,
-      routerLink: 'trip-sheet',
-      icon: 'arrow_right',
-    },
-  ],
-
+        id: 1,
+        name: 'Trip Sheet',
+        hasSubMenu: true,
+        routerLink: 'trip-sheet',
+        icon: 'arrow_right',
+      },
+    ],
   },
 
   {
@@ -525,10 +513,7 @@ export const SUPER_COUNTER_MENUE: AdminMenu[] = [
 
     subMenus: [],
   },
-
-
-]
-
+];
 
 //Counter Menu
 export const COUNTER_MENU: AdminMenu[] = [
@@ -561,7 +546,7 @@ export const COUNTER_MENU: AdminMenu[] = [
         hasSubMenu: true,
         routerLink: 'bus-booking/all-tickets',
         icon: 'arrow_right',
-      }
+      },
     ],
   },
 
@@ -573,16 +558,14 @@ export const COUNTER_MENU: AdminMenu[] = [
     icon: 'inventory',
     subMenus: [
       {
-      id: 1,
-      name: 'Trip Sheet',
-      hasSubMenu: true,
-      routerLink: 'trip-sheet',
-      icon: 'arrow_right',
-    },
-  ],
-
+        id: 1,
+        name: 'Trip Sheet',
+        hasSubMenu: true,
+        routerLink: 'trip-sheet',
+        icon: 'arrow_right',
+      },
+    ],
   },
-
 
   {
     id: 13,
@@ -593,6 +576,4 @@ export const COUNTER_MENU: AdminMenu[] = [
 
     subMenus: [],
   },
-
-
-]
+];
