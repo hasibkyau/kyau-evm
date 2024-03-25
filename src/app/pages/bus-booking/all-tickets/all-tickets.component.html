@@ -202,7 +202,7 @@
         <td style="font-weight: 600; color: #d83333">{{ data?.expireTime }}</td>
         <td class="td-action">
           <button
-            *ngIf="data.ticketType !== 'Canceled'"
+            *ngIf="role === 'super_admin'"
             [disabled]="!checkEditPermission"
             (click)="openConfirmDialog('canceled', data)"
             color="warn"

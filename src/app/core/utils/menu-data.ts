@@ -161,14 +161,6 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
       routerLink: 'trip-sheet',
       icon: 'arrow_right',
     },
-    
-    // {
-    //   id: 2,
-    //   name: 'All Trips',
-    //   hasSubMenu: true,
-    //   routerLink: 'catalog/all-trip',
-    //   icon: 'arrow_right',
-    // },
   ],
 
   },
@@ -471,8 +463,143 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
 
 ]
 
+//Super Counter Menu
+export const SUPER_COUNTER_MENUE: AdminMenu[] = [
+  {
+    id: 0,
+    name: 'Dashboard',
+    hasSubMenu: false,
+    routerLink: 'dashboard',
+    icon: 'space_dashboard',
+    subMenus: [],
+  },
+  {
+    id: 2,
+    name: 'Configuration',
+    hasSubMenu: true,
+    routerLink: null,
+    icon: 'category',
+    subMenus: [
+      // {
+      //   id: 1,
+      //   name: 'Counters',
+      //   hasSubMenu: true,
+      //   routerLink: 'catalog/all-counter',
+      //   icon: 'arrow_right',
+      // },
+      {
+        id: 2,
+        name: ' Terminals',
+        hasSubMenu: true,
+        routerLink: 'catalog/all-terminal',
+        icon: 'arrow_right',
+      },
+      {
+        id: 3,
+        name: 'Schedules',
+        hasSubMenu: true,
+        routerLink: 'catalog/all-schedule',
+        icon: 'arrow_right',
+      },
+      {
+        id: 4,
+        name: 'Routes',
+        hasSubMenu: true,
+        routerLink: 'catalog/all-route',
+        icon: 'arrow_right',
+      },
+      {
+        id: 5,
+        name: 'Route Relations',
+        hasSubMenu: true,
+        routerLink: 'catalog/all-route-relation',
+        icon: 'arrow_right',
+      },
+      {
+        id: 6,
+        name: 'Launch',
+        hasSubMenu: true,
+        routerLink: 'catalog/all-bus',
+        icon: 'arrow_right',
+      },
 
-export const EDITOR_MENU: AdminMenu[] = [
+      {
+        id: 8,
+        name: 'Launch Config',
+        hasSubMenu: true,
+        routerLink: 'catalog/all-bus-config',
+        icon: 'arrow_right',
+      },
+      {
+        id: 7,
+        name: 'Trips',
+        hasSubMenu: true,
+        routerLink: 'catalog/all-trip',
+        icon: 'arrow_right',
+      },
+
+
+    ],
+  },
+
+  {
+    id: 3,
+    name: 'Launch Booking',
+    hasSubMenu: true,
+    routerLink: null,
+    icon: 'inventory',
+    subMenus: [
+      {
+        id: 1,
+        name: 'Add New Booking',
+        hasSubMenu: true,
+        routerLink: 'bus-booking/add-booking',
+        icon: 'arrow_right',
+      },
+      {
+        id: 2,
+        name: 'Ticket List',
+        hasSubMenu: true,
+        routerLink: 'bus-booking/all-tickets',
+        icon: 'arrow_right',
+      }
+    ],
+  },
+
+  {
+    id: 102,
+    name: 'Trip Sheet',
+    hasSubMenu: true,
+    routerLink: null,
+    icon: 'inventory',
+    subMenus: [
+      {
+      id: 1,
+      name: 'Trip Sheet',
+      hasSubMenu: true,
+      routerLink: 'trip-sheet',
+      icon: 'arrow_right',
+    },
+  ],
+
+  },
+
+  {
+    id: 13,
+    name: 'Profile',
+    hasSubMenu: false,
+    routerLink: 'profile',
+    icon: 'person',
+
+    subMenus: [],
+  },
+
+
+]
+
+
+//Counter Menu
+export const COUNTER_MENU: AdminMenu[] = [
   {
     id: 0,
     name: 'Dashboard',
@@ -573,6 +700,25 @@ export const EDITOR_MENU: AdminMenu[] = [
       }
     ],
   },
+
+  {
+    id: 102,
+    name: 'Trip Sheet',
+    hasSubMenu: true,
+    routerLink: null,
+    icon: 'inventory',
+    subMenus: [
+      {
+      id: 1,
+      name: 'Trip Sheet',
+      hasSubMenu: true,
+      routerLink: 'trip-sheet',
+      icon: 'arrow_right',
+    },
+  ],
+
+  },
+
 
   {
     id: 13,

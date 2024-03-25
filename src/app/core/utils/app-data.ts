@@ -7,7 +7,7 @@ import {OrderStatus} from '../../enum/order.enum';
 
 export const ADMIN_ROLES: Select[] = [
   {value: AdminRolesEnum.SUPER_ADMIN, viewValue: 'Super Admin'},
-  {value: AdminRolesEnum.ADMIN, viewValue: 'Admin'},
+  {value: AdminRolesEnum.ADMIN, viewValue: 'Super Counter'},
   {value: AdminRolesEnum.EDITOR, viewValue: 'Counter'},
   // {value: AdminRolesEnum.SALESMAN, viewValue: 'Sales Man'}
 ];
