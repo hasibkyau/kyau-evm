@@ -19,6 +19,7 @@ import {BusService} from '../../../services/common/bus.service';
 import {TripService} from '../../../services/common/trip.service';
 import {Select} from '../../../interfaces/core/select';
 import {TICKET_TYPES} from '../../../core/utils/app-data';
+import { AdminService } from 'src/app/services/admin/admin.service';
 
 
 @Component({
@@ -86,10 +87,13 @@ export class AllTicketsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private busService: BusService,
     private tripService: TripService,
+    private adminService: AdminService,
   ) {
   }
 
   ngOnInit(): void {
+    this.role = this.adminService.getAdminRole();
+
     // Reload
     this.subReload = this.reloadService.refreshData$.subscribe(() => {
       this.getAllTicket();

@@ -34,6 +34,8 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   @Input() mode: 'edit' | 'add';
   @Input() date: string;
 
+  USER_ROLE : any;
+
   selectedTrip: Trip = null;
   selectedTripFloors: string[] = [];
   prices: Price[] = [];
@@ -88,6 +90,8 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.USER_ROLE = this.adminService.getAdminRole();
+
     this.trip?.seats?.map(m => {
       if (m?.status === 'Available') {
         this.availableSeats += 1;
@@ -227,7 +231,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
       user: null,
       bookedInfo: {
         _id: this.adminService.getAdminId(),
-        name: this.adminService.getAdminId(),
+        name: this.adminService.getAdminRole(),
         role: this.adminService.getAdminRole(),
         applicationChannel: 'admin',
       },

@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {AdminService} from '../services/admin/admin.service';
-import {EDITOR_MENU, SUPER_ADMIN_MENU} from '../core/utils/menu-data';
+import {COUNTER_MENU, SUPER_ADMIN_MENU, SUPER_COUNTER_MENUE} from '../core/utils/menu-data';
 import {ADMIN_ROLES} from '../core/utils/app-data';
 import {AdminRolesEnum} from '../enum/admin.roles.enum';
 
@@ -35,12 +35,19 @@ export class PagesComponent implements OnInit {
     this.subId = JSON.parse(sessionStorage.getItem('sub-id'));
     this.USER_ROLE = this.adminService.getAdminRole();
 
-    if (this.USER_ROLE === AdminRolesEnum.SUPER_ADMIN || this.USER_ROLE === AdminRolesEnum.ADMIN) {
+    console.log('user_type', this.USER_ROLE);
+    
+
+    if (this.USER_ROLE === AdminRolesEnum.SUPER_ADMIN) {
       this.allMenus = SUPER_ADMIN_MENU;
     }
 
+    if (this.USER_ROLE === AdminRolesEnum.ADMIN) {
+      this.allMenus = SUPER_COUNTER_MENUE;
+    }
+
     if (this.USER_ROLE === AdminRolesEnum.EDITOR) {
-      this.allMenus = EDITOR_MENU;
+      this.allMenus = COUNTER_MENU;
     }
 
   }

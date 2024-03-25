@@ -167,14 +167,18 @@ export class AddNewBookingComponent implements OnInit {
 
   private getTicketById() {
    this.subDataOne =  this.ticketService.getTicketById(this.ticketId).subscribe({
-      next: res => {
+      next: res => {        
         this.ticket = res.data;
+        console.log('ticket---', res.data.trip);
+        
         if (this.ticket) {
           this.subDataTwo = this.tripService.getTripById(this.ticket.trip, 'date bus departureTime arrivalTime from to boardingPoints droppingPoints price serviceCharge createdAt')
             .subscribe({
               next: res => {
                 this.trip = res.data;
-                this.router.navigate([], {queryParams: {trip: this.trip._id}, queryParamsHandling: 'merge'}).then()
+                console.log('getTicketbyId', this.trip);
+                
+                this.router.navigate([], {queryParams: {trip: this.trip?._id}, queryParamsHandling: 'merge'}).then()
               },
               error: err => {
                 console.log(err)
