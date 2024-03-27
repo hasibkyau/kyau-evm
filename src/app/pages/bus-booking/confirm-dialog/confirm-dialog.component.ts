@@ -25,13 +25,13 @@ export class ConfirmDialogComponent implements OnInit {
   onShowConfirmDialog(data:any){
       this.isConfirm = true;
       this.ticket = data;
-      console.log(data);
+      // console.log(data);
   }
 
   onHideConfirmDialog(){
     this.isConfirm = false;
     this.allTicket.push(this.ticket);
-    console.log(this.ticket);
+    // console.log(this.ticket);
     sessionStorage.setItem('booked_ticket', JSON.stringify(this.ticket));
     sessionStorage.setItem('all_ticket', JSON.stringify(this.allTicket));
   }

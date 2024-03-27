@@ -166,7 +166,7 @@ export class AddBusConfigComponent implements OnInit {
       seatType: [null, Validators.required],
     });
     (this.dataForm?.get('prices') as FormArray).push(f);
-    console.log(this.seatsDataArray);
+    // console.log(this.seatsDataArray);
   }
 
   // onAddNewSeat() {
@@ -202,7 +202,7 @@ export class AddBusConfigComponent implements OnInit {
 
     let mSeat =  this.buss.find((m) => m._id === this.dataForm.value.bus).seats;
     let prices = this.dataForm.value.prices;
-    console.log(prices);
+    // console.log(prices);
     mSeat = mSeat?.map(m=>{
       let mPrice: Price = prices.find( (f) => f.seatType === m.seatType);
       return{

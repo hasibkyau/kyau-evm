@@ -230,7 +230,7 @@ export class CartListComponent implements OnInit {
         if (res.success) {
           this.carts = res.data;
 
-          console.log("this.carts", this.carts)
+          // console.log("this.carts", this.carts)
 
         }
       },

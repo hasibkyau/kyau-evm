@@ -35,7 +35,7 @@ export class PagesComponent implements OnInit {
     this.subId = JSON.parse(sessionStorage.getItem('sub-id'));
     this.USER_ROLE = this.adminService.getAdminRole();
 
-    console.log('user_type', this.USER_ROLE);
+    // console.log('user_type', this.USER_ROLE);
     
 
     if (this.USER_ROLE === AdminRolesEnum.SUPER_ADMIN) {

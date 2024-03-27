@@ -91,7 +91,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.userRole = this.adminService.getAdminRole();
-    console.log('user_role', this.userRole);
+    // console.log('user_role', this.userRole);
     
 
     this.trip?.seats?.map(m => {

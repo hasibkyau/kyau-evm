@@ -158,7 +158,7 @@ export class SubCategorySelectComponent implements OnInit, AfterViewInit, OnChan
    */
 
   private getAllCategoryList() {
-    console.log('Here', Date.now())
+    // console.log('Here', Date.now())
 
     // Select
     const mSelect = {
@@ -179,7 +179,7 @@ export class SubCategorySelectComponent implements OnInit, AfterViewInit, OnChan
       sort: {createdAt: -1},
     };
 
-    console.log('this.filter', this.filter)
+    // console.log('this.filter', this.filter)
 
 
     this.subCategoryService.getAllSubCategory(filter, null)

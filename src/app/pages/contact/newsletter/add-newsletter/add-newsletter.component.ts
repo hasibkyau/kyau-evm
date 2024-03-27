@@ -83,7 +83,7 @@ export class AddNewsletterComponent implements OnInit {
   onSubmit() {
 
     if (this.dataForm.invalid) {
-      console.log(this.dataForm.errors)
+      // console.log(this.dataForm.errors)
       this.uiService.warn('Please filed all the required field');
       return;
     }

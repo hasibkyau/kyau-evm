@@ -130,7 +130,7 @@ export class AddBlogComponent implements OnInit {
     this.subDataOne = this.blogService.getBlogById(this.id)
       .subscribe({
         next: (res => {
-          console.log('res', res.data)
+          // console.log('res', res.data)
           this.spinnerService.hide();
           if (res.data) {
             this.blog = res.data;
