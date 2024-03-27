@@ -130,7 +130,7 @@ export class ViewPageComponent implements OnInit {
     this.additionalPageService.addAdditionalPage(finalData)
       .subscribe({
         next: (res => {
-          console.log(res)
+          // console.log(res)
           this.uiService.success(res.message);
         }),
         error: (error => {

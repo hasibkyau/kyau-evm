@@ -232,7 +232,7 @@ export class AllBusComponent implements OnInit {
       .getAllBus(filter, null)
       .subscribe({
         next: (res) => {
-          console.log()
+          // console.log()
           if (res.success) {
             this.buss = res.data;
             this.totalBuss = res.count;

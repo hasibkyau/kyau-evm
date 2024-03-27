@@ -152,7 +152,7 @@ export class AllBusConfigComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log(res);
+          // console.log(res);
 
           this.searchBusConfig = res.data;
           this.busConfigs = this.searchBusConfig;
@@ -246,7 +246,7 @@ export class AllBusConfigComponent implements OnInit {
       .getAllBusConfig(filter, null)
       .subscribe({
         next: (res) => {
-          console.log()
+          // console.log()
           if (res.success) {
             this.busConfigs = res.data;
             this.totalBusConfigs = res.count;

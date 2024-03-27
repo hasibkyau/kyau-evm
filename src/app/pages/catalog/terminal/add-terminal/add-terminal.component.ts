@@ -222,7 +222,7 @@ export class AddTerminalComponent implements OnInit {
         next:(res) => {
              if(res.success){
                  this.counters = res.data;
-                 console.log(this.counters);
+                //  console.log(this.counters);
              }
         },
         error:(err) => {

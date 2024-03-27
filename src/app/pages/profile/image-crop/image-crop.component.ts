@@ -22,7 +22,7 @@ export class ImageCropComponent implements OnInit {
   ngOnInit(): void {
     if (this.data) {
       this.imageChangedEvent = this.data;
-      console.log(this.imageChangedEvent);
+      // console.log(this.imageChangedEvent);
     }
   }
 

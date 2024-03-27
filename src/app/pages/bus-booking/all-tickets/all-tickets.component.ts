@@ -312,7 +312,7 @@ export class AllTicketsComponent implements OnInit {
       .getAllTicket(filter, null)
       .subscribe({
         next: (res) => {
-          console.log('all ticket',res?.data);
+          // console.log('all ticket',res?.data);
 
           if (res.success) {
             this.tickets = res.data;
@@ -331,7 +331,7 @@ export class AllTicketsComponent implements OnInit {
   onExpireTimeCount() {
     this.tickets = this.tickets?.map(m=>{
       let time = this.utilsService.getexpiredTime(m.expiredIn, "HH:MM:SS");
-      console.log('time',time);
+      // console.log('time',time);
       return{
         ...m,
         ...{

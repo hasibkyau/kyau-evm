@@ -83,7 +83,7 @@ export class PrintTripComponent implements OnInit {
   private getTripSheetByTrip(id: string) {
     this.tripService.getTripSheetById(id).subscribe({
       next: (res: any) => {
-        console.log('tripSheet', res?.data);
+        // console.log('tripSheet', res?.data);
         this.tripSheets = res?.data?.tripSheet;
         this.tripDetails = res?.data?.tripDetails;
       },

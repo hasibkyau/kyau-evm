@@ -131,7 +131,7 @@ export class AddBusComponent implements OnInit {
       serialNo: [null,Validators.required],
     });
     (this.dataForm?.get('seats') as FormArray).push(f);
-    console.log(this.seatsDataArray);
+    // console.log(this.seatsDataArray);
   }
 
 
@@ -156,7 +156,7 @@ export class AddBusComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.dataForm.value)
+    // console.log(this.dataForm.value)
     if (this.dataForm.invalid) {
       this.uiService.warn('Please filed all the required field');
       return;
@@ -190,7 +190,7 @@ export class AddBusComponent implements OnInit {
         this.spinnerService.hide();
         if (res.success) {
           this.bus = res.data;
-          console.log('this.bus', this.bus)
+          // console.log('this.bus', this.bus)
           this.setFormValue();
         }
       },

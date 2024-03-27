@@ -180,7 +180,7 @@ export class TripSheetComponent implements OnInit {
     this.subDataOne = this.tripService.getAllTrip(filter, null).subscribe({
       next: (res) => {
         if (res.success) {
-          console.log(res);
+          // console.log(res);
 
           this.trips = res.data;
         }

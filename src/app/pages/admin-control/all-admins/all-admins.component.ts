@@ -170,9 +170,6 @@ export class AllAdminsComponent implements OnInit, AfterViewInit, OnDestroy {
     this.adminId = this.adminService.getAdminId();
     this.role = this.adminService.getAdminRole();
     this.permissions = this.adminService.getAdminPermissions();
-    console.log('this.adminId', this.adminId);
-    console.log('this.role', this.role);
-    console.log('this.permissions', this.permissions);
   }
 
   get checkAddPermission(): boolean {
