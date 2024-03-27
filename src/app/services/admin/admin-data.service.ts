@@ -60,7 +60,7 @@ export class AdminDataService {
     if (select) {
       params = params.append('select', select);
     }
-    return this.httpClient.get<{ data: Admin, message: string, success: boolean }>(API_ADMIN + id, {params});
+    return this.httpClient.get<{ data: Admin, message: string, success: boolean }>(API_ADMIN + 'get-by/' + id, {params});
   }
 
   updateAdminById(id: string, data: Admin) {

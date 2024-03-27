@@ -114,8 +114,11 @@ export class AddAdminComponent implements OnInit, OnDestroy {
   private getAdminById() {
     this.spinnerService.show();
     const select = 'name email username phoneNo gender role permissions hasAccess'
-    this.subDataTwo = this.adminDataService.getAdminById(this.id, select)
+    // this.subDataTwo = this.adminDataService.getAdminById(this.id, select)
+    this.subDataTwo = this.adminDataService.getAdminById(this.id)
       .subscribe(res => {
+        console.log('admin info', res);
+        
         this.spinnerService.hide();
         if (res.success) {
           this.user = res.data;

@@ -6,6 +6,7 @@ export const environment = {
   production: true,
   name: 'bd.mkshippinglines.com',
   domain: 'bd.mkshippinglines.com',
+
   // apiBaseLink: 'https://api.bd.mkshippinglines.com',
   // ftpBaseLink: 'https://api.bd.mkshippinglines.com',
 
