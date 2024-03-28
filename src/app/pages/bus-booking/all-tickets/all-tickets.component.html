@@ -213,7 +213,7 @@
             <mat-icon>block</mat-icon>
           </button>
           <a
-            *ngIf="data.ticketType !== 'Canceled'"
+            *ngIf="data.ticketType === 'Booked'"
             [disabled]="!checkEditPermission"
             [routerLink]="['/bus-booking', 'edit-booking', data._id]"
             mat-mini-fab
@@ -221,6 +221,15 @@
           >
             <mat-icon>edit</mat-icon>
           </a>
+          <a
+          *ngIf="data.ticketType === 'Sold'"
+          [disabled]="!checkEditPermission"
+          mat-mini-fab
+          matTooltip="print"
+          style="background: tomato;"
+        >
+          <mat-icon>print</mat-icon>
+        </a>
         </td>
       </tr>
     </ng-container>

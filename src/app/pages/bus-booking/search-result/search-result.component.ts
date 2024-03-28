@@ -8,7 +8,7 @@ import {Cart} from '../../../interfaces/common/cart.interface';
 import {AdminService} from '../../../services/admin/admin.service';
 import {CartService} from '../../../services/common/cart.service';
 import {ReloadService} from '../../../services/core/reload.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Route, Router} from '@angular/router';
 import {TripService} from '../../../services/common/trip.service';
 import {UtilsService} from '../../../services/core/utils.service';
 import {BOOKING_TIME} from '../../../core/utils/app-data';
@@ -85,7 +85,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private utilsService: UtilsService,
     private pricePipe: PricePipe,
-    private busConfigService: BusConfigService
+    private busConfigService: BusConfigService,
   ) {
   }
 
@@ -288,8 +288,6 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
           .then();
       }
     }
-
-
   }
 
   onShowMobile(event: MouseEvent) {
@@ -363,6 +361,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   onSelectBoardingPoint(data: any) {
     this.selectBoardingPoints = data;
     this.isBoardingError = false;
+
+    console.log('selected trip', this.selectedTrip);
+    console.log('selected seats', this.selectedSeats);
+
   }
 
   onSelectDroppingPoint(data: any) {
@@ -475,6 +477,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
           if (res.success) {
             this.reloadService.needRefreshData$();
             this.uiService.success(res.message);
+            // this.router.navigate(['/bus-booking/all-tickets']);
           } else {
             this.uiService.warn(res.message);
           }

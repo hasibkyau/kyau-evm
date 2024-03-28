@@ -11,6 +11,7 @@ import { SafeHtmlCustomPipe } from './safe-html.pipe';
 import {ExpiredInPipe} from './expired-in.pipe';
 import {TicketSeatsPipe} from './ticket-seats.pipe';
 import {SeatImagePipe} from './seat-image.pipe';
+import { FindPipe } from './find.pipe';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {SeatImagePipe} from './seat-image.pipe';
     SafeHtmlCustomPipe,
     ExpiredInPipe,
     TicketSeatsPipe,
-    SeatImagePipe
+    SeatImagePipe,
+    FindPipe
   ],
   imports: [
     CommonModule
@@ -41,7 +43,8 @@ import {SeatImagePipe} from './seat-image.pipe';
     SafeHtmlCustomPipe,
     ExpiredInPipe,
     TicketSeatsPipe,
-    SeatImagePipe
+    SeatImagePipe,
+    FindPipe
   ]
 })
 export class PipesModule {
