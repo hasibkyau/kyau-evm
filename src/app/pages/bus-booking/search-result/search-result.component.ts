@@ -34,6 +34,8 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   @Input() mode: 'edit' | 'add';
   @Input() date: string;
 
+  userInfo: any = null;
+
   userRole : any;
 
   selectedTrip: Trip = null;
@@ -92,8 +94,9 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.userRole = this.adminService.getAdminRole();
     // console.log('user_role', this.userRole);
+    let id = this.adminService.getAdminId();
+    this.getAdminById(id);
     
-
     this.trip?.seats?.map(m => {
       if (m?.status === 'Available') {
         this.availableSeats += 1;
@@ -232,9 +235,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
       }),
       user: null,
       bookedInfo: {
-        _id: this.adminService.getAdminId(),
-        name: this.adminService.getAdminRole(),
-        role: this.adminService.getAdminRole(),
+        _id: this.userInfo?._id,
+        name: this.userInfo?.name,
+        role: this.userInfo?.role === 'admin' ? 'Super Counter' :
+        this.userInfo?.role === 'editor' ? 'Counter' : this.userInfo?.role,
         applicationChannel: 'admin',
       },
     };
@@ -595,5 +599,19 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     const fIndex = this.canceledSeats.findIndex((f) => f._id === seat._id);
     this.canceledSeats.splice(fIndex, 1);
     this.selectedSeats.push(seat);
+  }
+
+
+  private getAdminById(id:string){
+    this.adminService.getAdminBYId(id).subscribe({
+      next: res => {
+        console.log('getAdminById', res);
+        this.userInfo = res?.data; 
+      },
+      error: err => {
+        console.log(err);
+        
+      }
+    })
   }
 }

@@ -213,7 +213,7 @@
             <mat-icon>block</mat-icon>
           </button>
           <a
-            *ngIf="data.ticketType === 'Booked'"
+            *ngIf="data.ticketType === 'Booked' || role === 'super_admin'"
             [disabled]="!checkEditPermission"
             [routerLink]="['/bus-booking', 'edit-booking', data._id]"
             mat-mini-fab
