@@ -205,5 +205,9 @@ export class AdminService {
     // console.log('Setting Time: ' + duration);
   }
 
-
-}
+    // For New User Registration..
+    getAdminBYId(id: string) {
+      return this.httpClient.get<{ data: any, count: number, success: boolean  }>
+      (API_URL_ADMIN + `get-by/${id}`);
+    }
+  }

@@ -312,7 +312,7 @@ export class AllTicketsComponent implements OnInit {
       .getAllTicket(filter, null)
       .subscribe({
         next: (res) => {
-          // console.log('all ticket',res?.data);
+          console.log('all ticket',res?.data);
 
           if (res.success) {
             this.tickets = res.data;
