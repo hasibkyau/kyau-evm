@@ -158,6 +158,7 @@
                         'grid-row-start': data?.xaxis,
                         'grid-column-start': data?.yaxis
                       }"
+                      [style.border]="(data?._id | find:selectedSeats) ? '1px solid #418D43' : ''"
                     >
                       <div
                         (click)="onSelectSeat(data, selectedTrip)"
@@ -243,7 +244,7 @@
                           <th>Seats</th>
                           <th>Class</th>
                           <th>Fare</th>
-                          <th *ngIf="mode === 'edit' && USER_ROLE === 'super_admin'">Act.</th>
+                          <th *ngIf="mode === 'edit' && USER_ROLE !== 'counter'">Act.</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -258,7 +259,7 @@
                             ৳ {{ selectedTrip.prices | price : seat.seatType }}
                           </td>
                           <td *ngIf="mode === 'edit'">৳ {{ selectedTrip.prices | price : seat.seatType }}</td>
-                          <td *ngIf="mode === 'edit' && seat?.type !== 'new' && userRole === 'super_admin'">
+                          <td *ngIf="mode === 'edit' && seat?.type !== 'new' && userRole !== 'counter'">
                             <mat-icon
                               (click)="onRemoveBookedSeat(seat)"
                               style="font-size: 16px; cursor: pointer"

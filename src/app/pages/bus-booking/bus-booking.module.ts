@@ -33,7 +33,7 @@ import { NgxPrintModule } from 'ngx-print';
     AddNewBookingComponent,
     SearchResultComponent,
     FilterComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
