@@ -57,7 +57,7 @@
         >
           {{ tripDetails?.launch }}
         </td>
-  
+
         <td
           style="
             border: 1px solid #656565;
@@ -68,7 +68,7 @@
         >
         {{ tripDetails?.route }}
         </td>
-  
+
         <td
           style="
             border: 1px solid #656565;
@@ -79,7 +79,7 @@
         >
         {{ tripDetails?.startingPlace }}
         </td>
-  
+
         <td
           style="
             border: 1px solid #656565;
@@ -90,7 +90,7 @@
         >
         {{ tripDetails?.journeyDate }}
         </td>
-  
+
         <td
           style="
             border: 1px solid #656565;
@@ -101,7 +101,7 @@
         >
         {{ tripDetails?.ticketSold }}
         </td>
-  
+
         <td
           style="
             border: 1px solid #656565;
@@ -118,8 +118,8 @@
       <tr>
         <th>SL</th>
         <th>Ticket No</th>
-        <th>Cabin</th> 
-        <th>{{'Pass. Name'}}</th> 
+        <th>Cabin</th>
+        <th>{{'Pass. Name'}}</th>
         <th>Phone No<Noscript></Noscript></th>
         <th>Paid</th>
         <th>Discount</th>
@@ -144,8 +144,8 @@
         <td>{{ data?.from }}</td>
         <td>{{ data?.to }}</td>
         <td>{{ data?.ticketStatus }}</td>
-        <td>{{ data?.bookedBy }}</td>
-        <td>{{ data?.issuedBy }}</td>
+        <td>{{ data?.bookedInfo?.name }}</td>
+        <td>{{ data?.issuedInfo?.name }}</td>
         <td>{{ data?.remarks ? data?.remarks : 'N/A' }}</td>
       </tr>
       <tr>
