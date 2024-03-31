@@ -234,13 +234,6 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
         };
       }),
       user: null,
-      bookedInfo: {
-        _id: this.userInfo?._id,
-        name: this.userInfo?.name,
-        role: this.userInfo?.role === 'admin' ? 'Super Counter' :
-        this.userInfo?.role === 'editor' ? 'Counter' : this.userInfo?.role,
-        applicationChannel: 'admin',
-      },
     };
 
     if (this.mode === 'edit') {
@@ -255,7 +248,36 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
       };
       this.updateBookedTrip(finalData);
     } else {
-      this.bookTrip(mData);
+
+      let finalData = {
+        ...mData,
+        ...{
+          bookedInfo: {
+            _id: this.userInfo?._id,
+            name: this.userInfo?.name,
+            role: this.userInfo?.role === 'admin' ? 'Super Counter' :
+            this.userInfo?.role === 'editor' ? 'Counter' : this.userInfo?.role,
+            applicationChannel: 'admin',
+          },
+        }
+      }
+
+      if(this.dataForm.value.ticketType === 'Sold'){
+        finalData = {
+          ...finalData,
+          ...{
+            issuedInfo: {
+              _id: this.userInfo?._id,
+              name: this.userInfo?.name,
+              role: this.userInfo?.role === 'admin' ? 'Super Counter' :
+              this.userInfo?.role === 'editor' ? 'Counter' : this.userInfo?.role,
+              applicationChannel: 'admin',
+            },
+          }
+        }
+      }
+
+      this.bookTrip(finalData);
     }
   }
 
