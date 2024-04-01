@@ -26,6 +26,7 @@ import {FilterComponent} from './filter/filter.component';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import {SearchTripModule} from '../../shared/components/search-trip/search-trip.module';
 import { NgxPrintModule } from 'ngx-print';
+import { CanceledListComponent } from './canceled-list/canceled-list.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { NgxPrintModule } from 'ngx-print';
     SearchResultComponent,
     FilterComponent,
     ConfirmDialogComponent,
+    CanceledListComponent,
   ],
   imports: [
     CommonModule,
@@ -57,6 +59,7 @@ import { NgxPrintModule } from 'ngx-print';
     GenericSelectModule,
     UnitSelectModule,
     SearchTripModule,
+    DirectivesModule
   ]
 })
 export class BusBookingModule {

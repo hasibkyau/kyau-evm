@@ -1,6 +1,6 @@
 import {Component, HostListener, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewChild,} from '@angular/core';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UiService} from 'src/app/services/core/ui.service';
 import {Trip} from 'src/app/interfaces/common/trip.interface';
 import {Seat} from '../../../interfaces/common/bus.interface';

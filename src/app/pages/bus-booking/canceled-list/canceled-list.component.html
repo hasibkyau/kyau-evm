@@ -1,0 +1,306 @@
+<section class="admin-data-sec">
+    <div class="top-data-header" style="display: block">
+      <app-search-trip></app-search-trip>
+    </div>
+    <!-- END TOP DATA HEADER -->
+  
+    <div class="top-data-header">
+      <div class="title">
+        <h2>All Tickets</h2>
+      </div>
+  
+      <form class="table-search" #searchForm="ngForm">
+        <input
+          type="text"
+          #searchInput
+          name="searchTerm"
+          autocomplete="off"
+          ngModel
+          placeholder="Search with ticket or phone number"
+        />
+        <button><i class="fa fa-search"></i></button>
+      </form>
+  
+      <div class="action">
+        <button
+          style="visibility: hidden"
+          mat-raised-button
+          color="accent"
+          [routerLink]="['../', 'add-ticket']"
+        >
+          <mat-icon>add</mat-icon>
+          Add Ticket
+        </button>
+      </div>
+    </div>
+    <!-- END TOP DATA HEADER -->
+  
+    <div class="action-multiple">
+      <div class="sort">
+        <button mat-raised-button color="primary" [matMenuTriggerFor]="menuCat">
+          Ticket Type
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menuCat="matMenu">
+          <button
+            *ngFor="let data of ticketTypes; let i = index"
+            mat-menu-item
+            (click)="filterData(data.value, i, 'ticketType')"
+            [class.dropdown-active]="activeFilter2 === i"
+          >
+            {{ data.viewValue }}
+          </button>
+        </mat-menu>
+      </div>
+  
+      <div class="sort">
+        <button mat-raised-button color="primary" [matMenuTriggerFor]="matMenuBus">
+          Launch
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #matMenuBus="matMenu">
+          <button
+            *ngFor="let data of buss; let i = index"
+            mat-menu-item
+            (click)="filterData(data.name, i, 'bus')"
+            [class.dropdown-active]="activeFilter1 === i"
+          >
+            {{ data.name }}
+          </button>
+        </mat-menu>
+      </div>
+  
+      <div class="sort">
+        <button mat-raised-button color="primary" [matMenuTriggerFor]="menuSort">
+          Sort By
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menuSort="matMenu">
+          <button
+            mat-menu-item
+            (click)="sortData({ createdAt: 1 }, 1)"
+            [class.dropdown-active]="activeSort === 1"
+          >
+            Booked Time (Last - First)
+          </button>
+          <button
+            mat-menu-item
+            (click)="sortData({ createdAt: -1 }, 1)"
+            [class.dropdown-active]="activeSort === 1"
+          >
+            Booked Time (First - Last)
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  
+    <div class="table-wrapper space">
+      <div class="table-action" [class.dual]="activeSort || filter">
+        <div class="left" *ngIf="activeSort || filter">
+          <button mat-stroked-button color="accent" (click)="onRemoveAllQuery()">
+            <mat-icon>close</mat-icon>
+            Clear FilterData
+          </button>
+        </div>
+  
+        <div class="right" *ngIf="selectedIds && selectedIds.length">
+          <!-- <button *ngIf="checkEditPermission" mat-stroked-button color="primary" [matMenuTriggerFor]="menu">
+                 Change Status
+                 <mat-icon>arrow_drop_down</mat-icon>
+               </button>
+               <mat-menu #menu="matMenu">
+                 <button mat-menu-item (click)="openConfirmDialog('edit', {status: 'publish'})">Publish</button>
+                 <button mat-menu-item (click)="openConfirmDialog('edit', {status: 'draft'})">Draft</button>
+               </mat-menu> -->
+  
+          <!-- <button *ngIf="checkDeletePermission" mat-stroked-button color="warn" (click)="openConfirmDialog('delete')"
+                       matTooltip="Delete">
+                 <mat-icon>delete</mat-icon>
+               </button> -->
+          <ng-container *ngIf="checkDeletePermission">
+               <button
+  
+            mat-stroked-button
+            color="warn"
+            matTooltip="Print Trip Sheet"
+            ngxPrint
+            styleSheetFile="../../../../assets/css/base-table.css"
+            printSectionId="all-tickets-print-table"
+          >
+            Print Trip Sheet <mat-icon>print</mat-icon>
+          </button>
+        </ng-container>
+        </div>
+      </div>
+      <!-- END Table Action -->
+  
+      <table>
+        <tr>
+          <th class="t-checkbox">
+            <mat-checkbox
+              #matCheckbox
+              (change)="onAllSelectChange($event)"
+            ></mat-checkbox>
+          </th>
+          <th>Ticket No</th>
+          <th>Name</th>
+          <th>phone</th>
+          <th>Bus</th>
+          <th>Ticket Type</th>
+          <th>Seats</th>
+          <!-- <th>Departure Time</th>
+          <th>Arrival Time</th> -->
+          <th>From</th>
+          <th>To</th>
+          <th>Price</th>
+          <th>Expired In</th>
+          <!--        <th>Status</th>-->
+          <th>Actions</th>
+        </tr>
+        <ng-container
+        *ngFor="
+            let data of tickets
+              | paginate
+                : {
+                    itemsPerPage: TicketsPerPage,
+                    currentPage: currentPage,
+                    totalItems: totalTickets
+                  };
+            let i = index
+          "
+        >
+        <!-- <tr *ngIf="data?.ticketType !== 'Canceled'"> -->
+        <tr>
+          <td class="t-checkbox">
+            <mat-checkbox
+              class="t-mat-checkbox"
+              [(ngModel)]="data.select"
+              (ngModelChange)="onCheckChange($event, i, data._id)"
+            ></mat-checkbox>
+          </td>
+          <td>{{ data.ticketNo }}</td>
+          <td>{{ data.name | titlecase }}</td>
+          <td>{{ data?.phoneNo }}</td>
+          <td>{{ data.bus?.name ?? "-" }}</td>
+          <td
+            style="font-weight: 600"
+            [ngStyle]="getTicketTypeStyle(data?.ticketType)"
+          >
+          {{ data?.ticketType === 'Sold' ? 'Issued' : data?.ticketType }}
+          </td>
+          <td>
+            {{
+              data
+                | ticketSeats
+                  : (data.ticketType === "Canceled" ? "Canceled" : null)
+            }}
+          </td>
+          <!-- <td>{{ data?.departureTime?.name }}</td>
+          <td>{{ data?.arrivalTime?.name }}</td> -->
+          <td>{{ data?.from?.name }}</td>
+          <td>{{ data?.to?.name }}</td>
+          <td>{{ data?.grandTotal }}</td>
+          <td style="font-weight: 600; color: #d83333">{{ data?.expireTime }}</td>
+          <td class="td-action">
+            <button
+              *ngIf="role === 'super_admin' && data?.ticketType !== 'Canceled'"
+              [disabled]="!checkEditPermission"
+              (click)="openConfirmDialog('canceled', data)"
+              color="warn"
+              style="margin-right: 5px"
+              mat-mini-fab
+              matTooltip="Cancel"
+            >
+              <mat-icon>block</mat-icon>
+            </button>
+            <a
+              *ngIf="(data.ticketType === 'Booked' || role === 'super_admin') && data?.ticketType !== 'Canceled'"
+              [disabled]="!checkEditPermission"
+              [routerLink]="['/bus-booking', 'edit-booking', data._id]"
+              mat-mini-fab
+              matTooltip="Edit"
+            >
+              <mat-icon>edit</mat-icon>
+            </a>
+            <a
+            *ngIf="data.ticketType === 'Sold'"
+            [disabled]="!checkEditPermission"
+            mat-mini-fab
+            matTooltip="print"
+            style="background: tomato;"
+          >
+            <mat-icon>print</mat-icon>
+          </a>
+          </td>
+        </tr>
+      </ng-container>
+      </table>
+    </div>
+  
+    <div class="pagination-container">
+      <pagination-controls
+        class="data-pagination"
+        [autoHide]="true"
+        [maxSize]="15"
+        (pageChange)="onPageChanged($event)"
+      >
+      </pagination-controls>
+    </div>
+    <!-- END PAGINATION -->
+  
+    <!-- LOADING TEMPLATE -->
+    <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.5)"
+      size="medium"
+      color="#fff"
+      type="ball-atom"
+      [fullScreen]="false"
+    >
+      <p style="color: white">Loading...</p>
+    </ngx-spinner>
+  </section>
+  
+  
+  <!-- Print Table Html Code -->
+  <div id="all-tickets-print-table" style="display: none">
+    <table>
+      <tr>
+        <th>Ticket No</th>
+        <th>Name</th>
+        <th>phone</th>
+        <th>Bus</th>
+        <th>Ticket Type</th>
+        <th>Seats</th>
+        <!-- <th>Departure Time</th>
+        <th>Arrival Time</th> -->
+        <th>From</th>
+        <th>To</th>
+        <th>Price</th>
+      </tr>
+      <tr *ngFor="let data of tickets">
+        <td>{{ data.ticketNo }}</td>
+        <td>{{ data.name | titlecase }}</td>
+        <td>{{ data?.phoneNo }}</td>
+        <td>{{ data.bus?.name ?? "-" }}</td>
+        <td
+          style="font-weight: 600"
+          [ngStyle]="getTicketTypeStyle(data?.ticketType)"
+        >
+          {{ data?.ticketType }}
+        </td>
+        <td>
+          {{
+            data
+              | ticketSeats
+                : (data.ticketType === "Canceled" ? "Canceled" : null)
+          }}
+        </td>
+        <!-- <td>{{ data?.departureTime?.name }}</td>
+        <td>{{ data?.arrivalTime?.name }}</td> -->
+        <td>{{ data?.from?.name }}</td>
+        <td>{{ data?.to?.name }}</td>
+        <td>{{ data?.grandTotal }}</td>
+      </tr>
+    </table>
+  </div>
+  

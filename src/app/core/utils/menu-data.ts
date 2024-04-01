@@ -142,6 +142,13 @@ export const SUPER_ADMIN_MENU: AdminMenu[] = [
         routerLink: 'bus-booking/all-tickets',
         icon: 'arrow_right',
       },
+      {
+        id: 3,
+        name: 'Canceled List',
+        hasSubMenu: true,
+        routerLink: 'bus-booking/cancel-tickets',
+        icon: 'arrow_right',
+      },
     ],
   },
 
@@ -482,6 +489,13 @@ export const SUPER_COUNTER_MENUE: AdminMenu[] = [
         name: 'Ticket List',
         hasSubMenu: true,
         routerLink: 'bus-booking/all-tickets',
+        icon: 'arrow_right',
+      },
+      {
+        id: 3,
+        name: 'Canceled List',
+        hasSubMenu: true,
+        routerLink: 'bus-booking/cancel-tickets',
         icon: 'arrow_right',
       },
     ],

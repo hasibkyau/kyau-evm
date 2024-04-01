@@ -83,6 +83,7 @@
         <mat-form-field appearance="outline" class="form-field" (click)="picker1.open()">
           <input readonly matInput [matDatepicker]="picker1"
                  placeholder="JOURNEY DATE"
+                 [min]="minDate"
                  formControlName="date">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
