@@ -199,6 +199,7 @@ export class AllTicketsComponent implements OnInit {
             seats: 1,
             canceledSeats: 1,
             bus: 1,
+            createdAt: 1
           };
 
           const filterData: FilterData = {
@@ -216,6 +217,8 @@ export class AllTicketsComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
+          console.log('tickets', res);
+          
           this.searchTicket = res.data;
           this.tickets = this.searchTicket;
           this.totalTickets = res.count;
@@ -293,6 +296,9 @@ export class AllTicketsComponent implements OnInit {
       seats: 1,
       canceledSeats: 1,
       bus: 1,
+      createdAt: 1,
+      time: 1,
+      updatedAt: 1
 
     };
 

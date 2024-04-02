@@ -11,7 +11,7 @@ export class PricePipe implements PipeTransform {
   transform(prices: any[], seatType: string): number {
     if (prices.length) {
       const f = prices.find(f => f.seatType === seatType);
-      return f.price ?? 0
+      return f?.price ? f?.price :  0
     } else {
       return 0;
     }

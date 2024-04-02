@@ -561,9 +561,9 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   get totalAmount() {
     let price = 0;
     this.selectedSeats.forEach(seat => {
-      price += this.pricePipe.transform(this.selectedTrip.prices, seat.seatType);
+      price += this.pricePipe.transform(this.selectedTrip?.prices, seat.seatType);
     })
-    return price
+    return price ? price : 0
   }
 
   get serviceCharge() {
