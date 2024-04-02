@@ -20,6 +20,7 @@ import {TripService} from '../../../services/common/trip.service';
 import {Select} from '../../../interfaces/core/select';
 import {TICKET_TYPES} from '../../../core/utils/app-data';
 import { AdminService } from 'src/app/services/admin/admin.service';
+import { PrintConfirmDialogComponent } from './print-confirm-dialog/print-confirm-dialog.component';
 
 
 @Component({
@@ -68,6 +69,8 @@ export class AllTicketsComponent implements OnInit {
   // Pagination Input
   pageNo: number = null;
 
+  selectedTicket: Ticket = null;
+
   // Subscriptions
   private subDataOne: Subscription;
   private subDataTwo: Subscription;
@@ -89,6 +92,26 @@ export class AllTicketsComponent implements OnInit {
     private tripService: TripService,
     private adminService: AdminService,
   ) {
+  }
+
+
+  openPrintConfirmButton(data: Ticket) {
+    this.selectedTicket = data;
+
+    const dialogRef = this.dialog.open(PrintConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: {
+        title: 'Confirm Print',
+        message: 'Are you sure you want to Print this ticket?'
+      }
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+
+
+      }
+    });
+
   }
 
   ngOnInit(): void {

@@ -54,7 +54,11 @@
     </div>
 
     <div class="sort">
-      <button mat-raised-button color="primary" [matMenuTriggerFor]="matMenuBus">
+      <button
+        mat-raised-button
+        color="primary"
+        [matMenuTriggerFor]="matMenuBus"
+      >
         Launch
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
@@ -118,18 +122,17 @@
                <mat-icon>delete</mat-icon>
              </button> -->
         <ng-container *ngIf="checkDeletePermission">
-             <button
-
-          mat-stroked-button
-          color="warn"
-          matTooltip="Print Trip Sheet"
-          ngxPrint
-          styleSheetFile="../../../../assets/css/base-table.css"
-          printSectionId="all-tickets-print-table"
-        >
-          Print Trip Sheet <mat-icon>print</mat-icon>
-        </button>
-      </ng-container>
+          <button
+            mat-stroked-button
+            color="warn"
+            matTooltip="Print Trip Sheet"
+            ngxPrint
+            styleSheetFile="../../../../assets/css/base-table.css"
+            printSectionId="all-tickets-print-table"
+          >
+            Print Trip Sheet <mat-icon>print</mat-icon>
+          </button>
+        </ng-container>
       </div>
     </div>
     <!-- END Table Action -->
@@ -158,7 +161,7 @@
         <th>Actions</th>
       </tr>
       <ng-container
-      *ngFor="
+        *ngFor="
           let data of tickets
             | paginate
               : {
@@ -169,71 +172,87 @@
           let i = index
         "
       >
-      <!-- <tr *ngIf="data?.ticketType !== 'Canceled'"> -->
-      <tr [style.background]="data?.ticketType === 'Canceled' ? '#F7BDC3' : ''">
-        <td class="t-checkbox">
-          <mat-checkbox
-            class="t-mat-checkbox"
-            [(ngModel)]="data.select"
-            (ngModelChange)="onCheckChange($event, i, data._id)"
-          ></mat-checkbox>
-        </td>
-        <td>{{ data.ticketNo }}</td>
-        <td>{{ data.name | titlecase }}</td>
-        <td>{{ data?.phoneNo }}</td>
-        <td>{{ data.bus?.name ?? "-" }}</td>
-        <td
-          style="font-weight: 600"
-          [ngStyle]="getTicketTypeStyle(data?.ticketType)"
+        <!-- <tr *ngIf="data?.ticketType !== 'Canceled'"> -->
+        <tr
+          [style.background]="data?.ticketType === 'Canceled' ? '#F7BDC3' : ''"
         >
-        {{ data?.ticketType === 'Sold' ? 'Issued' : data?.ticketType }}
-        </td>
-        <td>
-          {{
-            data
-              | ticketSeats
-                : (data.ticketType === "Canceled" ? "Canceled" : null)
-          }}
-        </td>
-        <!-- <td>{{ data?.departureTime?.name }}</td>
+          <td class="t-checkbox">
+            <mat-checkbox
+              class="t-mat-checkbox"
+              [(ngModel)]="data.select"
+              (ngModelChange)="onCheckChange($event, i, data._id)"
+            ></mat-checkbox>
+          </td>
+          <td>{{ data.ticketNo }}</td>
+          <td>{{ data.name | titlecase }}</td>
+          <td>{{ data?.phoneNo }}</td>
+          <td>{{ data.bus?.name ?? "-" }}</td>
+          <td
+            style="font-weight: 600"
+            [ngStyle]="getTicketTypeStyle(data?.ticketType)"
+          >
+            {{ data?.ticketType === "Sold" ? "Issued" : data?.ticketType }}
+          </td>
+          <td>
+            {{
+              data
+                | ticketSeats
+                  : (data.ticketType === "Canceled" ? "Canceled" : null)
+            }}
+          </td>
+          <!-- <td>{{ data?.departureTime?.name }}</td>
         <td>{{ data?.arrivalTime?.name }}</td> -->
-        <td>{{ data?.from?.name }}</td>
-        <td>{{ data?.to?.name }}</td>
-        <td>{{ data?.grandTotal }}</td>
-        <td style="font-weight: 600; color: #d83333">{{ data?.expireTime }}</td>
-        <td class="td-action">
-          <button
-            *ngIf="role === 'super_admin' && data?.ticketType !== 'Canceled'"
-            [disabled]="!checkEditPermission"
-            (click)="openConfirmDialog('canceled', data)"
-            color="warn"
-            style="margin-right: 5px"
-            mat-mini-fab
-            matTooltip="Cancel"
-          >
-            <mat-icon>block</mat-icon>
-          </button>
-          <a
-            *ngIf="(data.ticketType === 'Booked' || role === 'super_admin') && data?.ticketType !== 'Canceled'"
-            [disabled]="!checkEditPermission"
-            [routerLink]="['/bus-booking', 'edit-booking', data._id]"
-            mat-mini-fab
-            matTooltip="Edit"
-          >
-            <mat-icon>edit</mat-icon>
-          </a>
-          <a
-          *ngIf="data.ticketType === 'Sold'"
-          [disabled]="!checkEditPermission"
-          mat-mini-fab
-          matTooltip="print"
-          style="background: tomato;"
-        >
-          <mat-icon>print</mat-icon>
-        </a>
-        </td>
-      </tr>
-    </ng-container>
+          <td>{{ data?.from?.name }}</td>
+          <td>{{ data?.to?.name }}</td>
+          <td>{{ data?.grandTotal }}</td>
+          <td style="font-weight: 600; color: #d83333">
+            {{ data?.expireTime }}
+          </td>
+          <td class="td-action">
+            <button
+              *ngIf="role === 'super_admin' && data?.ticketType !== 'Canceled'"
+              [disabled]="!checkEditPermission"
+              (click)="openConfirmDialog('canceled', data)"
+              color="warn"
+              style="margin-right: 5px"
+              mat-mini-fab
+              matTooltip="Cancel"
+            >
+              <mat-icon>block</mat-icon>
+            </button>
+            <a
+              *ngIf="
+                (data.ticketType === 'Booked' || role === 'super_admin') &&
+                data?.ticketType !== 'Canceled'
+              "
+              [disabled]="!checkEditPermission"
+              [routerLink]="['/bus-booking', 'edit-booking', data._id]"
+              mat-mini-fab
+              matTooltip="Edit"
+            >
+              <mat-icon>edit</mat-icon>
+            </a>
+            <button *ngIf="data.ticketType === 'Sold'" [disabled]="!checkEditPermission" mat-mini-fab matTooltip="Print"
+              style="background: tomato;" (click)="openPrintConfirmButton(data)">
+              <mat-icon>print</mat-icon>
+            </button>
+            <!-- <button
+              *ngIf="data.ticketType === 'Sold'"
+              [disabled]="!checkEditPermission"
+              mat-mini-fab
+              matTooltip="Print"
+              style="background: tomato"
+              ngxPrint
+              styleSheetFile="./print-invoice/print-invoice.css"
+              printSectionId="print-invoice"
+              useExistingCss="True"
+              (click)="openPrintConfirmButton(data)"
+            >
+              <mat-icon>print</mat-icon>
+            </button> -->
+          </td>
+        </tr>
+      </ng-container>
     </table>
   </div>
 
@@ -259,7 +278,6 @@
     <p style="color: white">Loading...</p>
   </ngx-spinner>
 </section>
-
 
 <!-- Print Table Html Code -->
 <div id="all-tickets-print-table" style="display: none">
@@ -291,8 +309,7 @@
       <td>
         {{
           data
-            | ticketSeats
-              : (data.ticketType === "Canceled" ? "Canceled" : null)
+            | ticketSeats : (data.ticketType === "Canceled" ? "Canceled" : null)
         }}
       </td>
       <!-- <td>{{ data?.departureTime?.name }}</td>
@@ -303,3 +320,5 @@
     </tr>
   </table>
 </div>
+
+<app-print-invoice id="print-invoice" style="display: none" [ticket]="selectedTicket"></app-print-invoice>
