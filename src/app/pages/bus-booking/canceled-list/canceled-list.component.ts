@@ -21,13 +21,12 @@ import {Select} from '../../../interfaces/core/select';
 import {TICKET_TYPES} from '../../../core/utils/app-data';
 import { AdminService } from 'src/app/services/admin/admin.service';
 
-
 @Component({
-  selector: 'app-all-tickets',
-  templateUrl: './all-tickets.component.html',
-  styleUrls: ['./all-tickets.component.scss'],
+  selector: 'app-canceled-list',
+  templateUrl: './canceled-list.component.html',
+  styleUrls: ['./canceled-list.component.scss']
 })
-export class AllTicketsComponent implements OnInit {
+export class CanceledListComponent implements OnInit {
   // Admin Base Data
   adminId: string;
   role: string;
@@ -199,7 +198,6 @@ export class AllTicketsComponent implements OnInit {
             seats: 1,
             canceledSeats: 1,
             bus: 1,
-            createdAt: 1
           };
 
           const filterData: FilterData = {
@@ -217,8 +215,6 @@ export class AllTicketsComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log('tickets', res);
-          
           this.searchTicket = res.data;
           this.tickets = this.searchTicket;
           this.totalTickets = res.count;
@@ -296,9 +292,6 @@ export class AllTicketsComponent implements OnInit {
       seats: 1,
       canceledSeats: 1,
       bus: 1,
-      createdAt: 1,
-      time: 1,
-      updatedAt: 1
 
     };
 
@@ -308,7 +301,7 @@ export class AllTicketsComponent implements OnInit {
     }
 
     const filter: FilterData = {
-      filter: this.filter,
+      filter: {...this.filter, ...{ticketType: 'Canceled'}},
       pagination: pagination,
       select: mSelect,
       sort: this.sortQuery,

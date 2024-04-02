@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {MatDatepicker} from '@angular/material/datepicker';
 import {RouteRelations} from '../../../interfaces/common/route-relation.interface';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -19,6 +19,8 @@ import { SEAT_TYPES } from 'src/app/core/db/seat-type.db';
   styleUrls: ['./search-trip.component.scss']
 })
 export class SearchTripComponent implements OnInit {
+  @Input() minDate: Date = null;
+  @Input() maxDate: Date = null;
 
   @ViewChild('formInput') formInput!: ElementRef;
   @ViewChild('toInput') toInput!: ElementRef;

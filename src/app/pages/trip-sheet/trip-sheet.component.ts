@@ -25,6 +25,8 @@ export class TripSheetComponent implements OnInit {
   adminId: string;
   role: string;
   permissions: AdminPermissions[];
+  minDate: Date = new Date();
+  maxDate: Date = null;
 
   // Store Data
   ticketTypes: Select[] = TICKET_TYPES;
@@ -171,7 +173,7 @@ export class TripSheetComponent implements OnInit {
     };
 
     const filter: FilterData = {
-      filter: this.filter,
+      filter: {...this.filter, ...{status: 'publish'}},
       pagination: null,
       select: mSelect,
       sort: this.sortQuery,

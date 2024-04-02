@@ -354,14 +354,10 @@
                     >
                       <div class="form-field">
                         <label>NAME*</label>
-                        <input type="text" formControlName="name" />
-                        <span
-                          *ngIf="
-                            dataForm.get('name')?.touched &&
-                            dataForm.get('name')?.invalid
-                          "
-                          >This field is required</span
-                        >
+                        <input type="text" formControlName="name" appTextOnly/>
+                        <span *ngIf="dataForm.get('name')?.touched && dataForm.get('name')?.invalid">
+                          This field is required and should contain only text characters.
+                        </span>
                       </div>
                     </div>
 

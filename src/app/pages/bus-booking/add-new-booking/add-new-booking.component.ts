@@ -23,6 +23,8 @@ export class AddNewBookingComponent implements OnInit {
   ticket: Ticket = null;
   trip: Trip = null;
   date: string;
+  
+  today: Date = new Date();
 
 
   // Pagination

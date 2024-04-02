@@ -169,7 +169,8 @@
           let i = index
         "
       >
-      <tr *ngIf="data?.ticketType !== 'Canceled'">
+      <!-- <tr *ngIf="data?.ticketType !== 'Canceled'"> -->
+      <tr [style.background]="data?.ticketType === 'Canceled' ? '#F7BDC3' : ''">
         <td class="t-checkbox">
           <mat-checkbox
             class="t-mat-checkbox"
@@ -202,7 +203,7 @@
         <td style="font-weight: 600; color: #d83333">{{ data?.expireTime }}</td>
         <td class="td-action">
           <button
-            *ngIf="role === 'super_admin'"
+            *ngIf="role === 'super_admin' && data?.ticketType !== 'Canceled'"
             [disabled]="!checkEditPermission"
             (click)="openConfirmDialog('canceled', data)"
             color="warn"
@@ -213,7 +214,7 @@
             <mat-icon>block</mat-icon>
           </button>
           <a
-            *ngIf="data.ticketType === 'Booked' || role === 'super_admin'"
+            *ngIf="(data.ticketType === 'Booked' || role === 'super_admin') && data?.ticketType !== 'Canceled'"
             [disabled]="!checkEditPermission"
             [routerLink]="['/bus-booking', 'edit-booking', data._id]"
             mat-mini-fab

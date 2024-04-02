@@ -4,6 +4,7 @@ import {ImageLoadErrorDirective} from './image-load-error.directive';
 import {ImageProfileErrorDirective} from "./image-profile-error.directive";
 import {NoWhitespaceDirective} from "./no-whitespace.directive";
 import {AutoSlugDirective} from "./auto-slug.directive";
+import { TextOnlyDirective } from './text-only.directive';
 
 
 
@@ -12,7 +13,8 @@ import {AutoSlugDirective} from "./auto-slug.directive";
     ImageLoadErrorDirective,
     ImageProfileErrorDirective,
     NoWhitespaceDirective,
-    AutoSlugDirective
+    AutoSlugDirective,
+    TextOnlyDirective
   ],
   imports: [
     CommonModule
@@ -21,7 +23,8 @@ import {AutoSlugDirective} from "./auto-slug.directive";
     ImageLoadErrorDirective,
     ImageProfileErrorDirective,
     NoWhitespaceDirective,
-    AutoSlugDirective
+    AutoSlugDirective,
+    TextOnlyDirective
   ]
 })
 export class DirectivesModule { }
