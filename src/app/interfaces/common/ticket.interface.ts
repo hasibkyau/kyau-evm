@@ -35,6 +35,8 @@ export interface Ticket {
   expiredIn?: any;
   expireTime?: any;
   status?: 'draft' | 'publish';
+  tripDate?: string;
+  time?: string;
   createdAt: string;
   updatedAt: string;
   select?:boolean;

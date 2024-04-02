@@ -1,0 +1,212 @@
+
+<div class="main">
+    <!---download-ticket-area-->
+    <div class="download-ticket-area">
+  
+      <!--mk-tickect-copy-->
+      <div class="mk-ticket-info-right" >
+        <!--ticket-info-->
+        <div class="ticket-info">
+          <ul>
+            <li>
+              <h3> Name:</h3>
+              <span>{{ticket?.name}}</span>
+            </li>
+            <li>
+              <h3>Tickets:</h3>
+              <span>{{ticket?.ticketNo}}</span>
+            </li>
+            <li>
+              <h3>Launch:</h3>
+              <span>{{ticket?.bus?.name}}</span>
+            </li>
+            <li>
+              <h3>Fare(Tk.):</h3>
+              <span>{{ticket?.grandTotal}}</span>
+            </li>
+            <li>
+              <h3>Advance:</h3>
+              <span>{{ticket?.paidAmount}}</span>
+            </li>
+            <li>
+              <h3>Due:</h3>
+              <span>{{ticket?.grandTotal - ticket?.paidAmount}}</span>
+              <!--          </li>-->
+            <li>
+              <h3>Date:</h3>
+              <span>{{ticket?.tripDate}}</span>
+            </li>
+            <li>
+              <h3>Time:</h3>
+              <span>{{ticket?.time}}</span>
+            </li>
+  
+            <li>
+              <h3>Issued:</h3>
+              <span>{{ticket?.issuedInfo?.name | titlecase}}</span>
+            </li>
+  
+  
+          </ul>
+        </div>
+      </div><!--details-->
+      <!---------------passenger-copy------------>
+      <div class="passenger-info">
+        <!--details-->
+        <div class="mk-ticket">
+          <!--ticket-info-->
+          <div class="ticket-info">
+            <ul>
+              <li>
+                <h3>Passenger Name:</h3>
+                <span>{{ticket?.name}}</span>
+              </li>
+              <!-- <li>
+                <h3>Address:</h3>
+                <span>{{ticket?.address}}</span>
+              </li> -->
+              <li>
+                <ul>
+                  <li>
+                    <h3>Mobile:</h3>
+                    <span>{{ticket?.phoneNo}}</span>
+                  </li>
+                  <!-- <li>
+                    <h3>ID:</h3>
+                    <span>{{ticket?.passportNid}}</span>
+                  </li> -->
+                </ul>
+              </li>
+  
+              <li>
+                <h3>Boarding at:</h3>
+                <span>{{ticket?.from?.name}}</span>
+              </li>
+              <li>
+                <ul>
+                  <li>
+                    <h3>Ticket:</h3>
+                    <span>{{ticket?.ticketNo}}</span>
+                  </li>
+                  <li>
+                    <h3>From:</h3>
+                    <span>{{ticket?.from?.name}}</span>
+                  </li>
+                </ul>
+              </li>
+  
+              <li>
+                <ul>
+                  <li>
+                    <h3>Launch:</h3>
+                    <span>{{ticket?.bus?.name}}</span>
+                  </li>
+                  <li>
+                    <h3>To:</h3>
+                    <span>{{ticket?.to?.name}}</span>
+                  </li>
+                </ul>
+              </li>
+  
+              <li>
+                <h3>Journey Date:</h3>
+                <span>{{ticket?.from}}</span>
+              </li>
+              <li>
+                <h3>Departure Time:</h3>
+                <span>{{ticket?.departureTime?.name}}</span>
+              </li>
+              <!-- <li>
+                <h3>Vehicle NO:</h3>
+                <span>{{(ticket?.carNumber)}}</span>
+              </li> -->
+              <li>
+                <h3>Fare(Tk.):</h3>
+                <span>{{ticket?.grandTotal}}</span>
+              </li>
+  
+  <!--            <li>-->
+  <!--              <ul>-->
+  <!--                <li>-->
+  <!--                  <h3>Cabin No:</h3>-->
+  <!--                  <span *ngFor="let data of ticket?.seats">{{data?.seatNo}}, </span>-->
+  <!--                </li>-->
+  <!--                <li>-->
+  <!--                <li>-->
+  <!--                  <h3>Total Fare(Tk.):</h3>-->
+  <!--                  <span>{{ticket?.totalAmount}}</span>-->
+  <!--                </li>-->
+  <!--              </ul>-->
+  <!--            </li>-->
+  
+  <!--            <li>-->
+  <!--              <h3>Issued by:</h3>-->
+  <!--              <span>{{ticket?.issuedBy?.name | titlecase}}</span>-->
+  <!--            </li>-->
+  
+  
+            </ul>
+          </div>
+        </div><!--details-->
+        <!---passenger-coppy-rotate-title-->
+        <div class="rotate-title">
+          <h2>Passenger's Copy</h2>
+        </div>
+      </div>
+  
+      <!--Mk Ticket Coppy-->
+      <div class="mk-ticket-info" style="padding-left: 45px;">
+        <!--ticket-info-->
+        <div class="ticket-info">
+          <ul>
+            <li>
+  <!--            <h3>Passengers <br/> Name:</h3>-->
+              <h3>Name:</h3>
+              <span>{{ticket?.name}}</span>
+            </li>
+            <li>
+              <h3>Tickets:</h3>
+              <span>{{ticket?.ticketNo}}</span>
+            </li>
+            <li>
+              <h3>Launch:</h3>
+              <span>{{ticket?.bus?.name}}</span>
+            </li>
+            <!-- <li>
+              <h3>Vehicle NO:</h3>
+              <span>{{(ticket?.carNumber)}}</span>
+            </li> -->
+            <li>
+              <h3>Fare(Tk.):</h3>
+              <span>{{ticket?.grandTotal}}</span>
+            </li>
+            <li>
+              <h3>Advance:</h3>
+              <span>{{ticket?.paidAmount}}</span>
+            </li>
+            <li>
+              <h3>Due:</h3>
+              <span>{{ticket?.grandTotal - ticket?.paidAmount}}</span>
+              <!--          </li>-->
+            <li>
+              <h3>Date:</h3>
+              <span>{{ticket?.tripDate}}</span>
+            </li>
+            <li>
+              <h3>Time:</h3>
+              <span>{{ticket?.time}}</span>
+            </li>
+  
+            <li>
+              <h3>Issued:</h3>
+              <span style="letter-spacing: -0.5px; white-space: pre;">{{ticket?.issuedInfo?.name | titlecase}}</span>
+            </li>
+  
+  
+          </ul>
+        </div>
+      </div><!--details-->
+  
+    </div><!---download-ticket-area-end-->
+  </div>
+  

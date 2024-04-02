@@ -27,6 +27,8 @@ import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component'
 import {SearchTripModule} from '../../shared/components/search-trip/search-trip.module';
 import { NgxPrintModule } from 'ngx-print';
 import { CanceledListComponent } from './canceled-list/canceled-list.component';
+import { PrintInvoiceComponent } from './all-tickets/print-invoice/print-invoice.component';
+import { PrintConfirmDialogComponent } from './all-tickets/print-confirm-dialog/print-confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { CanceledListComponent } from './canceled-list/canceled-list.component';
     FilterComponent,
     ConfirmDialogComponent,
     CanceledListComponent,
+    PrintInvoiceComponent,
+    PrintConfirmDialogComponent,
   ],
   imports: [
     CommonModule,

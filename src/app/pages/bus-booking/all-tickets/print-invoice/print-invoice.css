@@ -1,0 +1,145 @@
+/** defualt css code ***/
+*{
+    padding: 0;
+    margin: 0;
+  }
+  body{
+    display: block;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    font-weight: 500;
+    font-family: 'Poppins',sans-serif;
+    color: #000;
+    font-size: 16px;
+    font-style:normal;
+    background-color: #ffffff;
+  
+  }
+  img{
+    display: block;
+    max-width: 100%;
+  }
+  a{
+    color: #000;
+    text-decoration:none;
+    display: block;
+  }
+  a:hover{
+    color: #000;
+    text-decoration: none;
+  }
+  .container{
+    display: block;
+    width: 95%;
+    margin: auto;
+  }
+  .clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+  
+  
+  .chart{
+    text-align: center;
+    margin-bottom: 10px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /** start Main Coding */
+  .main{
+    width: 100%;
+    overflow-x: auto;
+  }
+  .download-ticket-area{
+    width: 740px;
+    height: 310px;
+    line-height: 0px;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 175px 365px 175px;
+    grid-template-rows: auto;
+    margin: auto;
+    overflow: hidden;
+    -webkit-overflow:hidden;
+    -moz-overflow:hidden;
+    -o-overflow:hidden;
+  }
+
+  .mk-ticket-info{
+    padding: 45px 14px 36px 12px;
+    box-sizing: border-box;
+  }
+  .mk-ticket-info-right{
+    padding: 45px 14px 36px 0px;
+    box-sizing: border-box;
+  }
+  .passenger-info{
+    box-sizing: border-box;
+    position: relative;
+    padding: 45px 45px 36px 19px;
+  }
+  .ticket-info{
+    display: block;
+  }
+  .ticket-info ul{
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+  }
+  .ticket-info ul li{
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    gap: 2px;
+    margin-bottom: 3px;
+    flex-wrap: wrap;
+  }
+  .ticket-info ul li ul{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .ticket-info ul li h3{
+    color: #080000;
+    font-family:'Poppins',sans-serif;
+    font-style: normal;
+    font-size: 11px;
+    line-height: 16px;
+    font-weight: 700;
+    display: block;
+    letter-spacing: 0.5px;
+  }
+  .ticket-info ul li span{
+    color: #080000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 500;
+    display: block;
+    letter-spacing: 0.5px;
+    word-wrap:break-word;
+    line-height: 1.0;
+  }
+  .rotate-title{
+    display: block;
+  }
+  .rotate-title h2{
+    text-transform: uppercase;
+    color: #827666;
+    font-size: 18px;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    position: absolute;
+    top: 50%;
+    right: -80px;
+    transform: rotate(-90deg);
+  }
+  
