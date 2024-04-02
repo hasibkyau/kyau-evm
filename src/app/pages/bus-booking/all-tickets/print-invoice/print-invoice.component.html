@@ -26,15 +26,15 @@
             </li>
             <li>
               <h3>Advance:</h3>
-              <span>{{ticket?.paidAmount}}</span>
+              <span>{{ticket?.paidAmount ? ticket?.paidAmount : '0'}}</span>
             </li>
             <li>
               <h3>Due:</h3>
-              <span>{{ticket?.grandTotal - ticket?.paidAmount}}</span>
+              <span>{{(ticket?.grandTotal ? ticket?.grandTotal : 0) - (ticket?.paidAmount ? ticket?.paidAmount : 0)}}</span>
               <!--          </li>-->
             <li>
               <h3>Date:</h3>
-              <span>{{ticket?.tripDate}}</span>
+              <span>{{ticket?.date }}</span>
             </li>
             <li>
               <h3>Time:</h3>
@@ -110,7 +110,7 @@
   
               <li>
                 <h3>Journey Date:</h3>
-                <span>{{ticket?.from}}</span>
+                <span>{{ticket?.from?.name}}</span>
               </li>
               <li>
                 <h3>Departure Time:</h3>
@@ -182,15 +182,15 @@
             </li>
             <li>
               <h3>Advance:</h3>
-              <span>{{ticket?.paidAmount}}</span>
+              <span>{{ticket?.paidAmount ? ticket?.paidAmount : '0'}}</span>
             </li>
             <li>
               <h3>Due:</h3>
-              <span>{{ticket?.grandTotal - ticket?.paidAmount}}</span>
+              <span>{{(ticket?.grandTotal ? ticket?.grandTotal : 0) - (ticket?.paidAmount ? ticket?.paidAmount : 0)}}</span>
               <!--          </li>-->
             <li>
               <h3>Date:</h3>
-              <span>{{ticket?.tripDate}}</span>
+              <span>{{ticket?.date}}</span>
             </li>
             <li>
               <h3>Time:</h3>
