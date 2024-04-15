@@ -233,7 +233,6 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
           },
         };
       }),
-      user: null,
     };
 
     if (this.mode === 'edit') {
@@ -243,7 +242,8 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
           seats: this.selectedSeats.filter((f) => f.type === 'new'),
           oldSeats: this.selectedSeats.filter((f) => f.type !== 'new'),
           canceledSeats: this.canceledSeats,
-          user: this.ticket.user
+          user: this.ticket?.user,
+          bookedInfo: this.ticket?.bookedInfo
         },
       };
       this.updateBookedTrip(finalData);
@@ -259,6 +259,7 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
             this.userInfo?.role === 'editor' ? 'Counter' : this.userInfo?.role,
             applicationChannel: 'admin',
           },
+          user: this.userInfo?._id,
         }
       }
 
@@ -501,8 +502,10 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
         next: (res) => {
           this.isLoading = false;
           if (res.success) {
-            this.reloadService.needRefreshData$();
+            this.canceledSeats = [];
+            // this.selectedSeats = [];
             this.uiService.success(res.message);
+            this.reloadService.needRefreshData$();
             // this.router.navigate(['/bus-booking/all-tickets']);
           } else {
             this.uiService.warn(res.message);

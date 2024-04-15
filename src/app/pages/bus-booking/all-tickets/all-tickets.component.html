@@ -174,7 +174,7 @@
       >
         <!-- <tr *ngIf="data?.ticketType !== 'Canceled'"> -->
         <tr
-          [style.background]="data?.ticketType === 'Canceled' ? '#F7BDC3' : ''"
+          *ngIf="data?.ticketType !== 'Canceled'"
         >
           <td class="t-checkbox">
             <mat-checkbox
