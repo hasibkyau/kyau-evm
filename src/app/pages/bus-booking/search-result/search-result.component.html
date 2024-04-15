@@ -260,6 +260,7 @@
                           </td>
                           <td *ngIf="mode === 'edit'">৳ {{ selectedTrip.prices | price : seat.seatType }}</td>
                           <td *ngIf="mode === 'edit' && seat?.type !== 'new' && userRole !== 'counter'">
+                          <!-- <td *ngIf="mode === 'edit' && userRole !== 'counter'"> -->
                             <mat-icon
                               (click)="onRemoveBookedSeat(seat)"
                               style="font-size: 16px; cursor: pointer"
