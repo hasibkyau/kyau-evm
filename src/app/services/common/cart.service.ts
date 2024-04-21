@@ -85,6 +85,10 @@ export class CartService {
     return this.httpClient.post<ResponsePayload>(API_URL + 'delete-multiple', {ids: ids}, {params});
   }
 
+  cleanCartByUser() {
+    return this.httpClient.delete<ResponsePayload>(API_URL + 'delete-cart-by-user');
+  }
+
   // cartGroupByField<T>(dataArray: T[], field: string): CartGroup[] {
   //   const data = dataArray.reduce((group, product) => {
   //     const uniqueField = product[field]
