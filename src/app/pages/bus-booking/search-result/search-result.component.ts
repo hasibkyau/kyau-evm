@@ -92,6 +92,8 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.cleanCartByUser();
+
     this.userRole = this.adminService.getAdminRole();
     // console.log('user_role', this.userRole);
     let id = this.adminService.getAdminId();
@@ -440,6 +442,17 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
+  private cleanCartByUser(){
+    this.cartService.cleanCartByUser().subscribe({
+      next: (res) => {
+        console.log('cleanCartByUser',res);
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+  }
+
   private getCartByTrip() {
     const data = {
       user: this.adminService.getAdminId(),
@@ -589,31 +602,6 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
     return this.totalAmount + this.serviceCharge;
   }
 
-  ngOnDestroy() {
-    if (this.subReload) {
-      this.subReload.unsubscribe();
-    }
-
-    if (this.subRoute) {
-      this.subRoute.unsubscribe();
-    }
-
-    if (this.subDataOne) {
-      this.subDataOne.unsubscribe();
-    }
-
-    if (this.subDataTwo) {
-      this.subDataTwo.unsubscribe();
-    }
-
-    if (this.subDataThree) {
-      this.subDataThree.unsubscribe();
-    }
-    if (this.subDataFour) {
-      this.subDataFour.unsubscribe();
-    }
-  }
-
   onRemoveBookedSeat(seat: Seat) {
     const fIndex = this.selectedSeats.findIndex((f) => f._id === seat._id);
     this.selectedSeats.splice(fIndex, 1);
@@ -639,4 +627,36 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
       }
     })
   }
+  
+    /**
+   * ON DESTROY
+   */
+  ngOnDestroy() {
+    if (this.subReload) {
+      this.subReload.unsubscribe();
+    }
+
+    if (this.subRoute) {
+      this.subRoute.unsubscribe();
+    }
+
+    if (this.subDataOne) {
+      this.subDataOne.unsubscribe();
+    }
+
+    if (this.subDataTwo) {
+      this.subDataTwo.unsubscribe();
+    }
+
+    if (this.subDataThree) {
+      this.subDataThree.unsubscribe();
+    }
+    if (this.subDataFour) {
+      this.subDataFour.unsubscribe();
+    }
+
+    this.cleanCartByUser();
+  }
+
+
 }
