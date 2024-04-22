@@ -91,8 +91,8 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   ) {
   }
 
-  ngOnInit(): void {
-    this.cleanCartByUser();
+  async ngOnInit() {
+    await this.cleanCartByUser();
 
     this.userRole = this.adminService.getAdminRole();
     // console.log('user_role', this.userRole);
@@ -443,13 +443,17 @@ export class SearchResultComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private cleanCartByUser(){
-    this.cartService.cleanCartByUser().subscribe({
-      next: (res) => {
-        console.log('cleanCartByUser',res);
-      },
-      error: err => {
-        console.log(err);
-      }
+    return new Promise((resolve, reject)=>{
+      this.cartService.cleanCartByUser().subscribe({
+        next: (res) => {
+          resolve(res);
+          console.log('cleanCartByUser',res);
+        },
+        error: err => {
+          console.log(err);
+          reject(err);
+        }
+      })
     })
   }
 
