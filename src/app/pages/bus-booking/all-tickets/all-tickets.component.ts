@@ -34,6 +34,8 @@ export class AllTicketsComponent implements OnInit {
   role: string;
   permissions: AdminPermissions[];
 
+  today: Date = new Date();
+
   // Store Data
   ticketTypes: Select[] = TICKET_TYPES;
   toggleMenu: boolean = false;
