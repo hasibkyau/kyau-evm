@@ -88,6 +88,7 @@ export class AddBusComponent implements OnInit {
       coachType: [null],
       totalSeat: [null],
       company: [null],
+      merchantNumber: [null, Validators.required],
       seats: this.fb.array([
       ]),
       status:['publish'],
