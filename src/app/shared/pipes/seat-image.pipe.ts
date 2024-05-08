@@ -78,12 +78,22 @@ export class SeatImagePipe implements PipeTransform {
           status + (gender === 'Female' ? '/Female' : '')
         }/vipAc.png`;
       }
-      case 'deluxCabin': {
+      case 'deluxCabinAc': {
         return `/assets/images/seats/${
           status + (gender === 'Female' ? '/Female' : '')
         }/deluxCabin.png`;
       }
-      case 'semiDoubleCabin': {
+      case 'deluxCabinNonAc': {
+        return `/assets/images/seats/${
+          status + (gender === 'Female' ? '/Female' : '')
+        }/deluxCabin.png`;
+      }
+      case 'semiDoubleAc': {
+        return `/assets/images/seats/${
+          status + (gender === 'Female' ? '/Female' : '')
+        }/semiDoubleCabin.png`;
+      }
+      case 'semiDoubleNonAc': {
         return `/assets/images/seats/${
           status + (gender === 'Female' ? '/Female' : '')
         }/semiDoubleCabin.png`;
